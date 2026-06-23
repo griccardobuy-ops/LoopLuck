@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Luck Loop – Missioni quotidiane per aumentare le tue opportunità reali." />
+  <title>Luck Loop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy-900: #0D1117;
+      --navy-800: #161B24;
+      --navy-700: #1C2333;
+      --navy-600: #253047;
+      --gold:     #C9A84C;
+      --gold-lt:  #DFC57A;
+      --cream:    #E8DCC8;
+      --cream-dim:#B8A98A;
+      --teal:     #4ECDC4;
+      --amber:    #E8934A;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy-900); color: var(--cream); font-family: 'Inter', system-ui, sans-serif; min-height: 100dvh; -webkit-font-smoothing: antialiased; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-thumb { background: var(--navy-600); border-radius: 99px; }
+
+    .app { max-width: 520px; margin: 0 auto; padding: 0 16px 80px; position: relative; }
+    .glow-top { position: fixed; top: -120px; right: -120px; width: 360px; height: 360px; background: radial-gradient(circle, rgba(201,168,76,.07) 0%, transparent 70%); pointer-events: none; }
+    .glow-bottom { position: fixed; bottom: -120px; left: -120px; width: 360px; height: 360px; background: radial-gradient(circle, rgba(78,205,196,.07) 0%, transparent 70%); pointer-events: none; }
+
+    header { display: flex; align-items: center; justify-content: space-between; padding: 16px 0 8px; }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(201,168,76,.15); border: 1px solid rgba(201,168,76,.3); display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--gold); }
+    .logo-name { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--cream); letter-spacing: .03em; }
+
+    nav { display: flex; gap: 4px; }
+    nav button { background: none; border: none; cursor: pointer; color: var(--cream-dim); font-size: 13px; font-family: inherit; padding: 6px 10px; border-radius: 8px; transition: background .15s, color .15s; }
+    nav button:hover { color: var(--cream); background: rgba(255,255,255,.07); }
+    nav button.active { background: rgba(255,255,255,.1); color: var(--cream); }
+
+    .page-title { font-family: 'Playfair Display', serif; font-size: 28px; line-height: 1.2; }
+    .page-date { font-size: 13px; color: var(--cream-dim); margin-bottom: 4px; }
+
+    .card { border-radius: 16px; padding: 20px; margin-bottom: 14px; }
+    .card-teal  { background: var(--navy-700); border: 1px solid rgba(78,205,196,.25);  box-shadow: 0 0 28px rgba(78,205,196,.05); }
+    .card-amber { background: var(--navy-700); border: 1px solid rgba(232,147,74,.25);  box-shadow: 0 0 28px rgba(232,147,74,.05); }
+    .card-glass { background: var(--navy-700); border: 1px solid rgba(255,255,255,.08); }
+    .card-dark  { background: var(--navy-800); border-radius: 12px; padding: 16px; }
+
+    .tag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: 3px 10px; border-radius: 99px; }
+    .tag-real  { color: var(--teal);  background: rgba(78,205,196,.1);  border: 1px solid rgba(78,205,196,.2);  }
+    .tag-micro { color: var(--amber); background: rgba(232,147,74,.1);  border: 1px solid rgba(232,147,74,.2);  }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; font-family: inherit; font-weight: 600; cursor: pointer; border-radius: 12px; border: none; padding: 12px 20px; font-size: 14px; transition: transform .12s, opacity .15s, background .15s; }
+    .btn:active { transform: scale(.97); }
+    .btn-primary { background: var(--gold); color: var(--navy-900); }
+    .btn-primary:hover { background: var(--gold-lt); }
+    .btn-teal  { background: rgba(78,205,196,.1);  color: var(--teal);  border: 1px solid rgba(78,205,196,.3);  }
+    .btn-teal:hover  { background: rgba(78,205,196,.18);  }
+    .btn-amber { background: rgba(232,147,74,.1);  color: var(--amber); border: 1px solid rgba(232,147,74,.3);  }
+    .btn-amber:hover { background: rgba(232,147,74,.18); }
+    .btn-ghost { background: transparent; color: var(--cream-dim); border: 1px solid rgba(255,255,255,.15); }
+    .btn-ghost:hover { border-color: rgba(255,255,255,.35); color: var(--cream); }
+    .btn-danger { background: transparent; color: rgba(239,68,68,.6); border: 1px solid rgba(239,68,68,.25); font-size: 13px; padding: 8px 14px; }
+    .btn-danger:hover { border-color: rgba(239,68,68,.5); color: rgba(239,68,68,.9); }
+    .btn-full { width: 100%; }
+    .btn:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+
+    .impact { display: inline-flex; align-items: center; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 8px; }
+    .impact-basso { color: var(--cream-dim); background: rgba(184,169,138,.1); }
+    .impact-medio { color: var(--gold);  background: rgba(201,168,76,.1); }
+    .impact-alto  { color: var(--teal);  background: rgba(78,205,196,.1); }
+
+    .streak-bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 16px; background: var(--navy-700); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; margin-bottom: 18px; }
+    .streak-item { display: flex; align-items: center; gap: 8px; }
+    .streak-num { font-family: 'Playfair Display', serif; font-size: 22px; line-height: 1; }
+    .streak-label { font-size: 11px; color: var(--cream-dim); }
+    .streak-divider { width: 1px; height: 32px; background: rgba(255,255,255,.08); }
+
+    .energy-option { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; padding: 14px 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,.1); background: var(--navy-700); cursor: pointer; font-family: inherit; transition: border-color .15s, background .15s; margin-bottom: 10px; }
+    .energy-option:hover { border-color: rgba(255,255,255,.25); }
+    .energy-option.selected { border-color: var(--gold); background: rgba(201,168,76,.08); }
+    .energy-name { font-size: 15px; font-weight: 600; color: var(--cream); }
+    .energy-desc { font-size: 12px; color: var(--cream-dim); }
+    .energy-check { margin-left: auto; width: 20px; height: 20px; border-radius: 50%; background: var(--gold); display: none; align-items: center; justify-content: center; }
+    .energy-option.selected .energy-check { display: flex; }
+
+    .card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 4px; }
+    .card-title { font-family: 'Playfair Display', serif; font-size: 20px; margin: 10px 0 8px; line-height: 1.25; }
+    .card-desc { font-size: 13px; color: var(--cream-dim); line-height: 1.6; margin-bottom: 14px; }
+    .card-why { border-top: 1px solid rgba(255,255,255,.08); padding-top: 12px; margin-bottom: 16px; }
+    .card-why p { font-size: 12px; color: var(--cream-dim); line-height: 1.6; }
+    .card-why strong { color: var(--teal); }
+
+    /* ── MICRO-PRINCIPIO ── */
+    .mp-principio {
+      background: rgba(232,147,74,.06);
+      border: 1px solid rgba(232,147,74,.15);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+    .mp-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .09em; color: var(--amber); margin-bottom: 4px; }
+    .mp-testo { font-size: 13px; color: var(--cream); line-height: 1.55; }
+    .mp-fonte { font-size: 11px; color: var(--cream-dim); margin-top: 4px; font-style: italic; }
+
+    .mp-cultura {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+    .mp-cultura .mp-label { color: var(--cream-dim); }
+
+    .mp-azione {
+      background: rgba(201,168,76,.07);
+      border: 1px solid rgba(201,168,76,.2);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+    }
+    .mp-azione .mp-label { color: var(--gold); }
+    .mp-azione .mp-testo { font-weight: 500; }
+
+    .mp-completed {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(232,147,74,.08); border: 1px solid rgba(232,147,74,.2);
+      border-radius: 12px; padding: 11px 14px;
+    }
+    .mp-completed-check { width: 28px; height: 28px; border-radius: 50%; background: var(--amber); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .mp-completed strong { font-size: 13px; color: var(--amber); display: block; }
+    .mp-completed span { font-size: 11px; color: var(--cream-dim); }
+
+    /* ── CARD REALE ── */
+    .completed-state { display: flex; align-items: center; gap: 12px; background: rgba(78,205,196,.08); border: 1px solid rgba(78,205,196,.2); border-radius: 12px; padding: 12px; }
+    .completed-check { width: 32px; height: 32px; border-radius: 50%; background: var(--teal); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .completed-text strong { font-size: 13px; color: var(--teal); }
+    .completed-text span { font-size: 11px; color: var(--cream-dim); display: block; }
+    .confirm-row { display: flex; gap: 8px; }
+    .confirm-label { font-size: 12px; color: var(--cream-dim); text-align: center; margin-bottom: 8px; }
+
+    .done-banner { text-align: center; padding: 24px 0 8px; }
+    .done-emoji { font-size: 36px; margin-bottom: 8px; }
+    .done-title { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 4px; }
+    .done-sub { font-size: 13px; color: var(--cream-dim); }
+    .streak-pill { display: inline-flex; align-items: center; gap: 6px; background: rgba(201,168,76,.1); border: 1px solid rgba(201,168,76,.2); border-radius: 99px; padding: 6px 16px; font-size: 13px; font-weight: 600; color: var(--gold); margin-top: 12px; }
+
+    /* ── COME FUNZIONA ── */
+    .how-section { margin-bottom: 14px; }
+    .how-list li { display: flex; gap: 8px; font-size: 13px; color: var(--cream-dim); margin-bottom: 6px; line-height: 1.5; list-style: none; }
+    .how-list li::before { content: '→'; color: var(--teal); flex-shrink: 0; }
+    .no-list li { display: flex; gap: 8px; font-size: 13px; color: var(--cream-dim); margin-bottom: 6px; list-style: none; }
+    .no-list li::before { content: '✕'; color: #f87171; flex-shrink: 0; }
+
+    /* ── ARCHIVIO ── */
+    .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 16px; }
+    .stat-box { background: var(--navy-700); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 12px; text-align: center; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 24px; }
+    .stat-label { font-size: 11px; color: var(--cream-dim); }
+    .badge-row { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 10px; margin-bottom: 6px; }
+    .badge-row.earned { background: rgba(201,168,76,.08); border: 1px solid rgba(201,168,76,.18); }
+    .badge-row.locked { opacity: .38; }
+    .badge-emoji { font-size: 22px; }
+    .badge-name { font-size: 13px; font-weight: 600; color: var(--gold); }
+    .badge-desc { font-size: 11px; color: var(--cream-dim); }
+    .history-item { display: flex; align-items: center; gap: 10px; background: var(--navy-800); border-radius: 10px; padding: 10px; margin-bottom: 6px; }
+    .history-icon { font-size: 18px; }
+    .history-title { font-size: 13px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .history-meta { font-size: 11px; color: var(--cream-dim); }
+    .history-check { width: 20px; height: 20px; border-radius: 50%; background: rgba(78,205,196,.2); flex-shrink: 0; margin-left: auto; display: flex; align-items: center; justify-content: center; }
+
+    /* ── DEBUG ── */
+    .debug-toggle { background: none; border: none; color: rgba(255,255,255,.2); font-size: 12px; font-family: inherit; cursor: pointer; margin-top: 24px; }
+    .debug-toggle:hover { color: rgba(255,255,255,.4); }
+    .debug-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+
+    /* ── TOAST ── */
+    #badge-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--navy-700); border: 1px solid rgba(201,168,76,.35); border-radius: 18px; padding: 16px 20px; display: flex; align-items: center; gap: 14px; min-width: 260px; z-index: 100; box-shadow: 0 16px 48px rgba(0,0,0,.5); transition: transform .4s cubic-bezier(.34,1.56,.64,1), opacity .4s; opacity: 0; pointer-events: none; }
+    #badge-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    .toast-label { font-size: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: .08em; font-weight: 600; }
+    .toast-title { font-family: 'Playfair Display', serif; font-size: 18px; line-height: 1.1; }
+    .toast-desc { font-size: 11px; color: var(--cream-dim); }
+
+    /* ── MISC ── */
+    .back-btn { display: inline-flex; align-items: center; gap: 6px; background: none; border: none; color: var(--cream-dim); font-family: inherit; font-size: 13px; cursor: pointer; margin-bottom: 20px; padding: 0; transition: color .15s; }
+    .back-btn:hover { color: var(--cream); }
+    .section-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--cream-dim); margin-bottom: 12px; }
+    h2.section-title { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 16px; }
+    h3.card-sub { font-family: 'Playfair Display', serif; font-size: 17px; margin-bottom: 8px; }
+
+    .page    { animation: fadeUp .4s ease-out both; }
+    .flip-in { animation: flipIn .5s ease-out both; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes flipIn { from { opacity:0; transform:rotateY(-70deg); } to { opacity:1; transform:rotateY(0); } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.01ms!important; transition-duration:.01ms!important; } }
+  </style>
+</head>
+<body>
+
+<div class="glow-top"></div>
+<div class="glow-bottom"></div>
+
+<div class="app">
+  <header>
+    <div class="logo">
+      <div class="logo-icon">∞</div>
+      <span class="logo-name">Luck Loop</span>
+    </div>
+    <nav>
+      <button id="nav-history" onclick="showPage('history')">Archivio</button>
+      <button id="nav-how" onclick="showPage('how')">Come funziona</button>
+    </nav>
+  </header>
+  <main id="main"></main>
+</div>
+
+<div id="badge-toast">
+  <span id="toast-emoji" style="font-size:32px"></span>
+  <div>
+    <div class="toast-label">Nuovo badge!</div>
+    <div class="toast-title" id="toast-title"></div>
+    <div class="toast-desc" id="toast-desc"></div>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════
+   DATI — MISSIONI REALI
+══════════════════════════════════════════════════ */
+const MISSIONI_REALI = [
+  { id:'r01', categoria:'sociale',     energia:['bassa','media','alta'], titolo:"Scrivi a qualcuno che non senti da un po'", descrizione:"Manda un messaggio breve e sincero a una persona che stimi. Non chiedere nulla, solo un contatto genuino.", impatto:'medio', perche:"Le reti sociali dormienti sono una delle fonti più sottovalutate di opportunità inaspettate." },
+  { id:'r02', categoria:'sociale',     energia:['media','alta'],         titolo:"Parla con uno sconosciuto",                  descrizione:"Fai una domanda o un complimento sincero a qualcuno che non conosci. Bar, negozio, coda: qualunque contesto.", impatto:'alto',  perche:"Le connessioni deboli (weak ties) aprono porte che le amicizie strette raramente raggiungono." },
+  { id:'r03', categoria:'sociale',     energia:['bassa'],                titolo:"Rispondi al messaggio rimasto in sospeso",    descrizione:"C'è qualcuno che aspetta una tua risposta. Fallo ora, anche con due righe.", impatto:'basso', perche:"L'affidabilità nelle piccole cose costruisce reputazione nel tempo." },
+  { id:'r04', categoria:'sociale',     energia:['media','alta'],         titolo:"Partecipa a un evento",                      descrizione:"Trova un evento, meetup o incontro nel tuo settore o area di interesse. Basta essere presenti.", impatto:'alto',  perche:"La presenza fisica o attiva aumenta la probabilità di essere ricordati e coinvolti." },
+  { id:'r05', categoria:'sociale',     energia:['bassa','media'],        titolo:"Fai una micro-presentazione",                descrizione:"Pensa a due persone che potrebbero trarre vantaggio dal conoscersi. Presentale via messaggio.", impatto:'alto',  perche:"Chi connette gli altri viene percepito come risorsa preziosa e ricordato con gratitudine." },
+  { id:'r06', categoria:'esplorazione',energia:['bassa','media','alta'], titolo:"Cambia percorso",                            descrizione:"Oggi prendi una strada diversa dal solito. Anche solo 10 minuti a piedi in una direzione nuova.", impatto:'basso', perche:"Piccoli cambiamenti di routine espongono il cervello a stimoli nuovi e aumentano la prontezza cognitiva." },
+  { id:'r07', categoria:'esplorazione',energia:['media','alta'],         titolo:"Entra in un posto che non hai mai frequentato",descrizione:"Un bar, una libreria, un negozio, un parco. Entra senza obiettivo e osserva.", impatto:'medio', perche:"L'esposizione a nuovi ambienti allarga il campo delle possibilità percepite." },
+  { id:'r08', categoria:'esplorazione',energia:['bassa'],                titolo:"Leggi un articolo fuori dalla tua nicchia",  descrizione:"Cerca un argomento completamente fuori dalla tua comfort zone. Dedica 10 minuti senza giudicare.", impatto:'basso', perche:"Le idee contaminate da settori diversi producono soluzioni creative uniche." },
+  { id:'r09', categoria:'esplorazione',energia:['media','alta'],         titolo:"Prova qualcosa che rimandi da mesi",         descrizione:"Quella cosa nella lista 'prima o poi'. Fallo per 20 minuti, solo per capire come ci si sente.", impatto:'alto',  perche:"L'action bias — agire nonostante l'incertezza — è correlato alle opportunità percepite come 'fortuna'." },
+  { id:'r10', categoria:'esplorazione',energia:['alta'],                 titolo:"Fai una cosa che ti spaventa un po'",        descrizione:"Non qualcosa di pericoloso: qualcosa che ti mette a disagio in modo sano. Una presentazione, una chiamata, un tentativo.", impatto:'alto', perche:"La zona di disagio evolutivo è dove avvengono la maggior parte delle trasformazioni significative." },
+  { id:'r11', categoria:'abitudini',   energia:['bassa','media','alta'], titolo:"Riordina un singolo spazio",                 descrizione:"Scrivania, borsa, inbox email, una cartella sul computer. Un posto solo. Ordinato e finito.", impatto:'basso', perche:"Gli ambienti ordinati riducono il carico cognitivo e migliorano la capacità decisionale." },
+  { id:'r12', categoria:'abitudini',   energia:['bassa','media'],        titolo:"Cammina 20 minuti senza schermo",            descrizione:"Solo tu e il mondo. Nessun podcast, nessun audio. Lascia che la mente vada dove vuole.", impatto:'medio', perche:"Il default mode network, attivo nel riposo, è associato alla creatività e alla risoluzione di problemi complessi." },
+  { id:'r13', categoria:'abitudini',   energia:['bassa'],                titolo:"Chiudi un micro-task aperto",                descrizione:"Quella piccola cosa che hai in testa da giorni. Meno di 10 minuti. Chiudila.", impatto:'basso', perche:"I task aperti consumano banda cognitiva inconsapevolmente. Chiuderli libera risorse mentali reali." },
+  { id:'r14', categoria:'abitudini',   energia:['media','alta'],         titolo:"30 minuti su qualcosa che stai imparando",  descrizione:"Una skill, una lingua, uno strumento. Anche solo 30 minuti di pratica deliberata contano.", impatto:'alto',  perche:"Il compounding dell'apprendimento: piccole sessioni regolari producono risultati sproporzionati nel tempo." },
+  { id:'r15', categoria:'abitudini',   energia:['media'],                titolo:"Scrivi 3 cose che vuoi che accadano",        descrizione:"Non una lista dei desideri: scrivi come se fossero già in corso. Presente, concreto, specifico.", impatto:'medio', perche:"La scrittura di intenzioni attiva il filtro attentivo del cervello e aumenta il riconoscimento di opportunità." },
+  { id:'r16', categoria:'abitudini',   energia:['bassa','media'],        titolo:"Fai una domanda a qualcuno più esperto",     descrizione:"Una sola domanda, genuina e specifica su un problema reale. Non chiedere consigli generici.", impatto:'alto',  perche:"Fare buone domande è una delle competenze più rare e valorizzate in qualsiasi contesto." },
+];
+
+/* ══════════════════════════════════════════════════
+   DATI — MICRO-PRINCIPI DEL GIORNO
+   Struttura:
+     principio  → fatto comportamentale reale + fonte
+     cultura    → riferimento storico/culturale umano reale
+     azione     → micro-azione immediata e concreta
+   La selezione è deterministica per data (seed-based).
+   30 principi = un mese senza ripetizioni.
+══════════════════════════════════════════════════ */
+const MICRO_PRINCIPI = [
+  {
+    principio: "Le persone ricordano meglio le informazioni che hanno elaborato attivamente rispetto a quelle ricevute passivamente.",
+    fonte: "Psicologia cognitiva — effetto di generazione (Slamecka & Graf, 1978)",
+    cultura: "Nel Giappone feudale, i carpentieri tramandavano le tecniche costruttive solo attraverso la pratica diretta, mai solo osservando. Il verbo 'capire' in giapponese antico includeva la radice del 'fare'.",
+    azione: "Spiega ad alta voce, anche a te stesso, qualcosa che stai cercando di imparare. Bastano 2 minuti.",
+  },
+  {
+    principio: "Dopo aver aiutato qualcuno, tendiamo a valutarlo più positivamente — non il contrario. Fare un favore genera simpatia verso chi lo riceve.",
+    fonte: "Effetto Benjamin Franklin — psicologia sociale (Jecker & Landy, 1969)",
+    cultura: "Gli indigeni Kula delle Trobriand (Papua Nuova Guinea) costruivano alleanze sociali attraverso scambi rituali di doni: chi dava per primo stabiliva la relazione.",
+    azione: "Chiedi un piccolo favore a qualcuno oggi. Un consiglio, un'opinione, un aiuto minimo. Rafforza il legame.",
+  },
+  {
+    principio: "La presenza di un osservatore — anche immaginario — migliora le performance su compiti semplici e aumenta la motivazione.",
+    fonte: "Facilitazione sociale (Zajonc, 1965) — effetto audience",
+    cultura: "I monaci zen giapponesi praticavano la calligrafia in pubblico non per esibirsi, ma perché lo sguardo altrui portava la mente a uno stato di piena presenza.",
+    azione: "Fai una cosa che stai rimandando come se qualcuno di importante ti stesse guardando. Scegli tu chi.",
+  },
+  {
+    principio: "Nominiamo, e quindi notiamo, solo ciò per cui abbiamo una parola. Espandere il vocabolario espande letteralmente la percezione della realtà.",
+    fonte: "Ipotesi Sapir-Whorf — linguistica cognitiva",
+    cultura: "Gli Inuit hanno decine di parole distinte per tipi diversi di neve, consentendo distinzioni percettive che chi non le ha non riesce a operare con la stessa velocità.",
+    azione: "Impara oggi una parola nuova — in italiano o in un'altra lingua — che descriva qualcosa che già esiste nella tua vita ma non avevi nominato.",
+  },
+  {
+    principio: "Le decisioni prese dopo una breve pausa sono mediamente migliori di quelle prese immediatamente sotto pressione emotiva.",
+    fonte: "Teoria del pensiero inconscio (Dijksterhuis, 2004) — effetto sleeping on it",
+    cultura: "I Quaccheri nelle loro assemblee storiche praticavano il silenzio deliberato prima di qualsiasi decisione collettiva. La pausa era parte formale del processo.",
+    azione: "Prima della prossima decisione non urgente, aspetta deliberatamente 10 minuti. Poi decidi.",
+  },
+  {
+    principio: "Le persone tendono a completare i compiti interrotti meglio di quelli portati a termine — il cervello mantiene attiva la tensione verso l'incompiuto.",
+    fonte: "Effetto Zeigarnik (1927) — psicologia della Gestalt",
+    cultura: "I narratori orali dell'Africa subsahariana interrompevano deliberatamente le storie nei punti di massima tensione, garantendo che il pubblico tornasse la sera successiva.",
+    azione: "Inizia qualcosa che vuoi fare ma non hai il tempo di finire oggi. L'inizio riduce la resistenza futura.",
+  },
+  {
+    principio: "Esprimere gratitudine concreta aumenta il benessere di chi la riceve e, in misura uguale o maggiore, di chi la esprime.",
+    fonte: "Psicologia positiva (Emmons & McCullough, 2003)",
+    cultura: "In molte culture andine esiste il concetto di 'ayni' — reciprocità cosmica — che lega ogni azione di cura a un ritorno naturale nell'ecosistema sociale.",
+    azione: "Scrivi o di' a voce ad una persona una cosa specifica e concreta per cui sei grato. Non generica: specifica.",
+  },
+  {
+    principio: "Il nostro cervello non distingue chiaramente tra immaginazione vivida e memoria reale. Visualizzare un'azione la rende più eseguibile.",
+    fonte: "Mental simulation — neuroscienze cognitive (Kosslyn, 1994)",
+    cultura: "I Maestri del Rinascimento italiano insegnavano ai propri allievi a 'vedere' il dipinto finito prima di toccare il pennello. Leonardo descriveva questo come 'disegnare con la mente'.",
+    azione: "Prima di fare qualcosa di impegnativo oggi, chiudi gli occhi per 60 secondi e immaginala già fatta con successo.",
+  },
+  {
+    principio: "Il contesto fisico in cui siamo influenza il nostro stato mentale più di quanto crediamo. Cambiare ambiente cambia il tipo di pensiero.",
+    fonte: "Cognizione incarnata (embodied cognition) — Lakoff & Johnson",
+    cultura: "I filosofi greci del Liceo di Aristotele insegnavano camminando — i Peripatetici. Il movimento fisico era considerato parte integrante del ragionamento.",
+    azione: "Porta fuori un problema che stai cercando di risolvere. Cammina mentre ci pensi, non seduto.",
+  },
+  {
+    principio: "La specificità degli obiettivi aumenta drasticamente la probabilità di raggiungerli rispetto a intenzioni vaghe.",
+    fonte: "Goal-setting theory (Locke & Latham, 1990)",
+    cultura: "I costruttori delle cattedrali medievali fissavano pietre miliari precise — campanile entro l'anno, navata entro il decennio — anche sapendo che non avrebbero visto il completamento.",
+    azione: "Prendi un obiettivo vago che hai in testa e trasformalo in una frase con data, luogo e azione concreta.",
+  },
+  {
+    principio: "Ridere insieme — non solo ridere — è uno dei meccanismi più rapidi di costruzione di fiducia tra persone.",
+    fonte: "Psicologia sociale della risata condivisa (Dunbar, 2012)",
+    cultura: "Nelle cerimonie di benvenuto Maori (pōwhiri), l'umorismo rituale è parte ufficiale del protocollo: serve a disattivare la tensione tra stranieri prima di qualsiasi accordo.",
+    azione: "Trova oggi un momento per ridere davvero con qualcuno, non per educazione. Cerca il momento, non aspettarlo.",
+  },
+  {
+    principio: "Le persone si conformano alle norme sociali percepite anche in assenza di pressione esplicita — basta che la norma sia resa visibile.",
+    fonte: "Teoria delle norme sociali (Cialdini, 1990) — prova sociale",
+    cultura: "Le città medievali europee usavano campane pubbliche per scandire i momenti collettivi — preghiera, lavoro, riposo. Il ritmo condiviso costruiva identità comunitaria.",
+    azione: "Osserva oggi un comportamento positivo che vedi fare agli altri e imitalo consapevolmente. Non seguire: scegli.",
+  },
+  {
+    principio: "Piccole vittorie quotidiane attivano il sistema dopaminergico e aumentano la motivazione per compiti successivi più difficili.",
+    fonte: "Progress principle (Amabile & Kramer, 2011)",
+    cultura: "I costruttori di giardini zen giapponesi completavano ogni giorno un micro-segmento del giardino, rendendo il progresso visibile e celebrabile anche in percorsi decennali.",
+    azione: "Identifica la cosa più piccola e completabile che hai in lista oggi. Falla per prima. Il momentum è reale.",
+  },
+  {
+    principio: "Le emozioni degli altri sono contagiose a livello neurale — i neuroni specchio ci sincronizzano automaticamente con chi abbiamo di fronte.",
+    fonte: "Mirror neurons — Rizzolatti et al. (1996), neuroscienze",
+    cultura: "Nelle tradizioni teatrali del Noh giapponese, l'attore non recita l'emozione: la 'abita' internamente, fidandosi che il pubblico la riceva senza gesti espliciti.",
+    azione: "In una conversazione oggi, ascolta senza pianificare la risposta. Lascia che l'altro ti arrivi prima di reagire.",
+  },
+  {
+    principio: "Il senso di autonomia — scegliere come fare una cosa, non solo cosa fare — aumenta motivazione e qualità del lavoro indipendentemente dal compito.",
+    fonte: "Self-determination theory (Deci & Ryan, 1985)",
+    cultura: "Le corporazioni medievali di artigiani (gilde) permettevano ai maestri di organizzare il proprio lavoro con grande libertà metodologica, a patto che il risultato rispettasse gli standard.",
+    azione: "Prendi un compito che senti imposto e ridefinisci almeno un aspetto del come lo eseguirai. Riappropriatene.",
+  },
+  {
+    principio: "La scrittura a mano attiva aree cognitive diverse rispetto alla digitazione, producendo una comprensione più profonda e duratura.",
+    fonte: "Mueller & Oppenheimer (2014) — The Pen Is Mightier Than the Keyboard",
+    cultura: "I monaci copisti medievali consideravano la copia manuale dei testi un atto contemplativo oltre che pratico: la lentezza era funzionale all'assimilazione.",
+    azione: "Scrivi a mano — su carta — una cosa importante che hai in mente oggi. Solo una. Non digitarla.",
+  },
+  {
+    principio: "La scarsità di tempo aumenta la creatività quando il compito è ben definito. I vincoli stimolano soluzioni che l'abbondanza non produce.",
+    fonte: "Constraint-induced creativity (Catrinel Haught-Tromp, 2017)",
+    cultura: "La poesia haiku giapponese nacque proprio come forma estrema di vincolo — 17 sillabe — che trasformò il limite in strumento di intensità espressiva.",
+    azione: "Dati 10 minuti esatti, risolvi o avanza su un problema che rimandi. Il timer è lo strumento, non la trappola.",
+  },
+  {
+    principio: "Le persone valutano le esperienze principalmente in base al picco emotivo e alla fine — non alla durata totale.",
+    fonte: "Peak-end rule (Kahneman & Fredrickson, 1993)",
+    cultura: "I banchetti romani si chiudevano sempre con il piatto più raffinato — non per nutrizione, ma perché i romani avevano capito intuitivamente che il finale definisce il ricordo.",
+    azione: "Cura consapevolmente come finisce qualcosa oggi: una conversazione, un lavoro, un pasto. Il finale rimane.",
+  },
+  {
+    principio: "Attribuire un nome o un'identità a un ruolo cambia il comportamento delle persone in quel ruolo, indipendentemente dal compenso.",
+    fonte: "Effetto etichetta — identità e comportamento (Bem, 1972)",
+    cultura: "I guerrieri Masai del Kenya ricevono un nome nuovo dopo ogni rito di passaggio. Il nome non descrive chi sono: indica chi devono diventare.",
+    azione: "Dai un nome al ruolo che stai cercando di costruire — professionalmente o personalmente. Dillo ad alta voce.",
+  },
+  {
+    principio: "Le persone che dormono su una decisione difficile la vivono con meno rimpianto anche quando il risultato è lo stesso.",
+    fonte: "Regret theory — Loomes & Sugden (1982), economia comportamentale",
+    cultura: "Nella diplomazia ottomana medievale, le risposte alle missive importanti venivano deliberatamente ritardate di un giorno. Non per lentezza: per strategia emotiva.",
+    azione: "Se hai una risposta da dare oggi che potrebbe essere reattiva, posticipala di qualche ora. Poi rispondi.",
+  },
+  {
+    principio: "Il senso di appartenenza a un gruppo aumenta la resilienza individuale più di qualsiasi tecnica di gestione dello stress individuale.",
+    fonte: "Social baseline theory (Coan & Sbarra, 2015)",
+    cultura: "Le comunità monastiche benedettine medievali strutturavano la giornata intorno a momenti collettivi obbligatori — non solo per spiritualità, ma come infrastruttura di supporto reciproco.",
+    azione: "Cerca oggi un momento di presenza condivisa con qualcuno — non necessariamente parlando. Stare insieme conta.",
+  },
+  {
+    principio: "Le metafore che usiamo per descrivere un problema determinano in modo inconscio le soluzioni che consideriamo.",
+    fonte: "Metaphors We Live By — Lakoff & Johnson (1980)",
+    cultura: "I diplomatici navajo usavano narrazioni indirette per trattare conflitti complessi: non descrivevano il problema, raccontavano una storia che lo conteneva.",
+    azione: "Descrivi una situazione difficile con una metafora diversa da quella solita. Cambia l'immagine, vedrai nuove uscite.",
+  },
+  {
+    principio: "Fissare gli occhi su un punto fisso per 30–60 secondi riduce l'attivazione dell'amigdala e migliora la capacità di prendere decisioni sotto pressione.",
+    fonte: "Neuroscienze dello stress — Huberman Lab (Stanford, 2021)",
+    cultura: "I maestri di scherma giapponesi del Kenjutsu insegnavano ai propri allievi a fissare un punto lontano — 'metsuke' — per mantenere la visione periferica e la mente calma simultaneamente.",
+    azione: "Prima di una situazione stressante oggi, fissa un punto lontano per 30 secondi. Respira normalmente.",
+  },
+  {
+    principio: "Raccontare un'esperienza difficile in terza persona ('Marco si sentiva...') riduce la reattività emotiva e favorisce l'elaborazione razionale.",
+    fonte: "Self-distancing — Ethan Kross, Università del Michigan (2014)",
+    cultura: "I filosofi stoici romani praticavano il 'distacco narrativo' come esercizio quotidiano: Epitteto consigliava di osservare se stessi come se si guardasse un altro.",
+    azione: "Descrivi a te stesso in terza persona un problema che ti pesa. Guarda se cambia la prospettiva.",
+  },
+  {
+    principio: "La curiosità — non la certezza — è il motore principale dell'apprendimento efficace e della resilienza cognitiva.",
+    fonte: "Information gap theory of curiosity (Loewenstein, 1994)",
+    cultura: "I polimati del Rinascimento italiano — da Leonardo a Pico della Mirandola — non specializzavano le proprie letture: il salto tra discipline era considerato metodo, non distrazione.",
+    azione: "Segui oggi una curiosità senza utilità immediata. Cerca per il gusto di cercare, non per arrivare a qualcosa.",
+  },
+  {
+    principio: "La vicinanza fisica ripetuta — anche non intenzionale — aumenta la probabilità di sviluppare simpatia e fiducia reciproca.",
+    fonte: "Effetto di mera esposizione (Zajonc, 1968) — prossimità e attrazione",
+    cultura: "Le piazze dei mercati medievali europei non erano solo luoghi di commercio: erano progettate per massimizzare gli incontri ricorrenti tra le stesse persone, costruendo fiducia commerciale.",
+    azione: "Oggi, scegli intenzionalmente di passare vicino a qualcuno con cui vuoi costruire un rapporto migliore.",
+  },
+  {
+    principio: "Il modo in cui incorniciamo un'informazione — guadagno o perdita, opportunità o rischio — cambia radicalmente la decisione, anche con dati identici.",
+    fonte: "Prospect theory — Kahneman & Tversky (1979)",
+    cultura: "I mercanti veneziani del '400 usavano deliberatamente il linguaggio del 'non perdere' invece di 'guadagnare' nei contratti: avevano capito intuitivamente l'asimmetria emotiva.",
+    azione: "Rileggi qualcosa che vuoi proporre — a qualcuno o a te stesso — e riformulalo in termini di cosa si perde non facendolo.",
+  },
+  {
+    principio: "Le abitudini si consolidano più rapidamente quando vengono agganciate a comportamenti già automatici (habit stacking).",
+    fonte: "Atomic Habits — James Clear (2018), basato su ricerca comportamentale",
+    cultura: "I samurai agganciavano la meditazione mattutina alla pulizia della spada — un'azione già automatica. Il rituale non richiedeva forza di volontà: seguiva il binario.",
+    azione: "Scegli un'abitudine che vuoi creare. Agganciala subito dopo qualcosa che fai già ogni giorno senza pensarci.",
+  },
+  {
+    principio: "Esprimere incertezza in modo esplicito aumenta la credibilità di chi parla, non la riduce.",
+    fonte: "Calibrated uncertainty — psicologia della comunicazione (Tetlock, 2005)",
+    cultura: "Nella tradizione talmudica ebraica, dire 'non lo so' era considerato una risposta completa e rispettabile. L'ammissione dell'ignoranza era segno di serietà intellettuale.",
+    azione: "Oggi, in almeno una conversazione, di' 'non sono sicuro' invece di fingere certezza. Osserva la reazione.",
+  },
+  {
+    principio: "L'atto fisico di sorridere — anche forzato — attiva in parte le stesse risposte neurali del sorriso spontaneo, influenzando l'umore.",
+    fonte: "Facial feedback hypothesis (Strack, 1988) — rivista e confermata parzialmente (2022)",
+    cultura: "I praticanti di alcune scuole buddiste tibetane iniziano la meditazione con un sorriso deliberato — non come espressione di gioia, ma come porta di accesso ad essa.",
+    azione: "Sorridi consapevolmente per 30 secondi, anche da solo. Non deve essere spontaneo: è un esperimento.",
+  },
+];
+
+/* ══════════════════════════════════════════════════
+   DATI ACCESSORI
+══════════════════════════════════════════════════ */
+const BADGE   = [{id:'primo_passo',label:'Primo Passo',desc:'Prima missione completata',emoji:'🌱'},{id:'tre_giorni',label:'Tripletta',desc:'3 giorni di fila',emoji:'🎯'},{id:'sette_giorni',label:'Settimana Intera',desc:'7 giorni consecutivi',emoji:'🔥'},{id:'venti_missioni',label:'Abitudine Solida',desc:'20 missioni completate',emoji:'⚡'},{id:'cinquanta',label:'Loop Master',desc:'50 missioni completate',emoji:'🌀'}];
+const LIVELLI = [{id:'bassa',label:'Bassa energia',emoji:'🌙',desc:'Giornata tranquilla, missioni leggere'},{id:'media',label:'Media energia',emoji:'⚡',desc:'In forma, pronto a qualcosa di concreto'},{id:'alta',label:'Alta energia',emoji:'🔥',desc:'Al massimo, sfida più intensa'}];
+const CAT_ICON = {sociale:'🤝',esplorazione:'🧭',abitudini:'⚙️'};
+const EN_EMOJI = {bassa:'🌙',media:'⚡',alta:'🔥'};
+
+/* ══════════════════════════════════════════════════
+   SEED — generazione deterministica per data
+══════════════════════════════════════════════════ */
+function hash(s){let h=0;for(let i=0;i<s.length;i++)h=Math.imul(31,h)+s.charCodeAt(i)|0;return Math.abs(h);}
+function rng(seed){let s=seed;return()=>{s=(s*1664525+1013904223)&0xffffffff;return(s>>>0)/0xffffffff;};}
+function pesca(arr,data,sale=''){return arr[Math.floor(rng(hash(data+sale))() * arr.length)];}
+
+// Il micro-principio usa indice basato su data per copertura uniforme
+function pescaMicroPrincipio(data){
+  const r    = rng(hash(data+'mp'));
+  r(); // scarta primo valore per migliore distribuzione
+  const base = r();
+  const idx  = Math.min(Math.floor(base * MICRO_PRINCIPI.length), MICRO_PRINCIPI.length - 1);
+  return MICRO_PRINCIPI[idx] || MICRO_PRINCIPI[0];
+}
+
+/* ══════════════════════════════════════════════════
+   STORAGE
+══════════════════════════════════════════════════ */
+const K={G:'ll_g',H:'ll_h',S:'ll_s',B:'ll_b',T:'ll_t'};
+const sg=(k)=>{try{return JSON.parse(localStorage.getItem(k));}catch{return null;}};
+const ss=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch{}};
+function oggi(){const d=new Date();return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function ieriDi(s){const d=new Date(s+'T12:00:00');d.setDate(d.getDate()-1);return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+const caricoStato=()=>sg(K.G);
+const salvaStato=(v)=>ss(K.G,v);
+const storia=()=>sg(K.H)||[];
+const streak=()=>sg(K.S)||{corrente:0,record:0,ultimaData:null};
+const totale=()=>parseInt(localStorage.getItem(K.T)||'0',10);
+const badgeGuadagnati=()=>sg(K.B)||[];
+
+function aggiungiStoria(e){const h=storia();h.unshift({...e,completatoIl:new Date().toISOString()});ss(K.H,h.slice(0,100));}
+function aggiornaStreak(data){const s=streak();if(s.ultimaData===data)return s;s.corrente=s.ultimaData===ieriDi(data)?s.corrente+1:1;s.record=Math.max(s.record,s.corrente);s.ultimaData=data;ss(K.S,s);return s;}
+function incTotale(){const n=totale()+1;localStorage.setItem(K.T,n);return n;}
+function daBadge(id){const b=badgeGuadagnati();if(b.includes(id))return false;b.push(id);ss(K.B,b);return true;}
+function resetTutto(){Object.values(K).forEach(k=>localStorage.removeItem(k));}
+
+/* ══════════════════════════════════════════════════
+   COSTRUZIONE GIORNATA
+══════════════════════════════════════════════════ */
+function costruisciGiornata(data,energia){
+  const pool=MISSIONI_REALI.filter(m=>m.energia.includes(energia));
+  return{
+    data, energia,
+    missioneReale:   pesca(pool.length?pool:MISSIONI_REALI, data, energia),
+    microPrincipio:  pescaMicroPrincipio(data),
+    realeCompletata: false,
+    microCompletato: false,
+  };
+}
+
+/* ══════════════════════════════════════════════════
+   STATO APP
+══════════════════════════════════════════════════ */
+let app={pagina:'home',giornata:null,streak:streak(),badge:badgeGuadagnati(),totale:totale(),debugAperto:false,confermaReale:false};
+
+function avvia(){
+  const salvato=caricoStato();
+  if(salvato&&salvato.data===oggi()){
+    // Compatibilità con salvataggi precedenti (v1.0) che non avevano microPrincipio
+    if(!salvato.microPrincipio){
+      salvato.microPrincipio = pescaMicroPrincipio(salvato.data);
+      salvato.microCompletato = false;
+      salvaStato(salvato);
+    }
+    app.giornata=salvato;
+  }
+  render();
+}
+
+/* ══════════════════════════════════════════════════
+   AZIONI
+══════════════════════════════════════════════════ */
+window.showPage=(p)=>{app.pagina=p;app.confermaReale=false;render();};
+
+window.scegliEnergia=(liv)=>{
+  const g=costruisciGiornata(oggi(),liv);
+  salvaStato(g);app.giornata=g;render();
+};
+
+window.toggleConferma=()=>{app.confermaReale=!app.confermaReale;render();};
+
+window.completaReale=()=>{
+  if(!app.giornata||app.giornata.realeCompletata)return;
+  app.giornata.realeCompletata=true;salvaStato(app.giornata);
+  aggiungiStoria({data:oggi(),missioneId:app.giornata.missioneReale.id,titolo:app.giornata.missioneReale.titolo,categoria:app.giornata.missioneReale.categoria,energia:app.giornata.energia});
+  app.streak=aggiornaStreak(oggi());app.totale=incTotale();
+  controllaBadge();app.confermaReale=false;render();
+};
+
+window.completaMicro=()=>{
+  if(!app.giornata||app.giornata.microCompletato)return;
+  app.giornata.microCompletato=true;salvaStato(app.giornata);render();
+};
+
+window.rigenera=()=>{
+  if(!app.giornata)return;
+  const g=costruisciGiornata(oggi(),app.giornata.energia);
+  salvaStato(g);app.giornata=g;render();
+};
+
+window.resetCompleto=()=>{
+  if(!confirm('Vuoi davvero resettare tutti i dati?'))return;
+  resetTutto();
+  app={pagina:'home',giornata:null,streak:streak(),badge:badgeGuadagnati(),totale:0,debugAperto:false,confermaReale:false};
+  render();
+};
+
+window.toggleDebug=()=>{app.debugAperto=!app.debugAperto;render();};
+
+let _energiaSelezionata=null;
+window.cliccaEnergia=(id)=>{
+  _energiaSelezionata=id;
+  document.querySelectorAll('.energy-option').forEach(el=>el.classList.remove('selected'));
+  document.getElementById('eo-'+id)?.classList.add('selected');
+  document.getElementById('conferma-energia').disabled=false;
+};
+window.confermaEnergia=()=>{if(_energiaSelezionata)scegliEnergia(_energiaSelezionata);};
+
+function controllaBadge(){
+  const checks=[
+    {id:'primo_passo',ok:app.totale>=1},{id:'tre_giorni',ok:app.streak.corrente>=3},
+    {id:'sette_giorni',ok:app.streak.corrente>=7},{id:'venti_missioni',ok:app.totale>=20},{id:'cinquanta',ok:app.totale>=50},
+  ];
+  for(const c of checks){
+    if(c.ok&&!app.badge.includes(c.id)){
+      if(daBadge(c.id)){app.badge=badgeGuadagnati();mostraToast(BADGE.find(b=>b.id===c.id));break;}
+    }
+  }
+}
+
+function mostraToast(b){
+  const t=document.getElementById('badge-toast');
+  document.getElementById('toast-emoji').textContent=b.emoji;
+  document.getElementById('toast-title').textContent=b.label;
+  document.getElementById('toast-desc').textContent=b.desc;
+  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000);
+}
+
+/* ══════════════════════════════════════════════════
+   RENDER
+══════════════════════════════════════════════════ */
+function render(){
+  document.getElementById('nav-history').classList.toggle('active',app.pagina==='history');
+  document.getElementById('nav-how').classList.toggle('active',app.pagina==='how');
+  const main=document.getElementById('main');
+  if(app.pagina==='how')     {main.innerHTML=renderCome();   return;}
+  if(app.pagina==='history') {main.innerHTML=renderStoria(); return;}
+  renderHome(main);
+}
+
+/* ── HOME ── */
+function renderHome(main){
+  const dataLabel=new Date().toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'});
+  const emojiEn=app.giornata?EN_EMOJI[app.giornata.energia]:'';
+  let html=`<div class="page">
+    <div style="margin-bottom:20px">
+      <div class="page-date">${dataLabel}</div>
+      <h1 class="page-title">La tua giornata ${emojiEn}</h1>
+    </div>`;
+
+  if(app.totale>0||app.streak.corrente>0){
+    const bEarned=BADGE.filter(b=>app.badge.includes(b.id)).slice(-3);
+    html+=`<div class="streak-bar">
+      <div class="streak-item"><span>🔥</span><div><div class="streak-num" style="color:var(--gold)">${app.streak.corrente}</div><div class="streak-label">giorni di fila</div></div></div>
+      <div class="streak-divider"></div>
+      <div class="streak-item"><span>🎯</span><div><div class="streak-num">${app.totale}</div><div class="streak-label">missioni totali</div></div></div>
+      <div class="streak-divider"></div>
+      <div style="display:flex;gap:4px;align-items:center">${bEarned.length?bEarned.map(b=>`<span style="font-size:18px" title="${b.label}">${b.emoji}</span>`).join(''):'<span style="font-size:11px;color:var(--cream-dim)">nessun badge</span>'}</div>
+    </div>`;
+  }
+
+  if(!app.giornata){
+    html+=renderSelezioneEnergia();
+  } else {
+    html+=renderCardReale(app.giornata.missioneReale, app.giornata.realeCompletata);
+    html+=renderCardMicro(app.giornata.microPrincipio, app.giornata.microCompletato);
+    if(app.giornata.realeCompletata&&app.giornata.microCompletato){
+      html+=`<div class="done-banner page">
+        <div class="done-emoji">✨</div>
+        <div class="done-title">Giornata completata</div>
+        <div class="done-sub">Torna domani per una nuova missione</div>
+        ${app.streak.corrente>1?`<div class="streak-pill">🔥 ${app.streak.corrente} giorni di fila</div>`:''}
+      </div>`;
+    }
+    html+=`<div style="padding-top:8px;border-top:1px solid rgba(255,255,255,.05);margin-top:8px">
+      <button class="debug-toggle" onclick="toggleDebug()">··· opzioni sviluppatore</button>
+      ${app.debugAperto?`<div class="debug-row">
+        <button class="btn btn-ghost" onclick="rigenera()" style="font-size:12px;padding:7px 12px">🔄 Rigenera giornata</button>
+        <button class="btn btn-danger" onclick="resetCompleto()">🗑️ Reset completo</button>
+      </div>`:''}
+    </div>`;
+  }
+  html+=`</div>`;
+  main.innerHTML=html;
+}
+
+/* ── SELEZIONE ENERGIA ── */
+function renderSelezioneEnergia(){
+  return`<div>
+    <div class="section-label" style="text-align:center;margin-bottom:4px">Come ti senti oggi?</div>
+    <h2 class="section-title" style="text-align:center;font-size:20px;margin-bottom:4px">Scegli il tuo livello di energia</h2>
+    <p style="font-size:12px;color:var(--cream-dim);text-align:center;margin-bottom:20px">Calibra la difficoltà della missione reale</p>
+    ${LIVELLI.map(l=>`
+      <button class="energy-option" id="eo-${l.id}" onclick="cliccaEnergia('${l.id}')">
+        <span style="font-size:22px">${l.emoji}</span>
+        <div><div class="energy-name">${l.label}</div><div class="energy-desc">${l.desc}</div></div>
+        <div class="energy-check"><svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="#0D1117" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+      </button>`).join('')}
+    <button class="btn btn-primary btn-full" id="conferma-energia" disabled onclick="confermaEnergia()">Genera la mia giornata →</button>
+  </div>`;
+}
+
+/* ── CARD MISSIONE REALE ── */
+function renderCardReale(m,completata){
+  const iC={basso:'impact-basso',medio:'impact-medio',alto:'impact-alto'}[m.impatto];
+  const iL={basso:'Impatto lieve',medio:'Impatto medio',alto:'Impatto alto'}[m.impatto];
+  return`<div class="card card-teal flip-in">
+    <div class="card-header"><span class="tag tag-real">Missione Reale</span><span>${CAT_ICON[m.categoria]||'🎯'}</span></div>
+    <div class="card-title">${m.titolo}</div>
+    <div class="card-desc">${m.descrizione}</div>
+    <div style="margin-bottom:14px"><span class="impact ${iC}">${iL}</span></div>
+    <div class="card-why"><p><strong>Perché funziona:</strong> ${m.perche}</p></div>
+    ${completata
+      ? `<div class="completed-state">
+           <div class="completed-check"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+           <div class="completed-text"><strong>Missione completata</strong><span>Ottimo lavoro, la streak continua</span></div>
+         </div>`
+      : app.confermaReale
+        ? `<div>
+             <div class="confirm-label">Hai davvero completato questa missione?</div>
+             <div class="confirm-row">
+               <button class="btn btn-ghost" style="flex:1;font-size:13px" onclick="toggleConferma()">No, aspetta</button>
+               <button class="btn" style="flex:1;font-size:13px;background:var(--teal);color:var(--navy-900)" onclick="completaReale()">Sì, completata ✓</button>
+             </div>
+           </div>`
+        : `<button class="btn btn-teal btn-full" onclick="toggleConferma()">Segna come completata</button>`
+    }
+  </div>`;
+}
+
+/* ── CARD MICRO-PRINCIPIO ── */
+function renderCardMicro(mp,completato){
+  return`<div class="card card-amber" style="animation:fadeUp .4s .15s both">
+    <div class="card-header">
+      <span class="tag tag-micro">Micro-principio del giorno</span>
+      <span>🧠</span>
+    </div>
+    <div class="card-title" style="margin-top:12px">Cosa sa il comportamento umano</div>
+
+    <div class="mp-principio">
+      <div class="mp-label">Il principio</div>
+      <div class="mp-testo">${mp.principio}</div>
+      <div class="mp-fonte">${mp.fonte}</div>
+    </div>
+
+    <div class="mp-cultura">
+      <div class="mp-label">Nel mondo</div>
+      <div class="mp-testo">${mp.cultura}</div>
+    </div>
+
+    <div class="mp-azione">
+      <div class="mp-label">La tua micro-azione di oggi</div>
+      <div class="mp-testo">${mp.azione}</div>
+    </div>
+
+    ${completato
+      ? `<div class="mp-completed">
+           <div class="mp-completed-check"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+           <div><strong>Principio applicato</strong><span>Hai messo in pratica la scienza oggi</span></div>
+         </div>`
+      : `<button class="btn btn-amber btn-full" onclick="completaMicro()">Ho applicato questa micro-azione</button>`
+    }
+  </div>`;
+}
+
+/* ── COME FUNZIONA ── */
+function renderCome(){
+  return`<div class="page">
+    <button class="back-btn" onclick="showPage('home')">← Torna alla home</button>
+    <h2 class="section-title">Come funziona Luck Loop</h2>
+
+    <div class="card card-teal how-section">
+      <span class="tag tag-real" style="margin-bottom:12px;display:inline-block">Missione Reale</span>
+      <h3 class="card-sub">La fortuna si costruisce con il comportamento</h3>
+      <p style="font-size:13px;color:var(--cream-dim);line-height:1.65;margin-bottom:10px">La ricerca in psicologia e scienze comportamentali mostra che le persone percepite come "fortunate" hanno in comune comportamenti specifici: mantengono reti sociali attive, si espongono a nuove esperienze, completano micro-azioni quotidiane che aumentano la loro visibilità e le occasioni di incontro.</p>
+      <p style="font-size:13px;color:var(--cream-dim);line-height:1.65">Le missioni reali di Luck Loop sono calibrate su questi meccanismi. Nessuna promessa: solo un modo per aumentare le probabilità che cose buone abbiano l'opportunità di accadere.</p>
+    </div>
+
+    <div class="card card-amber how-section">
+      <span class="tag tag-micro" style="margin-bottom:12px;display:inline-block">Micro-principio del giorno</span>
+      <h3 class="card-sub">Un fatto, una radice, un'azione</h3>
+      <p style="font-size:13px;color:var(--cream-dim);line-height:1.65;margin-bottom:10px">Ogni giorno Luck Loop estrae un principio comportamentale reale dalla ricerca in psicologia e neuroscienze, lo collega a un riferimento storico o culturale umano, e lo traduce in una micro-azione eseguibile in pochi minuti.</p>
+      <p style="font-size:13px;color:var(--cream-dim);line-height:1.65">Il contenuto cambia ogni giorno ma è stabile per tutta la giornata: puoi ricaricare la pagina e trovare lo stesso principio. Non è casuale: è deterministico per data.</p>
+    </div>
+
+    <div class="card card-glass how-section">
+      <div class="section-label">La scienza dietro</div>
+      <ul class="how-list">
+        <li>Le <strong>reti sociali dormienti</strong> producono più opportunità di lavoro delle connessioni attive (Levin et al., 2022)</li>
+        <li>L'<strong>esposizione a stimoli nuovi</strong> attiva percorsi cognitivi associati alla creatività</li>
+        <li>I <strong>micro-task completati</strong> riducono il cognitive load e migliorano le decisioni</li>
+        <li>Le <strong>abitudini agganciate</strong> a comportamenti esistenti si consolidano più velocemente</li>
+      </ul>
+    </div>
+
+    <div class="card card-glass how-section">
+      <div class="section-label">Cosa Luck Loop NON dice mai</div>
+      <ul class="no-list">
+        <li>Che la fortuna esista come forza causale</li>
+        <li>Che i principi garantiscano risultati immediati</li>
+        <li>Che completare le missioni cambi la vita in un giorno</li>
+        <li>Che ci sia un unico modo corretto di applicare ogni principio</li>
+      </ul>
+    </div>
+
+    <button class="btn btn-primary btn-full" onclick="showPage('home')">Torna alla mia giornata</button>
+  </div>`;
+}
+
+/* ── ARCHIVIO ── */
+function renderStoria(){
+  const h=storia();
+  return`<div class="page">
+    <button class="back-btn" onclick="showPage('home')">← Torna alla home</button>
+    <h2 class="section-title">Il tuo archivio</h2>
+
+    <div class="stats-grid">
+      <div class="stat-box"><div class="stat-num" style="color:var(--gold)">${app.totale}</div><div class="stat-label">missioni</div></div>
+      <div class="stat-box"><div class="stat-num" style="color:var(--teal)">${app.streak.corrente}</div><div class="stat-label">streak</div></div>
+      <div class="stat-box"><div class="stat-num">${app.streak.record}</div><div class="stat-label">record</div></div>
+    </div>
+
+    <div class="card card-glass" style="margin-bottom:14px">
+      <div class="section-label">Badge</div>
+      ${BADGE.map(b=>{
+        const e=app.badge.includes(b.id);
+        return`<div class="badge-row ${e?'earned':'locked'}">
+          <span class="badge-emoji">${b.emoji}</span>
+          <div>
+            <div class="badge-name" style="${e?'':'color:var(--cream-dim)'}">${b.label}</div>
+            <div class="badge-desc">${b.desc}</div>
+          </div>
+          ${e?`<div style="margin-left:auto;color:var(--gold)">✓</div>`:''}
+        </div>`;
+      }).join('')}
+    </div>
+
+    <div class="card card-glass">
+      <div class="section-label">Missioni completate</div>
+      ${h.length===0
+        ? `<p style="font-size:13px;color:var(--cream-dim);text-align:center;padding:16px 0">Nessuna missione ancora.<br>Inizia oggi!</p>`
+        : h.map(e=>`
+          <div class="history-item">
+            <span class="history-icon">${CAT_ICON[e.categoria]||'🎯'}</span>
+            <div style="flex:1;min-width:0">
+              <div class="history-title">${e.titolo}</div>
+              <div class="history-meta">${new Date(e.completatoIl).toLocaleDateString('it-IT',{day:'numeric',month:'short'})} · ${EN_EMOJI[e.energia]||''} ${e.energia}</div>
+            </div>
+            <div class="history-check"><svg fill="none" viewBox="0 0 24 24" stroke="var(--teal)" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+          </div>`).join('')
+      }
+    </div>
+  </div>`;
+}
+
+avvia();
+</script>
+</body>
+</html>
