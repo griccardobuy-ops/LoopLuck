@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Luck Loop – Missioni quotidiane per aumentare le tue opportunità reali." />
+  <title>Luck Loop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy-900: #0D1117;
+      --navy-800: #161B24;
+      --navy-700: #1C2333;
+      --navy-600: #253047;
+      --gold:     #C9A84C;
+      --gold-lt:  #DFC57A;
+      --cream:    #E8DCC8;
+      --cream-dim:#B8A98A;
+      --teal:     #4ECDC4;
+      --amber:    #E8934A;
+      --violet:   #9C6FDE;
+      --star:     #F5C842;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy-900); color: var(--cream); font-family: 'Inter', system-ui, sans-serif; min-height: 100dvh; -webkit-font-smoothing: antialiased; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-thumb { background: var(--navy-600); border-radius: 99px; }
+
+    .app { max-width: 520px; margin: 0 auto; padding: 0 16px 80px; position: relative; }
+    .glow-top { position: fixed; top: -120px; right: -120px; width: 360px; height: 360px; background: radial-gradient(circle, rgba(201,168,76,.07) 0%, transparent 70%); pointer-events: none; }
+    .glow-bottom { position: fixed; bottom: -120px; left: -120px; width: 360px; height: 360px; background: radial-gradient(circle, rgba(78,205,196,.07) 0%, transparent 70%); pointer-events: none; }
+
+    header { display: flex; align-items: center; justify-content: space-between; padding: 16px 0 8px; }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(201,168,76,.15); border: 1px solid rgba(201,168,76,.3); display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--gold); }
+    .logo-name { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--cream); letter-spacing: .03em; }
+
+    nav { display: flex; gap: 4px; }
+    nav button { background: none; border: none; cursor: pointer; color: var(--cream-dim); font-size: 13px; font-family: inherit; padding: 6px 10px; border-radius: 8px; transition: background .15s, color .15s; }
+    nav button:hover { color: var(--cream); background: rgba(255,255,255,.07); }
+    nav button.active { background: rgba(255,255,255,.1); color: var(--cream); }
+
+    .page-title { font-family: 'Playfair Display', serif; font-size: 28px; line-height: 1.2; }
+    .page-date { font-size: 13px; color: var(--cream-dim); margin-bottom: 4px; }
+
+    .card { border-radius: 16px; padding: 20px; margin-bottom: 14px; }
+    .card-teal  { background: var(--navy-700); border: 1px solid rgba(78,205,196,.25);  box-shadow: 0 0 28px rgba(78,205,196,.05); }
+    .card-amber { background: var(--navy-700); border: 1px solid rgba(232,147,74,.25);  box-shadow: 0 0 28px rgba(232,147,74,.05); }
+    .card-glass { background: var(--navy-700); border: 1px solid rgba(255,255,255,.08); }
+    .card-dark    { background: var(--navy-800); border-radius: 12px; padding: 16px; }
+    /* Missione speciale — bordo viola sottile, nessun altro cambiamento visivo */
+    .card-special { background: var(--navy-700); border: 1px solid rgba(156,111,222,.35); box-shadow: 0 0 28px rgba(156,111,222,.06); }
+
+    .tag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: 3px 10px; border-radius: 99px; }
+    .tag-real  { color: var(--teal);  background: rgba(78,205,196,.1);  border: 1px solid rgba(78,205,196,.2);  }
+    .tag-micro   { color: var(--amber);  background: rgba(232,147,74,.1);  border: 1px solid rgba(232,147,74,.2);  }
+    .tag-special { color: var(--violet); background: rgba(156,111,222,.1); border: 1px solid rgba(156,111,222,.25); }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; font-family: inherit; font-weight: 600; cursor: pointer; border-radius: 12px; border: none; padding: 12px 20px; font-size: 14px; transition: transform .12s, opacity .15s, background .15s; }
+    .btn:active { transform: scale(.97); }
+    .btn-primary { background: var(--gold); color: var(--navy-900); }
+    .btn-primary:hover { background: var(--gold-lt); }
+    .btn-teal  { background: rgba(78,205,196,.1);  color: var(--teal);  border: 1px solid rgba(78,205,196,.3);  }
+    .btn-teal:hover  { background: rgba(78,205,196,.18);  }
+    .btn-amber { background: rgba(232,147,74,.1);  color: var(--amber); border: 1px solid rgba(232,147,74,.3);  }
+    .btn-amber:hover   { background: rgba(232,147,74,.18); }
+    .btn-special { background: rgba(156,111,222,.1); color: var(--violet); border: 1px solid rgba(156,111,222,.3); }
+    .btn-special:hover { background: rgba(156,111,222,.18); }
+    .btn-ghost { background: transparent; color: var(--cream-dim); border: 1px solid rgba(255,255,255,.15); }
+    .btn-ghost:hover { border-color: rgba(255,255,255,.35); color: var(--cream); }
+    .btn-danger { background: transparent; color: rgba(239,68,68,.6); border: 1px solid rgba(239,68,68,.25); font-size: 13px; padding: 8px 14px; }
+    .btn-danger:hover { border-color: rgba(239,68,68,.5); color: rgba(239,68,68,.9); }
+    .btn-full { width: 100%; }
+    .btn:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+
+    .impact { display: inline-flex; align-items: center; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 8px; }
+    .impact-basso { color: var(--cream-dim); background: rgba(184,169,138,.1); }
+    .impact-medio { color: var(--gold);  background: rgba(201,168,76,.1); }
+    .impact-alto  { color: var(--teal);  background: rgba(78,205,196,.1); }
+
+    .streak-bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 16px; background: var(--navy-700); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; margin-bottom: 18px; }
+    .streak-item { display: flex; align-items: center; gap: 8px; }
+    .streak-num { font-family: 'Playfair Display', serif; font-size: 22px; line-height: 1; }
+    .streak-label { font-size: 11px; color: var(--cream-dim); }
+    .streak-divider { width: 1px; height: 32px; background: rgba(255,255,255,.08); }
+
+    .energy-option { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; padding: 14px 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,.1); background: var(--navy-700); cursor: pointer; font-family: inherit; transition: border-color .15s, background .15s; margin-bottom: 10px; }
+    .energy-option:hover { border-color: rgba(255,255,255,.25); }
+    .energy-option.selected { border-color: var(--gold); background: rgba(201,168,76,.08); }
+    .energy-name { font-size: 15px; font-weight: 600; color: var(--cream); }
+    .energy-desc { font-size: 12px; color: var(--cream-dim); }
+    .energy-check { margin-left: auto; width: 20px; height: 20px; border-radius: 50%; background: var(--gold); display: none; align-items: center; justify-content: center; }
+    .energy-option.selected .energy-check { display: flex; }
+
+    .card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 4px; }
+    .card-title { font-family: 'Playfair Display', serif; font-size: 20px; margin: 10px 0 8px; line-height: 1.25; }
+    .card-desc { font-size: 13px; color: var(--cream-dim); line-height: 1.6; margin-bottom: 14px; }
+    .card-why { border-top: 1px solid rgba(255,255,255,.08); padding-top: 12px; margin-bottom: 16px; }
+    .card-why p { font-size: 12px; color: var(--cream-dim); line-height: 1.6; }
+    .card-why strong { color: var(--teal); }
+
+    /* ── MICRO-PRINCIPIO ── */
+    .mp-principio {
+      background: rgba(232,147,74,.06);
+      border: 1px solid rgba(232,147,74,.15);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+    .mp-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .09em; color: var(--amber); margin-bottom: 4px; }
+    .mp-testo { font-size: 13px; color: var(--cream); line-height: 1.55; }
+    .mp-fonte { font-size: 11px; color: var(--cream-dim); margin-top: 4px; font-style: italic; }
+
+    .mp-cultura {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+    .mp-cultura .mp-label { color: var(--cream-dim); }
+
+    .mp-azione {
+      background: rgba(201,168,76,.07);
+      border: 1px solid rgba(201,168,76,.2);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+    }
+    .mp-azione .mp-label { color: var(--gold); }
+    .mp-azione .mp-testo { font-weight: 500; }
+
+    .mp-completed {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(232,147,74,.08); border: 1px solid rgba(232,147,74,.2);
+      border-radius: 12px; padding: 11px 14px;
+    }
+    .mp-completed-check { width: 28px; height: 28px; border-radius: 50%; background: var(--amber); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .mp-completed strong { font-size: 13px; color: var(--amber); display: block; }
+    .mp-completed span { font-size: 11px; color: var(--cream-dim); }
+
+    /* ── CARD REALE ── */
+    .completed-state { display: flex; align-items: center; gap: 12px; background: rgba(78,205,196,.08); border: 1px solid rgba(78,205,196,.2); border-radius: 12px; padding: 12px; }
+    .completed-check { width: 32px; height: 32px; border-radius: 50%; background: var(--teal); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .completed-text strong { font-size: 13px; color: var(--teal); }
+    .completed-text span { font-size: 11px; color: var(--cream-dim); display: block; }
+    .confirm-row { display: flex; gap: 8px; }
+    .confirm-label { font-size: 12px; color: var(--cream-dim); text-align: center; margin-bottom: 8px; }
+
+    .done-banner { text-align: center; padding: 24px 0 8px; }
+    .done-emoji { font-size: 36px; margin-bottom: 8px; }
+    .done-title { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 4px; }
+    .done-sub { font-size: 13px; color: var(--cream-dim); }
+    .streak-pill { display: inline-flex; align-items: center; gap: 6px; background: rgba(201,168,76,.1); border: 1px solid rgba(201,168,76,.2); border-radius: 99px; padding: 6px 16px; font-size: 13px; font-weight: 600; color: var(--gold); margin-top: 12px; }
+
+
+    /* ── SFIDA DEL GIORNO ────────────────────────── */
+    .card-star   { background:var(--navy-700); border:1px solid rgba(245,200,66,.28); box-shadow:0 0 28px rgba(245,200,66,.05); }
+    .tag-star    { color:#F5C842; background:rgba(245,200,66,.1); border:1px solid rgba(245,200,66,.22); font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; padding:3px 10px; border-radius:99px; display:inline-block; }
+    .btn-star    { background:rgba(245,200,66,.1); color:#F5C842; border:1px solid rgba(245,200,66,.3); }
+    .btn-star:hover { background:rgba(245,200,66,.18); }
+    .sfida-box   { background:var(--navy-800); border-radius:12px; padding:20px; margin-bottom:16px; display:flex; flex-direction:column; align-items:center; gap:14px; min-height:140px; justify-content:center; }
+    .forme-grid  { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+    .forma       { width:44px; height:44px; border-radius:50%; cursor:pointer; transition:transform .15s; display:flex; align-items:center; justify-content:center; border:none; }
+    .forma:active { transform:scale(.9); }
+    @keyframes correctFlash { 0%{transform:scale(1)}40%{transform:scale(1.4)}100%{transform:scale(1)} }
+    @keyframes wrongShake   { 0%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}100%{transform:translateX(0)} }
+    .focus-ring  { position:relative; width:120px; height:120px; touch-action:none; cursor:pointer; }
+    .focus-svg   { width:120px; height:120px; transform:rotate(-90deg); }
+    .focus-track { fill:none; stroke:rgba(255,255,255,.08); stroke-width:9; }
+    .focus-prog  { fill:none; stroke:#F5C842; stroke-width:9; stroke-linecap:round; stroke-dasharray:339.3; stroke-dashoffset:339.3; transition:stroke-dashoffset .08s linear; }
+    .focus-label { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:26px; }
+    .mistero-btn { width:72px; height:72px; border-radius:50%; background:rgba(245,200,66,.1); border:2px solid rgba(245,200,66,.35); font-size:30px; cursor:pointer; transition:transform .15s,background .15s; display:flex; align-items:center; justify-content:center; }
+    .mistero-btn:hover { background:rgba(245,200,66,.2); transform:scale(1.06); }
+    .mistero-reveal { font-size:14px; color:var(--cream); line-height:1.6; text-align:center; max-width:240px; animation:fadeUp .35s ease-out; }
+    .scena-wrap  { position:relative; width:100%; max-width:280px; }
+    .sfida-done  { display:flex; align-items:center; gap:10px; background:rgba(245,200,66,.08); border:1px solid rgba(245,200,66,.22); border-radius:12px; padding:12px 14px; }
+    .sfida-done-icon { width:28px; height:28px; border-radius:50%; background:#F5C842; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+    .sfida-done strong { font-size:13px; color:#F5C842; display:block; }
+    .sfida-done span   { font-size:11px; color:var(--cream-dim); }
+    @keyframes starPop { 0%{transform:scale(0) rotate(-20deg);opacity:0}60%{transform:scale(1.25) rotate(5deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1} }
+    .star-pop { animation:starPop .55s cubic-bezier(.34,1.56,.64,1) both; }
+    .star-num  { font-family:'Playfair Display',serif; font-size:22px; line-height:1; color:#F5C842; }
+
+    /* ── COME FUNZIONA ── */
+    .how-section { margin-bottom: 14px; }
+    .how-list li { display: flex; gap: 8px; font-size: 13px; color: var(--cream-dim); margin-bottom: 6px; line-height: 1.5; list-style: none; }
+    .how-list li::before { content: '→'; color: var(--teal); flex-shrink: 0; }
+    .no-list li { display: flex; gap: 8px; font-size: 13px; color: var(--cream-dim); margin-bottom: 6px; list-style: none; }
+    .no-list li::before { content: '✕'; color: #f87171; flex-shrink: 0; }
+
+    /* ── ARCHIVIO ── */
+    .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 16px; }
+    .stat-box { background: var(--navy-700); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 12px; text-align: center; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 24px; }
+    .stat-label { font-size: 11px; color: var(--cream-dim); }
+    .badge-row { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 10px; margin-bottom: 6px; }
+    .badge-row.earned { background: rgba(201,168,76,.08); border: 1px solid rgba(201,168,76,.18); }
+    .badge-row.locked { opacity: .38; }
+    .badge-emoji { font-size: 22px; }
+    .badge-name { font-size: 13px; font-weight: 600; color: var(--gold); }
+    .badge-desc { font-size: 11px; color: var(--cream-dim); }
+    .history-item { display: flex; align-items: center; gap: 10px; background: var(--navy-800); border-radius: 10px; padding: 10px; margin-bottom: 6px; }
+    .history-icon { font-size: 18px; }
+    .history-title { font-size: 13px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .history-meta { font-size: 11px; color: var(--cream-dim); }
+    .history-check { width: 20px; height: 20px; border-radius: 50%; background: rgba(78,205,196,.2); flex-shrink: 0; margin-left: auto; display: flex; align-items: center; justify-content: center; }
+
+    /* ── DEBUG ── */
+    .debug-toggle { background: none; border: none; color: rgba(255,255,255,.2); font-size: 12px; font-family: inherit; cursor: pointer; margin-top: 24px; }
+    .debug-toggle:hover { color: rgba(255,255,255,.4); }
+    .debug-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+
+    /* ── TOAST ── */
+    #badge-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--navy-700); border: 1px solid rgba(201,168,76,.35); border-radius: 18px; padding: 16px 20px; display: flex; align-items: center; gap: 14px; min-width: 260px; z-index: 100; box-shadow: 0 16px 48px rgba(0,0,0,.5); transition: transform .4s cubic-bezier(.34,1.56,.64,1), opacity .4s; opacity: 0; pointer-events: none; }
+    #badge-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    .toast-label { font-size: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: .08em; font-weight: 600; }
+    .toast-title { font-family: 'Playfair Display', serif; font-size: 18px; line-height: 1.1; }
+    .toast-desc { font-size: 11px; color: var(--cream-dim); }
+
+    /* ── MISC ── */
+    .back-btn { display: inline-flex; align-items: center; gap: 6px; background: none; border: none; color: var(--cream-dim); font-family: inherit; font-size: 13px; cursor: pointer; margin-bottom: 20px; padding: 0; transition: color .15s; }
+    .back-btn:hover { color: var(--cream); }
+    .section-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--cream-dim); margin-bottom: 12px; }
+    h2.section-title { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 16px; }
+    h3.card-sub { font-family: 'Playfair Display', serif; font-size: 17px; margin-bottom: 8px; }
+
+    .page    { animation: fadeUp .4s ease-out both; }
+    .flip-in { animation: flipIn .5s ease-out both; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes flipIn { from { opacity:0; transform:rotateY(-70deg); } to { opacity:1; transform:rotateY(0); } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.01ms!important; transition-duration:.01ms!important; } }
+  </style>
+</head>
+<body>
+
+<div class="glow-top"></div>
+<div class="glow-bottom"></div>
+
+<div class="app">
+  <header>
+    <div class="logo">
+      <div class="logo-icon">∞</div>
+      <span class="logo-name">Luck Loop</span>
+    </div>
+    <nav>
+      <button id="nav-history" onclick="showPage('history')">Archivio</button>
+      <button id="nav-how" onclick="showPage('how')">Come funziona</button>
+    </nav>
+  </header>
+  <main id="main"></main>
+</div>
+
+<div id="badge-toast">
+  <span id="toast-emoji" style="font-size:32px"></span>
+  <div>
+    <div class="toast-label">Nuovo badge!</div>
+    <div class="toast-title" id="toast-title"></div>
+    <div class="toast-desc" id="toast-desc"></div>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════
+   DATI — MISSIONI REALI
+══════════════════════════════════════════════════ */
+const MISSIONI_REALI = [
+  // ── SOCIALE ──────────────────────────────────────────────────────────────────
+  // r01: riclassificata media/alta — contattare qualcuno richiede scelta emotiva,
+  //      formulazione del messaggio ed esposizione. Non eseguibile in stato di stanchezza.
+  {id:'r01',categoria:'sociale',energia:['media','alta'],
+   titolo:"Scrivi a qualcuno che non senti da un po'",
+   descrizione:"Manda un messaggio breve e sincero a una persona che stimi. Non chiedere nulla, solo un contatto genuino.",
+   impatto:'medio',
+   perche:"Le reti sociali dormienti sono una delle fonti più sottovalutate di opportunità inaspettate."},
+
+  // r02: confermata alta — massima esposizione sociale, imprevedibilità, coraggio.
+  {id:'r02',categoria:'sociale',energia:['alta'],
+   titolo:"Parla con uno sconosciuto",
+   descrizione:"Fai una domanda o un complimento sincero a qualcuno che non conosci. Bar, negozio, coda: qualunque contesto.",
+   impatto:'alto',
+   perche:"Le connessioni deboli (weak ties) aprono porte che le amicizie strette raramente raggiungono."},
+
+  // r03: confermata bassa — risposta reattiva, nessuna iniziativa, azione puntuale.
+  {id:'r03',categoria:'sociale',energia:['bassa'],
+   titolo:"Rispondi al messaggio rimasto in sospeso",
+   descrizione:"C'è qualcuno che aspetta una tua risposta. Fallo ora, anche con due righe.",
+   impatto:'basso',
+   perche:"L'affidabilità nelle piccole cose costruisce reputazione nel tempo."},
+
+  // r04: confermata alta — pianificazione, spostamento, esposizione sociale prolungata.
+  {id:'r04',categoria:'sociale',energia:['alta'],
+   titolo:"Partecipa a un evento",
+   descrizione:"Trova un evento, meetup o incontro nel tuo settore o area di interesse. Basta essere presenti.",
+   impatto:'alto',
+   perche:"La presenza fisica o attiva aumenta la probabilità di essere ricordati e coinvolti."},
+
+  // r05: riclassificata alta — networking attivo, valutazione sociale, scrittura strategica.
+  //      Precedentemente bassa/media: sottostimata significativamente.
+  {id:'r05',categoria:'sociale',energia:['alta'],
+   titolo:"Fai una micro-presentazione",
+   descrizione:"Pensa a due persone che potrebbero trarre vantaggio dal conoscersi. Presentale via messaggio.",
+   impatto:'alto',
+   perche:"Chi connette gli altri viene percepito come risorsa preziosa e ricordato con gratitudine."},
+
+  // r16: riclassificata media/alta — identificare la persona, formulare una domanda
+  //      non banale, esporsi intellettualmente: più costoso di quanto sembri.
+  {id:'r16',categoria:'sociale',energia:['media','alta'],
+   titolo:"Fai una domanda a qualcuno più esperto",
+   descrizione:"Una sola domanda, genuina e specifica su un problema reale. Non chiedere consigli generici.",
+   impatto:'alto',
+   perche:"Fare buone domande è una delle competenze più rare e valorizzate in qualsiasi contesto."},
+
+  // r17 (nuova): sociale a bassa energia — azione privata, riflessiva, nessuna esposizione.
+  //      Colma il gap: bassa energia non aveva missioni della categoria sociale.
+  {id:'r17',categoria:'sociale',energia:['bassa'],
+   titolo:"Pensa a qualcuno e scrivi cosa apprezzi di lui",
+   descrizione:"Non devi mandare nulla. Scrivi su carta o in un notes privato una cosa concreta che apprezzi di una persona della tua vita.",
+   impatto:'basso',
+   perche:"L'attenzione deliberata verso le qualità altrui allena la capacità di riconoscere risorse e alleati nel proprio ambiente."},
+
+  // r18 (nuova): sociale a bassa energia — azione reattiva, nessuna iniziativa diretta.
+  {id:'r18',categoria:'sociale',energia:['bassa'],
+   titolo:"Lascia un commento sincero",
+   descrizione:"Trova qualcosa pubblicato da una persona che stimi e lascia un commento reale — non generico. Due righe vere valgono più di mille reazioni.",
+   impatto:'basso',
+   perche:"Le micro-interazioni positive costruiscono presenza sociale senza richiedere investimento emotivo elevato."},
+
+  // ── ESPLORAZIONE ─────────────────────────────────────────────────────────────
+  // r06: riclassificata solo bassa — azione automatica con leggera variazione,
+  //      non giustifica energia media o alta.
+  {id:'r06',categoria:'esplorazione',energia:['bassa'],
+   titolo:"Cambia percorso",
+   descrizione:"Oggi prendi una strada diversa dal solito. Anche solo 10 minuti a piedi in una direzione nuova.",
+   impatto:'basso',
+   perche:"Piccoli cambiamenti di routine espongono il cervello a stimoli nuovi e aumentano la prontezza cognitiva."},
+
+  // r07: confermata media/alta — leggera esposizione, nessuna pressione sociale diretta.
+  {id:'r07',categoria:'esplorazione',energia:['media','alta'],
+   titolo:"Entra in un posto che non hai mai frequentato",
+   descrizione:"Un bar, una libreria, un negozio, un parco. Entra senza obiettivo e osserva.",
+   impatto:'medio',
+   perche:"L'esposizione a nuovi ambienti allarga il campo delle possibilità percepite."},
+
+  // r08: confermata bassa — lettura passiva, nessuna interazione, nessuna decisione.
+  {id:'r08',categoria:'esplorazione',energia:['bassa'],
+   titolo:"Leggi un articolo fuori dalla tua nicchia",
+   descrizione:"Cerca un argomento completamente fuori dalla tua comfort zone. Dedica 10 minuti senza giudicare.",
+   impatto:'basso',
+   perche:"Le idee contaminate da settori diversi producono soluzioni creative uniche."},
+
+  // r09: confermata media/alta — richiede iniziativa e uscita dalla zona di comfort.
+  {id:'r09',categoria:'esplorazione',energia:['media','alta'],
+   titolo:"Prova qualcosa che rimandi da mesi",
+   descrizione:"Quella cosa nella lista 'prima o poi'. Fallo per 20 minuti, solo per capire come ci si sente.",
+   impatto:'alto',
+   perche:"L'action bias — agire nonostante l'incertezza — è correlato alle opportunità percepite come 'fortuna'."},
+
+  // r10: confermata alta — disagio costruttivo, coraggio, uscita netta dalla comfort zone.
+  {id:'r10',categoria:'esplorazione',energia:['alta'],
+   titolo:"Fai una cosa che ti spaventa un po'",
+   descrizione:"Non qualcosa di pericoloso: qualcosa che ti mette a disagio in modo sano. Una presentazione, una chiamata, un tentativo.",
+   impatto:'alto',
+   perche:"La zona di disagio evolutivo è dove avvengono la maggior parte delle trasformazioni significative."},
+
+  // r19 (nuova): esplorazione a bassa energia — nessuno spostamento, nessuna interazione.
+  //      Colma gap: mancava esplorazione eseguibile in 5 minuti da casa.
+  {id:'r19',categoria:'esplorazione',energia:['bassa'],
+   titolo:"Guarda un video su un luogo che non conosci",
+   descrizione:"Scegli un paese, una città o un paesaggio che non hai mai visto. Guardane un video per 5 minuti. Nessun obiettivo pratico.",
+   impatto:'basso',
+   perche:"L'esposizione vicaria a nuovi ambienti stimola la curiosità e riduce il bias di familiarità nelle scelte future."},
+
+  // r20 (nuova): esplorazione a media energia — fisica ma solitaria, nessuna interazione.
+  {id:'r20',categoria:'esplorazione',energia:['media'],
+   titolo:"Esplora una zona della tua città che ignori",
+   descrizione:"Scegli una zona che non frequenti. Cammina senza meta per 15-20 minuti. Nessun obiettivo da raggiungere.",
+   impatto:'medio',
+   perche:"La familiarità con il proprio territorio allarga il perimetro delle possibilità percepite e riduce la tendenza a operare sempre negli stessi contesti."},
+
+  // ── ABITUDINI ────────────────────────────────────────────────────────────────
+  // r11: riclassificata solo bassa — azione meccanica, nessuna decisione complessa,
+  //      non giustifica media o alta.
+  {id:'r11',categoria:'abitudini',energia:['bassa'],
+   titolo:"Riordina un singolo spazio",
+   descrizione:"Scrivania, borsa, inbox email, una cartella sul computer. Un posto solo. Ordinato e finito.",
+   impatto:'basso',
+   perche:"Gli ambienti ordinati riducono il carico cognitivo e migliorano la capacità decisionale."},
+
+  // r12: confermata bassa/media — sforzo fisico leggero, astensione dallo schermo.
+  //      Nessuna interazione, nessuna decisione difficile.
+  {id:'r12',categoria:'abitudini',energia:['bassa','media'],
+   titolo:"Cammina 20 minuti senza schermo",
+   descrizione:"Solo tu e il mondo. Nessun podcast, nessun audio. Lascia che la mente vada dove vuole.",
+   impatto:'medio',
+   perche:"Il default mode network, attivo nel riposo, è associato alla creatività e alla risoluzione di problemi complessi."},
+
+  // r13: confermata bassa — micro-azione meccanica, meno di 10 minuti.
+  {id:'r13',categoria:'abitudini',energia:['bassa'],
+   titolo:"Chiudi un micro-task aperto",
+   descrizione:"Quella piccola cosa che hai in testa da giorni. Meno di 10 minuti. Chiudila.",
+   impatto:'basso',
+   perche:"I task aperti consumano banda cognitiva inconsapevolmente. Chiuderli libera risorse mentali reali."},
+
+  // r14: confermata media/alta — pratica deliberata richiede attenzione sostenuta.
+  {id:'r14',categoria:'abitudini',energia:['media','alta'],
+   titolo:"30 minuti su qualcosa che stai imparando",
+   descrizione:"Una skill, una lingua, uno strumento. Anche solo 30 minuti di pratica deliberata contano.",
+   impatto:'alto',
+   perche:"Il compounding dell'apprendimento: piccole sessioni regolari producono risultati sproporzionati nel tempo."},
+
+  // r15: riclassificata bassa/media — riflessione privata, nessuna esposizione,
+  //      eseguibile anche in stato di stanchezza. Precedentemente solo media.
+  {id:'r15',categoria:'abitudini',energia:['bassa','media'],
+   titolo:"Scrivi 3 cose che vuoi che accadano",
+   descrizione:"Non una lista dei desideri: scrivi come se fossero già in corso. Presente, concreto, specifico.",
+   impatto:'medio',
+   perche:"La scrittura di intenzioni attiva il filtro attentivo del cervello e aumenta il riconoscimento di opportunità."},
+
+  // r21 (nuova): abitudini a bassa energia — azione privata, riflessiva, meno di 3 minuti.
+  {id:'r21',categoria:'abitudini',energia:['bassa'],
+   titolo:"Scrivi una cosa che hai fatto bene oggi",
+   descrizione:"Non importa quanto piccola. Una sola cosa concreta che hai fatto e che vale la pena riconoscere. Scrivila.",
+   impatto:'basso',
+   perche:"Il riconoscimento deliberato dei propri progressi quotidiani è uno dei fattori più correlati alla motivazione sostenuta nel tempo."},
+
+  // r22 (nuova): abitudini a media energia — richiede attenzione e pianificazione leggera.
+  {id:'r22',categoria:'abitudini',energia:['media'],
+   titolo:"Pianifica i prossimi 3 giorni in 10 minuti",
+   descrizione:"Non un piano perfetto. Scrivi le tre cose principali che vuoi fare nei prossimi tre giorni. Una per giorno.",
+   impatto:'medio',
+   perche:"La pianificazione a breve termine riduce il carico cognitivo quotidiano e aumenta la probabilità di eseguire ciò che conta."},
+]
+
+
+
+/* ══════════════════════════════════════════════════
+   DATI — MISSIONI SPECIALI (eventi rari ~3%)
+   Non alterano streak o badge rispetto alle normali.
+══════════════════════════════════════════════════ */
+const MISSIONI_SPECIALI = [
+  {id:'sp01',categoria:'speciale',energia:['bassa','media','alta'],titolo:"Missione Jolly — oggi scegli tu",            descrizione:"Nessuna istruzione. Fai qualcosa di insolito che non faresti in un giorno normale. Qualunque cosa, purché deliberata.",                                               impatto:'alto', perche:"L'autonomia nella scelta aumenta la motivazione e la probabilità di ricordare l'azione nel tempo.",                 speciale:true,tipoSpeciale:"Jolly"},
+  {id:'sp02',categoria:'speciale',energia:['media','alta'],        titolo:"Sfida Coraggio — una cosa scomoda",          descrizione:"Fai oggi qualcosa che ti mette a disagio in modo costruttivo. Non pericoloso: scomodo. Un confine che sposti di un millimetro.",                               impatto:'alto', perche:"L'esposizione graduale al disagio riduce l'evitamento e amplia la finestra di tolleranza emotiva.",                 speciale:true,tipoSpeciale:"Coraggio"},
+  {id:'sp03',categoria:'speciale',energia:['bassa','media','alta'],titolo:"Connessione Umana — presenza totale",        descrizione:"In una conversazione oggi, sii completamente presente. Niente telefono, niente pensieri paralleli. Solo quella persona, per tutto il tempo che durerà.",        impatto:'alto', perche:"La qualità dell'attenzione, non la quantità del tempo, è ciò che le persone ricordano delle relazioni.",            speciale:true,tipoSpeciale:"Connessione"},
+  {id:'sp04',categoria:'speciale',energia:['bassa','media','alta'],titolo:"Esplorazione Casuale — segui un'intuizione", descrizione:"Oggi, senza pianificare, segui la prima cosa che ti incuriosisce. Un vicolo, un libro, un nome. Dài 15 minuti a qualcosa di completamente non pianificato.", impatto:'medio',perche:"Le scoperte più importanti nella storia umana sono spesso avvenute seguendo intuizioni non razionalizzate in anticipo.", speciale:true,tipoSpeciale:"Esplorazione"},
+];
+
+
+/* ══════════════════════════════════════════════════
+   DATI ACCESSORI
+══════════════════════════════════════════════════ */
+const BADGE = [
+  {id:'primo_passo',   label:'Primo Passo',      desc:'Prima missione completata',  emoji:'🌱'},
+  {id:'tre_giorni',    label:'Tripletta',         desc:'3 giorni di fila',           emoji:'🎯'},
+  {id:'sette_giorni',  label:'Settimana Intera',  desc:'7 giorni consecutivi',       emoji:'🔥'},
+  {id:'venti_missioni',label:'Abitudine Solida',  desc:'20 missioni completate',     emoji:'⚡'},
+  {id:'cinquanta',     label:'Loop Master',       desc:'50 missioni completate',     emoji:'🌀'},
+];
+const LIVELLI = [
+  {id:'bassa',label:'Bassa energia',emoji:'🌙',desc:'Giornata tranquilla, missioni leggere'},
+  {id:'media',label:'Media energia',emoji:'⚡',desc:'In forma, pronto a qualcosa di concreto'},
+  {id:'alta', label:'Alta energia', emoji:'🔥',desc:'Al massimo, sfida più intensa'},
+];
+const CAT_ICON = {sociale:'🤝',esplorazione:'🧭',abitudini:'⚙️',speciale:'✦'};
+const EN_EMOJI  = {bassa:'🌙',media:'⚡',alta:'🔥'};
+
+// Tag per micro-principi — categoria tematica
+// Permette di orientare il principio verso il comportamento prevalente dell'utente
+const MP_TAG = {
+  relazioni:  ['r01','r02','r03','r04','r05'],   // indici MICRO_PRINCIPI orientati al sociale
+  individuale:['r06','r07','r08','r09','r10'],   // orientati all'autonomia/esplorazione
+  abitudini:  ['r11','r12','r13','r14','r15'],   // orientati all'abitudine/routine
+  neutro:     ['r16','r17','r18','r19','r20','r21','r22','r23','r24','r25','r26','r27','r28','r29'],
+};
+// Mappa indice MICRO_PRINCIPI → tag tematico
+function tagDiMicro(idx){
+  if([0,1,2,10,11,20,25].includes(idx)) return 'relazioni';
+  if([5,6,7,8,16,21,24].includes(idx)) return 'individuale';
+  if([3,12,13,14,15,27,28,29].includes(idx)) return 'abitudini';
+  return 'neutro';
+}
+
+/* ══════════════════════════════════════════════════
+   SEED — generazione deterministica
+══════════════════════════════════════════════════ */
+function hash(s){let h=0;for(let i=0;i<s.length;i++)h=Math.imul(31,h)+s.charCodeAt(i)|0;return Math.abs(h);}
+function mkRng(seed){let s=seed;return()=>{s=(s*1664525+1013904223)&0xffffffff;return(s>>>0)/0xffffffff;};}
+function rngVal(data,sale){const r=mkRng(hash(data+sale));r();return r();}
+
+/* ══════════════════════════════════════════════════
+   MEMORIA UTENTE — ll_m (cuore del sistema reattivo)
+   Struttura:
+   {
+     completate: [{id, categoria, energia, data, speciale}],  // max 100
+     ignorate:   [{id, categoria, energia, data}],            // max 100
+     categorie:  {sociale:1, esplorazione:1, abitudini:1},    // pesi dinamici
+     energiaIgnorata: {bassa:0, media:0, alta:0},             // conta energia ignorata
+     socialeSenza: 0,   // giorni senza missione sociale completata
+     altaIgnorataDa: 0, // giorni consecutivi con "alta" ignorata
+   }
+══════════════════════════════════════════════════ */
+const KK = {
+  G:'ll_g', H:'ll_h', S:'ll_s', B:'ll_b', T:'ll_t',
+  M:'ll_m',            // [v1.3] memoria utente unificata
+  MR:'ll_mr_hist',     // storico missioni mostrate (anti-ripetizione)
+  MP:'ll_mp_hist',     // storico micro-principi mostrati
+};
+const sg = k=>{try{return JSON.parse(localStorage.getItem(k));}catch{return null;}};
+const ss = (k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch{}};
+
+function oggi(){const d=new Date();return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function ieriDi(s){const d=new Date(s+'T12:00:00');d.setDate(d.getDate()-1);return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+
+// Memoria utente — default
+function memDefault(){
+  return{
+    completate:[],ignorate:[],
+    categorie:{sociale:1,esplorazione:1,abitudini:1},
+    energiaIgnorata:{bassa:0,media:0,alta:0},
+    socialeSenza:0,
+    altaIgnorataDa:0,
+  };
+}
+function getMem(){return {...memDefault(),...(sg(KK.M)||{})};}
+function saveMem(m){ss(KK.M,m);}
+
+// Streak e totale (invariati)
+const storia         =()=>sg(KK.H)||[];
+const streak         =()=>sg(KK.S)||{corrente:0,record:0,ultimaData:null};
+const totale         =()=>parseInt(localStorage.getItem(KK.T)||'0',10);
+const badgeGuadagnati=()=>sg(KK.B)||[];
+
+function aggiungiStoria(e){const h=storia();h.unshift({...e,completatoIl:new Date().toISOString()});ss(KK.H,h.slice(0,100));}
+function aggiornaStreak(data){const s=streak();if(s.ultimaData===data)return s;s.corrente=s.ultimaData===ieriDi(data)?s.corrente+1:1;s.record=Math.max(s.record,s.corrente);s.ultimaData=data;ss(KK.S,s);return s;}
+function incTotale(){const n=totale()+1;localStorage.setItem(KK.T,n);return n;}
+function daBadge(id){const b=badgeGuadagnati();if(b.includes(id))return false;b.push(id);ss(KK.B,b);return true;}
+function resetTutto(){Object.values(KK).forEach(k=>localStorage.removeItem(k));}
+
+/* ══════════════════════════════════════════════════
+   REGISTRAZIONE EVENTI — aggiorna la memoria utente
+══════════════════════════════════════════════════ */
+function registraCompletamento(missione){
+  const m=getMem();
+  // Aggiungi a completate
+  m.completate.unshift({id:missione.id,categoria:missione.categoria,data:oggi(),speciale:!!missione.speciale});
+  m.completate=m.completate.slice(0,100);
+
+  // Peso categoria: +0.2, clamp 0.5–2.0
+  if(m.categorie[missione.categoria]!==undefined){
+    m.categorie[missione.categoria]=Math.min(2.0, m.categorie[missione.categoria]+0.2);
+  }
+
+  // Reset contatori sociali se missione sociale completata
+  if(missione.categoria==='sociale') m.socialeSenza=0;
+
+  // Reset altaIgnorataDa se energia alta completata
+  saveMem(m);
+}
+
+function registraIgnorata(missione, energia){
+  if(!missione) return;
+  const m=getMem();
+  // Aggiungi a ignorate
+  m.ignorate.unshift({id:missione.id,categoria:missione.categoria,energia,data:oggi()});
+  m.ignorate=m.ignorate.slice(0,100);
+
+  // Peso categoria: -0.3, clamp 0.5–2.0
+  if(!missione.speciale && m.categorie[missione.categoria]!==undefined){
+    m.categorie[missione.categoria]=Math.max(0.5, m.categorie[missione.categoria]-0.3);
+  }
+
+  // Conta energia ignorata
+  if(m.energiaIgnorata[energia]!==undefined) m.energiaIgnorata[energia]++;
+
+  // Conta giorni senza sociale
+  if(missione.categoria!=='sociale') m.socialeSenza=(m.socialeSenza||0)+1;
+
+  // Conta giorni con alta ignorata
+  if(energia==='alta') m.altaIgnorataDa=(m.altaIgnorataDa||0)+1;
+  else m.altaIgnorataDa=0;
+
+  saveMem(m);
+}
+
+/* ══════════════════════════════════════════════════
+   ANTI-RIPETIZIONE — basata su esperienza, non su data
+   Esclude missioni completate negli ultimi 30 giorni.
+   Se pool < 3, include le meno recenti (fallback).
+══════════════════════════════════════════════════ */
+const FINESTRA = 30;
+
+function dataRecentiSet(n){
+  const s=new Set();
+  for(let i=0;i<n;i++){const d=new Date();d.setDate(d.getDate()-i);s.add(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`);}
+  return s;
+}
+
+function idCompletateRecenti(){
+  const rec=dataRecentiSet(FINESTRA);
+  const mem=getMem();
+  return new Set(mem.completate.filter(e=>rec.has(e.data)).map(e=>e.id));
+}
+
+function idxMicroRecenti(){
+  const rec=dataRecentiSet(FINESTRA);
+  return new Set((sg(KK.MP)||[]).filter(e=>rec.has(e.data)).map(e=>e.idx));
+}
+
+function addMissioneHist(id,data){const h=sg(KK.MR)||[];h.push({id,data});ss(KK.MR,h.slice(-60));}
+function addMicroHist(idx,data){const h=sg(KK.MP)||[];h.push({idx,data});ss(KK.MP,h.slice(-60));}
+
+/* ══════════════════════════════════════════════════
+   PESO DINAMICO — cuore del sistema reattivo
+   peso = base(categoria) + bonus streak + malus inattività
+══════════════════════════════════════════════════ */
+function calcolaPesi(pool, mem, streakCorrente){
+  // Bonus streak alta: favorisce sociale/esplorazione
+  const bonusStreak = streakCorrente >= 5 ? 0.3 : 0;
+
+  return pool.map(m=>{
+    let peso = mem.categorie[m.categoria] || 1.0;
+
+    // Bonus streak per categorie che ampliano le opportunità
+    if(streakCorrente>=5 && (m.categoria==='sociale'||m.categoria==='esplorazione')){
+      peso += bonusStreak;
+    }
+
+    // Malus se energia alta è stata ignorata spesso
+    // (non eliminare, solo ridurre la probabilità di missioni impegnative)
+    const altaIgn = mem.altaIgnorataDa||0;
+    if(altaIgn>=3 && m.impatto==='alto'){
+      peso = Math.max(0.3, peso-0.4);
+    }
+
+    // Bonus abitudini se utente inattivo (socialeSenza alto)
+    if((mem.socialeSenza||0)>=5 && m.categoria==='abitudini'){
+      peso += 0.3;
+    }
+
+    return {missione:m, peso:Math.max(0.3, Math.min(2.0, peso))};
+  });
+}
+
+/* ══════════════════════════════════════════════════
+   SELEZIONE MISSIONE REALE (reattiva)
+══════════════════════════════════════════════════ */
+function scegliMissioneReale(data, energia, mem, streakCorrente){
+  // 1. Pool base filtrato per energia
+  let pool = MISSIONI_REALI.filter(m=>m.energia.includes(energia));
+  if(!pool.length) pool=[...MISSIONI_REALI];
+
+  // 2. Anti-ripetizione: rimuovi completate negli ultimi 30gg
+  const viste = idCompletateRecenti();
+  let disp = pool.filter(m=>!viste.has(m.id));
+
+  // 3. Fallback se pool troppo piccolo
+  if(disp.length<3){
+    const hist=sg(KK.MR)||[];
+    const ultime={};hist.forEach(e=>{ultime[e.id]=e.data;});
+    const fallback=pool.filter(m=>viste.has(m.id))
+      .sort((a,b)=>(ultime[a.id]||'0')<(ultime[b.id]||'0')?-1:1)
+      .slice(0,3-disp.length);
+    disp=[...disp,...fallback];
+  }
+
+  // 4. Calcola pesi dinamici
+  const pesati = calcolaPesi(disp, mem, streakCorrente);
+
+  // 5. Costruisci lottery pesata
+  const lottery=[];
+  pesati.forEach(({missione,peso})=>{
+    const slots=Math.max(1,Math.round(peso*10));
+    for(let i=0;i<slots;i++) lottery.push(missione);
+  });
+
+  // 6. Selezione deterministica per data+energia (riproducibile)
+  const r=mkRng(hash(data+'miss2'+energia));r();
+  return lottery[Math.min(Math.floor(r()*lottery.length),lottery.length-1)]||disp[0]||pool[0];
+}
+
+/* ══════════════════════════════════════════════════
+   SELEZIONE MICRO-PRINCIPIO (reattiva)
+   Orienta il principio verso il comportamento prevalente:
+   - Completa spesso sociale → principi su relazioni
+   - Evita sociale → principi su psicologia individuale
+   - Completa abitudini → principi su routine
+══════════════════════════════════════════════════ */
+function scegliMicro(data, mem){
+  const visti=idxMicroRecenti();
+  let cand=MICRO_PRINCIPI.map((_,i)=>i).filter(i=>!visti.has(i));
+  if(cand.length<3){
+    const hist=sg(KK.MP)||[];
+    const ultime={};hist.forEach(e=>{ultime[e.idx]=e.data;});
+    const fallback=MICRO_PRINCIPI.map((_,i)=>i).filter(i=>visti.has(i))
+      .sort((a,b)=>(ultime[a]||'0')<(ultime[b]||'0')?-1:1).slice(0,3-cand.length);
+    cand=[...cand,...fallback];
+  }
+
+  // Determina orientamento prevalente dall'utente
+  const catPrev = Object.entries(mem.categorie)
+    .sort((a,b)=>b[1]-a[1])[0][0]; // categoria con peso maggiore
+
+  // Mappa categoria → tema micro-principio
+  const temaFav = catPrev==='sociale' ? 'relazioni'
+                : catPrev==='abitudini' ? 'abitudini'
+                : 'individuale';
+
+  // Costruisci lista pesata: principi del tema favorito hanno peso 2x
+  const pesati=[];
+  cand.forEach(idx=>{
+    const tag=tagDiMicro(idx);
+    const slots=tag===temaFav?2:1;
+    for(let i=0;i<slots;i++) pesati.push(idx);
+  });
+
+  const r=mkRng(hash(data+'mp3'));r();
+  const pick=pesati[Math.min(Math.floor(r()*pesati.length),pesati.length-1)];
+  return{idx:pick, dato:MICRO_PRINCIPI[pick]||MICRO_PRINCIPI[0]};
+}
+
+/* ══════════════════════════════════════════════════
+   EVENTI ADATTIVI — non random puro, ma condizionati
+   al comportamento recente dell'utente
+══════════════════════════════════════════════════ */
+function controllaEventoSpeciale(data, mem, streakCorrente){
+  const altaIgn  = mem.altaIgnorataDa||0;
+  const senzaSoc = mem.socialeSenza||0;
+  const baseProb = rngVal(data,'special3');
+
+  // Trigger 1: "Sfida Coraggio" — solo se alta energia ignorata da 3+ giorni
+  if(altaIgn>=3 && baseProb<0.12){
+    return MISSIONI_SPECIALI[1]; // Sfida Coraggio
+  }
+
+  // Trigger 2: "Connessione Umana" — se nessun sociale completato da 5+ giorni
+  if(senzaSoc>=5 && baseProb<0.15){
+    return MISSIONI_SPECIALI[2]; // Connessione Umana
+  }
+
+  // Trigger 3: "Reset Loop" — streak lunga (10+) con bassa varietà categorie
+  if(streakCorrente>=10){
+    const pesi=Object.values(mem.categorie);
+    const maxPeso=Math.max(...pesi);
+    const minPeso=Math.min(...pesi);
+    // Bassa varietà = una categoria domina molto
+    if(maxPeso-minPeso>1.0 && baseProb<0.08){
+      return {...MISSIONI_SPECIALI[0], titolo:"Reset Loop — esci dal pattern", tipoSpeciale:"Reset"};
+    }
+  }
+
+  // Evento raro generico (~3%)
+  if(baseProb<0.03){
+    const r=mkRng(hash(data+'sp4'));r();
+    return MISSIONI_SPECIALI[Math.min(Math.floor(r()*MISSIONI_SPECIALI.length),MISSIONI_SPECIALI.length-1)];
+  }
+
+  return null;
+}
+
+/* ══════════════════════════════════════════════════
+   COSTRUZIONE GIORNATA (reattiva)
+══════════════════════════════════════════════════ */
+function costruisciGiornata(data, energia){
+  const mem = getMem();
+  const str = streak();
+
+  const mSpec  = controllaEventoSpeciale(data, mem, str.corrente);
+  const mReale = mSpec || scegliMissioneReale(data, energia, mem, str.corrente);
+  const {idx:mpIdx, dato:mpDato} = scegliMicro(data, mem);
+
+  return{
+    data, energia,
+    missioneReale:   mReale,
+    missioneSpeciale:!!mSpec,
+    microPrincipio:  mpDato,
+    microIdx:        mpIdx,
+    realeCompletata: false,
+    microCompletato: false,
+    _mId:  mReale.id,
+    _mpIdx:mpIdx,
+  };
+}
+
+/* ══════════════════════════════════════════════════
+   MIGRAZIONE AUTOMATICA da v1.0 / v1.1 / v1.2
+══════════════════════════════════════════════════ */
+function migra(s){
+  if(!s) return s;
+  if(!s.microPrincipio){const{idx,dato}=scegliMicro(s.data||oggi(),getMem());s.microPrincipio=dato;s.microIdx=idx;s.microCompletato=false;}
+  if(s.missioneSpeciale===undefined) s.missioneSpeciale=false;
+  if(!s._mId)  s._mId=s.missioneReale?.id||'';
+  if(s._mpIdx===undefined) s._mpIdx=s.microIdx||0;
+  return s;
+}
+
+/* ══════════════════════════════════════════════════
+   STATO APP
+══════════════════════════════════════════════════ */
+let app={
+  pagina:'home', giornata:null,
+  streak:streak(), badge:badgeGuadagnati(), totale:totale(),
+  debugAperto:false, confermaReale:false,
+};
+
+function avvia(){
+  const salvato=migra(sg(KK.G));
+  const td=oggi();
+
+  if(salvato && salvato.data===td){
+    app.giornata=salvato;
+  } else if(salvato && salvato.data!==td && !salvato.realeCompletata){
+    // Giornata scaduta non completata → registra come ignorata
+    registraIgnorata(salvato.missioneReale, salvato.energia);
+  }
+  render();
+}
+
+/* ══════════════════════════════════════════════════
+   AZIONI
+══════════════════════════════════════════════════ */
+window.showPage=(p)=>{app.pagina=p;app.confermaReale=false;render();};
+
+window.scegliEnergia=(liv)=>{
+  const g=costruisciGiornata(oggi(),liv);
+  ss(KK.G,g);
+  addMissioneHist(g._mId,g.data);
+  addMicroHist(g._mpIdx,g.data);
+  app.giornata=g;render();
+};
+
+window.toggleConferma=()=>{app.confermaReale=!app.confermaReale;render();};
+
+window.completaReale=()=>{
+  if(!app.giornata||app.giornata.realeCompletata)return;
+  app.giornata.realeCompletata=true;
+  ss(KK.G,app.giornata);
+  const m=app.giornata.missioneReale;
+  aggiungiStoria({data:oggi(),missioneId:m.id,titolo:m.titolo,categoria:m.categoria,energia:app.giornata.energia,speciale:app.giornata.missioneSpeciale});
+  registraCompletamento({...m,speciale:app.giornata.missioneSpeciale});
+  app.streak=aggiornaStreak(oggi());
+  app.totale=incTotale();
+  controllaBadge();
+  app.confermaReale=false;
+  render();
+};
+
+window.completaMicro=()=>{
+  if(!app.giornata||app.giornata.microCompletato)return;
+  app.giornata.microCompletato=true;ss(KK.G,app.giornata);render();
+};
+
+window.rigenera=()=>{
+  if(!app.giornata)return;
+  const g=costruisciGiornata(oggi(),app.giornata.energia);
+  ss(KK.G,g);addMissioneHist(g._mId,g.data);addMicroHist(g._mpIdx,g.data);
+  app.giornata=g;render();
+};
+
+window.resetCompleto=()=>{
+  if(!confirm('Vuoi davvero resettare tutti i dati?'))return;
+  resetTutto();
+  app={pagina:'home',giornata:null,streak:streak(),badge:badgeGuadagnati(),totale:0,debugAperto:false,confermaReale:false};
+  render();
+};
+
+window.toggleDebug=()=>{app.debugAperto=!app.debugAperto;render();};
+
+let _en=null;
+window.cliccaEnergia=(id)=>{
+  _en=id;
+  document.querySelectorAll('.energy-option').forEach(el=>el.classList.remove('selected'));
+  document.getElementById('eo-'+id)?.classList.add('selected');
+  document.getElementById('conferma-energia').disabled=false;
+};
+window.confermaEnergia=()=>{if(_en)scegliEnergia(_en);};
+
+function controllaBadge(){
+  const checks=[
+    {id:'primo_passo',   ok:app.totale>=1},
+    {id:'tre_giorni',    ok:app.streak.corrente>=3},
+    {id:'sette_giorni',  ok:app.streak.corrente>=7},
+    {id:'venti_missioni',ok:app.totale>=20},
+    {id:'cinquanta',     ok:app.totale>=50},
+  ];
+  for(const c of checks){
+    if(c.ok&&!app.badge.includes(c.id)){
+      if(daBadge(c.id)){app.badge=badgeGuadagnati();mostraToast(BADGE.find(b=>b.id===c.id));break;}
+    }
+  }
+}
+
+function mostraToast(b){
+  const t=document.getElementById('badge-toast');
+  document.getElementById('toast-emoji').textContent=b.emoji;
+  document.getElementById('toast-title').textContent=b.label;
+  document.getElementById('toast-desc').textContent=b.desc;
+  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000);
+}
+
+
+function render(){
+  document.getElementById('nav-history').classList.toggle('active',app.pagina==='history');
+  document.getElementById('nav-how').classList.toggle('active',app.pagina==='how');
+  const main=document.getElementById('main');
+  if(app.pagina==='how')     {main.innerHTML=renderCome();   return;}
+  if(app.pagina==='history') {main.innerHTML=renderStoria(); return;}
+  renderHome(main);
+}
+
+function renderHome(main){
+  const dataLabel=new Date().toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'});
+  let html=`<div class="page"><div style="margin-bottom:20px"><div class="page-date">${dataLabel}</div><h1 class="page-title">La tua giornata ${app.giornata?EN_EMOJI[app.giornata.energia]:''}</h1></div>`;
+  if(app.totale>0||app.streak.corrente>0){
+    const bE=BADGE.filter(b=>app.badge.includes(b.id)).slice(-3);
+    html+=`<div class="streak-bar"><div class="streak-item"><span>🔥</span><div><div class="streak-num" style="color:var(--gold)">${app.streak.corrente}</div><div class="streak-label">giorni di fila</div></div></div><div class="streak-divider"></div><div class="streak-item"><span>🎯</span><div><div class="streak-num">${app.totale}</div><div class="streak-label">missioni</div></div></div><div class="streak-divider"></div><div class="streak-item"><span>⭐</span><div><div class="star-num" id="pf-count">${getPF()}</div><div class="streak-label">punti fortuna</div></div></div></div>`;
+  }
+  if(!app.giornata){
+    html+=renderSelezioneEnergia();
+  } else {
+    html+=renderCardReale(app.giornata.missioneReale,app.giornata.realeCompletata,app.giornata.missioneSpeciale);
+    html+=renderCardMicro(app.giornata.microPrincipio,app.giornata.microCompletato);
+    const _sfidaStato=getSfidaStato();
+    const _sfidaOggi=_sfidaStato?.data===oggi()?_sfidaStato:null;
+    html+=renderCardSfida(_sfidaOggi);
+    const _sfidaOggiDone=getSfidaStato()?.data===oggi()&&getSfidaStato()?.completata;
+    if(app.giornata.realeCompletata&&app.giornata.microCompletato&&_sfidaOggiDone){
+      html+=`<div class="done-banner page"><div class="done-emoji">✨</div><div class="done-title">Giornata completata</div><div class="done-sub">Torna domani per una nuova missione</div>${app.streak.corrente>1?`<div class="streak-pill">🔥 ${app.streak.corrente} giorni di fila</div>`:''}</div>`;
+    }
+    html+=`<div style="padding-top:8px;border-top:1px solid rgba(255,255,255,.05);margin-top:8px"><button class="debug-toggle" onclick="toggleDebug()">··· opzioni sviluppatore</button>${app.debugAperto?`<div class="debug-row"><button class="btn btn-ghost" onclick="rigenera()" style="font-size:12px;padding:7px 12px">🔄 Rigenera giornata</button><button class="btn btn-danger" onclick="resetCompleto()">🗑️ Reset completo</button></div>`:''}</div>`;
+  }
+  html+=`</div>`;
+  main.innerHTML=html;
+  if(!app.giornata) attachEnergiaListeners();
+}
+
+function renderSelezioneEnergia(){
+  // Concatenazione stringa: evita il bug delle backslash-quote
+  // negli onclick inline quando si usano template literal annidati.
+  return '<div>'
+    +'<div class="section-label" style="text-align:center;margin-bottom:4px">Come ti senti oggi?</div>'
+    +'<h2 class="section-title" style="text-align:center;font-size:20px;margin-bottom:4px">Scegli il tuo livello di energia</h2>'
+    +'<p style="font-size:12px;color:var(--cream-dim);text-align:center;margin-bottom:20px">Calibra la difficoltà della missione reale</p>'
+    +LIVELLI.map(l=>
+      '<button class="energy-option" id="eo-'+l.id+'" data-energia="'+l.id+'">'
+      +'<span style="font-size:22px">'+l.emoji+'</span>'
+      +'<div><div class="energy-name">'+l.label+'</div>'
+      +'<div class="energy-desc">'+l.desc+'</div></div>'
+      +'<div class="energy-check"><svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="#0D1117" stroke-width="3">'
+      +'<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>'
+      +'</button>'
+    ).join('')
+    +'<button class="btn btn-primary btn-full" id="conferma-energia" disabled onclick="confermaEnergia()">Genera la mia giornata →</button>'
+    +'</div>';
+}
+
+function attachEnergiaListeners(){
+  document.querySelectorAll('[data-energia]').forEach(btn=>{
+    btn.addEventListener('click',()=>cliccaEnergia(btn.dataset.energia));
+  });
+}
+
+function renderCardReale(m,completata,speciale){
+  const iC={basso:'impact-basso',medio:'impact-medio',alto:'impact-alto'}[m.impatto];
+  const iL={basso:'Impatto lieve',medio:'Impatto medio',alto:'Impatto alto'}[m.impatto];
+  const cCard=speciale?'card-special':'card-teal';
+  const cBtn =speciale?'btn-special':'btn-teal';
+  const tag  =speciale?`<span class="tag tag-special">✦ ${m.tipoSpeciale}</span>`:`<span class="tag tag-real">Missione Reale</span>`;
+  const cComp=speciale?'completed-state special':'completed-state';
+  const cConf=speciale?'var(--violet)':'var(--teal)';
+  const cWhy =speciale?'card-why' :'card-why';
+  return`<div class="card ${cCard} flip-in">
+    <div class="card-header">${tag}<span>${CAT_ICON[m.categoria]||'🎯'}</span></div>
+    <div class="card-title">${m.titolo}</div>
+    <div class="card-desc">${m.descrizione}</div>
+    <div style="margin-bottom:14px"><span class="impact ${iC}">${iL}</span></div>
+    <div class="${cWhy}"><p><strong>Perché funziona:</strong> ${m.perche}</p></div>
+    ${completata
+      ?`<div class="${cComp}"><div class="completed-check"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div class="completed-text"><strong>Missione completata</strong><span>Ottimo lavoro, la streak continua</span></div></div>`
+      :app.confermaReale
+        ?`<div><div class="confirm-label">Hai davvero completato questa missione?</div><div class="confirm-row"><button class="btn btn-ghost" style="flex:1;font-size:13px" onclick="toggleConferma()">No, aspetta</button><button class="btn" style="flex:1;font-size:13px;background:${cConf};color:var(--navy-900)" onclick="completaReale()">Sì, completata ✓</button></div></div>`
+        :`<button class="btn ${cBtn} btn-full" onclick="toggleConferma()">Segna come completata</button>`
+    }</div>`;
+}
+
+function renderCardMicro(mp,completato){
+  if(!mp)return'';
+  return`<div class="card card-amber" style="animation:fadeUp .4s .15s both">
+    <div class="card-header"><span class="tag tag-micro">Micro-principio del giorno</span><span>🧠</span></div>
+    <div class="card-title" style="margin-top:12px">Cosa sa il comportamento umano</div>
+    <div class="mp-principio"><div class="mp-label">Il principio</div><div class="mp-testo">${mp.principio}</div><div class="mp-fonte">${mp.fonte}</div></div>
+    <div class="mp-cultura"><div class="mp-label">Nel mondo</div><div class="mp-testo">${mp.cultura}</div></div>
+    <div class="mp-azione"><div class="mp-label">La tua micro-azione di oggi</div><div class="mp-testo">${mp.azione}</div></div>
+    ${completato
+      ?`<div class="mp-completed"><div class="mp-completed-check"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div><strong>Principio applicato</strong><span>Hai messo in pratica la scienza oggi</span></div></div>`
+      :`<button class="btn btn-amber btn-full" onclick="completaMicro()">Ho applicato questa micro-azione</button>`
+    }</div>`;
+}
+
+function renderCome(){
+  return`<div class="page">
+    <button class="back-btn" onclick="showPage('home')">← Torna alla home</button>
+    <h2 class="section-title">Come funziona Luck Loop</h2>
+    <div class="card card-teal how-section"><span class="tag tag-real" style="margin-bottom:12px;display:inline-block">Missione Reale</span><h3 class="card-sub">La fortuna si costruisce con il comportamento</h3><p style="font-size:13px;color:var(--cream-dim);line-height:1.65;margin-bottom:10px">La ricerca in psicologia e scienze comportamentali mostra che le persone percepite come "fortunate" condividono comportamenti specifici: mantengono reti sociali attive, si espongono a nuove esperienze, completano micro-azioni che aumentano visibilità e occasioni di incontro.</p><p style="font-size:13px;color:var(--cream-dim);line-height:1.65">Il sistema anti-ripetizione garantisce che la stessa missione non compaia per almeno 30 giorni. Il sistema adattivo aumenta leggermente la probabilità delle categorie che completi spesso — senza mai eliminarne nessuna.</p></div>
+    <div class="card card-amber how-section"><span class="tag tag-micro" style="margin-bottom:12px;display:inline-block">Micro-principio del giorno</span><h3 class="card-sub">Un fatto, una radice, un'azione</h3><p style="font-size:13px;color:var(--cream-dim);line-height:1.65">Ogni giorno un principio comportamentale reale, un riferimento culturale umano, una micro-azione concreta. Cambia ogni giorno, non si ripete per almeno 30 giorni.</p></div>
+    <div class="card card-glass how-section" style="border-color:rgba(156,111,222,.2)"><span class="tag tag-special" style="margin-bottom:12px;display:inline-block">✦ Evento Raro</span><h3 class="card-sub">Le giornate speciali</h3><p style="font-size:13px;color:var(--cream-dim);line-height:1.65">Raramente — circa 3 giorni su 100 — compare una missione speciale: Jolly, Coraggio, Connessione Umana, Esplorazione Casuale. Stessi effetti sulla streak delle missioni normali.</p></div>
+    <div class="card card-star how-section">
+      <span class="tag-star" style="margin-bottom:12px;display:inline-block">⭐ Sfida del Giorno</span>
+      <h3 class="card-sub" style="font-family:'Playfair Display',serif;font-size:17px;margin-bottom:8px">Esercizi di attenzione e presenza</h3>
+      <p style="font-size:13px;color:var(--cream-dim);line-height:1.65">Ogni giorno una micro-sfida interattiva da completare in meno di 30 secondi. Allenano il cervello a notare, concentrarsi e agire. Ogni sfida completata vale 1 Punto Fortuna ⭐.</p>
+    </div>
+    <div class="card card-glass how-section"><div class="section-label">La scienza dietro</div><ul class="how-list"><li>Le <strong>reti sociali dormienti</strong> producono più opportunità delle connessioni attive (Levin et al., 2022)</li><li>L'<strong>esposizione a stimoli nuovi</strong> attiva percorsi cognitivi associati alla creatività</li><li>I <strong>micro-task completati</strong> riducono il cognitive load e migliorano le decisioni</li><li>Le <strong>abitudini agganciate</strong> a comportamenti esistenti si consolidano più velocemente</li></ul></div>
+    <div class="card card-glass how-section"><div class="section-label">Cosa Luck Loop NON dice mai</div><ul class="no-list"><li>Che la fortuna esista come forza causale</li><li>Che i principi garantiscano risultati immediati</li><li>Che completare le missioni cambi la vita in un giorno</li><li>Che ci sia un unico modo corretto di applicare ogni principio</li></ul></div>
+    <button class="btn btn-primary btn-full" onclick="showPage('home')">Torna alla mia giornata</button>
+  </div>`;
+}
+
+function renderStoria(){
+  const h=storia();
+  return`<div class="page">
+    <button class="back-btn" onclick="showPage('home')">← Torna alla home</button>
+    <h2 class="section-title">Il tuo archivio</h2>
+    <div class="stats-grid"><div class="stat-box"><div class="stat-num" style="color:var(--gold)">${app.totale}</div><div class="stat-label">missioni</div></div><div class="stat-box"><div class="stat-num" style="color:var(--teal)">${app.streak.corrente}</div><div class="stat-label">streak</div></div><div class="stat-box"><div class="stat-num">${app.streak.record}</div><div class="stat-label">record</div></div></div>
+    <div class="card card-glass" style="margin-bottom:14px"><div class="section-label" style="margin-bottom:6px">Badge</div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:12px;padding:10px;background:rgba(245,200,66,.06);border:1px solid rgba(245,200,66,.18);border-radius:10px">
+        <span style="font-size:20px">⭐</span>
+        <div><div style="font-family:'Playfair Display',serif;font-size:20px;color:#F5C842">${getPF()}</div><div style="font-size:11px;color:var(--cream-dim)">Punti Fortuna totali</div></div>
+      </div>
+      ${[...BADGE,...BADGE_PF].map(b=>{const earned=[...app.badge,...getPFBadge()];const e=earned.includes(b.id);return`<div class="badge-row ${e?'earned':'locked'}"><span class="badge-emoji">${b.emoji}</span><div><div class="badge-name" style="${e?'':'color:var(--cream-dim)'}">${b.label}</div><div class="badge-desc">${b.desc}</div></div>${e?`<div style="margin-left:auto;color:var(--gold)">✓</div>`:''}</div>`;
+      }).join('')}</div>
+    <div class="card card-glass"><div class="section-label">Missioni completate</div>${h.length===0?`<p style="font-size:13px;color:var(--cream-dim);text-align:center;padding:16px 0">Nessuna missione ancora.<br>Inizia oggi!</p>`:h.map(e=>`<div class="history-item"><span class="history-icon">${e.speciale?'✦':CAT_ICON[e.categoria]||'🎯'}</span><div style="flex:1;min-width:0"><div class="history-title">${e.titolo}</div><div class="history-meta">${new Date(e.completatoIl).toLocaleDateString('it-IT',{day:'numeric',month:'short'})} · ${EN_EMOJI[e.energia]||''} ${e.energia}${e.speciale?' · <span style="color:var(--violet)">speciale</span>':''}</div></div><div class="history-check"><svg fill="none" viewBox="0 0 24 24" stroke="var(--teal)" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div></div>`).join('')}</div>
+  </div>`;
+}
+
+
+/* ══════════════════════════════════════════════════
+   SFIDA DEL GIORNO — dati e logica
+══════════════════════════════════════════════════ */
+
+// Tipi di sfida disponibili
+const TIPI_SFIDA = ['rompi-loop','micro-coraggio','dettaglio','focus30'];
+
+// Micro-azioni per "Micro Coraggio" (scelta random al click)
+const MICRO_AZIONI = [
+  "Scrivi una cosa che rimandi da giorni.",
+  "Pensa a una persona che non senti da tempo. Cosa le diresti?",
+  "Fai tre respiri profondi, lentamente.",
+  "Sorridi per 10 secondi. Anche da solo.",
+  "Scrivi la prima cosa bella che ti viene in mente oggi.",
+  "Nota qualcosa nell'ambiente che non avevi mai osservato prima.",
+  "Pensa a una piccola cosa per cui sei grato oggi.",
+  "Chiudi gli occhi per 20 secondi. Poi riapri.",
+  "Scrivi il nome di qualcuno a cui vorresti dire grazie.",
+  "Immagina come sarà il tuo io di fra 5 anni a guardare oggi.",
+];
+
+// Messaggi finali per ogni tipo
+const MSG_FINE = {
+  'rompi-loop':    "Hai individuato l'anomalia. Le opportunità spesso assomigliano a questo.",
+  'micro-coraggio':"Molte opportunità iniziano da un passo senza garanzie.",
+  'dettaglio':     "Ciò che cambia è spesso ciò che conta.",
+  'focus30':       "La concentrazione è una forma di forza.",
+};
+
+/* ── Storage punti fortuna ───────────────────────── */
+const KS = {
+  PF:  'll_pf',     // totale punti fortuna
+  SD:  'll_sd',     // stato sfida giornaliera {data, tipo, completata}
+  PFB: 'll_pfb',    // badge punti fortuna già assegnati
+};
+
+function getPF()   { return parseInt(localStorage.getItem(KS.PF)||'0',10); }
+function addPF()   { const n=getPF()+1; localStorage.setItem(KS.PF,n); return n; }
+function getSfidaStato() { try{return JSON.parse(localStorage.getItem(KS.SD));}catch{return null;} }
+function saveSfidaStato(v){ try{localStorage.setItem(KS.SD,JSON.stringify(v));}catch{} }
+function getPFBadge() { try{return JSON.parse(localStorage.getItem(KS.PFB))||[];}catch{return[];} }
+function addPFBadge(id){ const b=getPFBadge(); if(b.includes(id))return false; b.push(id); try{localStorage.setItem(KS.PFB,JSON.stringify(b));}catch{} return true; }
+
+const BADGE_PF = [
+  {id:'pf_10',  label:'Esploratore',          desc:'10 Punti Fortuna',           emoji:'🔍', soglia:10},
+  {id:'pf_30',  label:'Cercatore',             desc:'30 Punti Fortuna',           emoji:'🧭', soglia:30},
+  {id:'pf_100', label:'Costruttore di Occasioni',desc:'100 Punti Fortuna',       emoji:'⭐', soglia:100},
+];
+
+/* ── Selezione tipo sfida (deterministica per data) ── */
+function scegliTipoSfida(data){
+  const r = mkRng(hash(data+'sfida'));r();
+  return TIPI_SFIDA[Math.floor(r()*TIPI_SFIDA.length)];
+}
+
+/* ── Stato runtime sfida (non salvato tra render) ─── */
+let sfidaRuntime = {
+  tipo: null,
+  fase: 'idle',       // idle | gioco | vinto | perso
+  // rompi-loop
+  forme: [],
+  idxDiversa: -1,
+  // dettaglio
+  scenaCambiata: false,
+  idxCambiamento: -1,
+  // focus30
+  timerFocus: null,
+  progressoFocus: 0,
+  holdAttivo: false,
+  // micro-coraggio
+  azioneRivelata: null,
+};
+
+function inizializzaSfida(tipo){
+  sfidaRuntime = {tipo, fase:'gioco', forme:[], idxDiversa:-1, scenaCambiata:false, idxCambiamento:-1, timerFocus:null, progressoFocus:0, holdAttivo:false, azioneRivelata:null};
+  if(tipo==='rompi-loop')   inizRompiLoop();
+  if(tipo==='dettaglio')    inizDettaglio();
+}
+
+/* ── ROMPI IL LOOP ──────────────────────────────── */
+function inizRompiLoop(){
+  const n = 9;
+  const colori = ['#4ECDC4','#C9A84C','#9C6FDE'];
+  const c = colori[Math.floor(Math.random()*colori.length)];
+  sfidaRuntime.idxDiversa = Math.floor(Math.random()*n);
+  sfidaRuntime.forme = Array.from({length:n},(_,i)=>({
+    id:i,
+    colore: i===sfidaRuntime.idxDiversa ? '#E8934A' : c,
+    shape:  i===sfidaRuntime.idxDiversa ? 'quadrato' : 'cerchio',
+  }));
+}
+
+window.toccaForma = function(idx){
+  if(sfidaRuntime.fase!=='gioco') return;
+  if(idx===sfidaRuntime.idxDiversa){
+    sfidaRuntime.fase='vinto';
+    completaSfida();
+  } else {
+    // Feedback visivo sbagliato — reimposta dopo breve delay
+    const el=document.getElementById('forma-'+idx);
+    if(el){el.style.animation='wrongShake .3s ease-out';setTimeout(()=>{if(el)el.style.animation='';},350);}
+  }
+  renderSfidaBox();
+};
+
+/* ── MICRO CORAGGIO ─────────────────────────────── */
+window.premiMistero = function(){
+  if(sfidaRuntime.fase!=='gioco') return;
+  const idx=Math.floor(Math.random()*MICRO_AZIONI.length);
+  sfidaRuntime.azioneRivelata=MICRO_AZIONI[idx];
+  sfidaRuntime.fase='vinto';
+  completaSfida();
+  renderSfidaBox();
+};
+
+/* ── DETTAGLIO NUOVO ────────────────────────────── */
+// Scena: 4 oggetti SVG semplici, uno cambia colore/forma dopo 1.2s
+const OGGETTI_SCENA = [
+  {x:50,  y:50,  tipo:'cerchio', r:18},
+  {x:140, y:60,  tipo:'rett',    w:32, h:22},
+  {x:220, y:45,  tipo:'cerchio', r:14},
+  {x:95,  y:110, tipo:'rett',    w:24, h:36},
+  {x:180, y:105, tipo:'cerchio', r:20},
+  {x:245, y:110, tipo:'rett',    w:28, h:18},
+];
+const COLORI_SCENA = ['#4ECDC4','#C9A84C','#9C6FDE','#E8934A','#4CAF76'];
+
+function inizDettaglio(){
+  sfidaRuntime.idxCambiamento = Math.floor(Math.random()*OGGETTI_SCENA.length);
+  sfidaRuntime.scenaCambiata  = false;
+  // Mostra scena originale 1.2s, poi cambia
+  setTimeout(()=>{
+    sfidaRuntime.scenaCambiata=true;
+    renderSfidaBox();
+  }, 1200);
+}
+
+window.toccaOggetto = function(idx){
+  if(sfidaRuntime.fase!=='gioco' || !sfidaRuntime.scenaCambiata) return;
+  if(idx===sfidaRuntime.idxCambiamento){
+    sfidaRuntime.fase='vinto';
+    completaSfida();
+  } else {
+    const el=document.getElementById('ogg-'+idx);
+    if(el){el.style.animation='wrongShake .3s ease-out';setTimeout(()=>{if(el)el.style.animation='';},350);}
+  }
+  renderSfidaBox();
+};
+
+/* ── FOCUS 30 ───────────────────────────────────── */
+const DURATA_FOCUS = 30;
+
+window.startFocus = function(){
+  if(sfidaRuntime.fase!=='gioco') return;
+  sfidaRuntime.holdAttivo=true;
+  const step=100; // ms
+  sfidaRuntime.timerFocus = setInterval(()=>{
+    if(!sfidaRuntime.holdAttivo){
+      sfidaRuntime.progressoFocus=0;
+      aggiornaCerchio(0);
+      return;
+    }
+    sfidaRuntime.progressoFocus+=step;
+    const perc=Math.min(sfidaRuntime.progressoFocus/(DURATA_FOCUS*1000),1);
+    aggiornaCerchio(perc);
+    if(perc>=1){
+      clearInterval(sfidaRuntime.timerFocus);
+      sfidaRuntime.fase='vinto';
+      completaSfida();
+      renderSfidaBox();
+    }
+    // Aggiorna solo il cerchio senza re-render completo
+    const lbl=document.getElementById('focus-lbl');
+    if(lbl) lbl.textContent=Math.ceil(DURATA_FOCUS-sfidaRuntime.progressoFocus/1000);
+  },step);
+};
+
+window.stopFocus = function(){
+  sfidaRuntime.holdAttivo=false;
+};
+
+function aggiornaCerchio(perc){
+  const el=document.getElementById('focus-prog');
+  if(el) el.style.strokeDashoffset=339.3*(1-perc);
+}
+
+/* ── COMPLETAMENTO SFIDA ────────────────────────── */
+function completaSfida(){
+  const data=oggi();
+  const stato=getSfidaStato();
+  if(stato?.completata) return; // già completata oggi
+  saveSfidaStato({data, tipo:sfidaRuntime.tipo, completata:true});
+  const nuovoPF=addPF();
+  // Controlla badge PF
+  for(const b of BADGE_PF){
+    if(nuovoPF>=b.soglia && addPFBadge(b.id)){
+      setTimeout(()=>mostraToast(b),600);
+      break;
+    }
+  }
+  // Aggiorna display PF nella streak bar
+  const pfEl=document.getElementById('pf-count');
+  if(pfEl) pfEl.textContent=nuovoPF;
+}
+
+/* ── RENDER SFIDA BOX ───────────────────────────── */
+function renderSfidaBox(){
+  const el=document.getElementById('sfida-content');
+  if(!el) return;
+  el.innerHTML=buildSfidaContent();
+}
+
+function buildSfidaContent(){
+  const {tipo,fase,forme,idxDiversa,scenaCambiata,idxCambiamento,azioneRivelata,progressoFocus}=sfidaRuntime;
+
+  if(fase==='idle'){
+    return `<button class="btn btn-star btn-full" onclick="avviaSfida()">Inizia la sfida →</button>`;
+  }
+
+  if(fase==='vinto'){
+    return `<div class="sfida-done star-pop">
+      <div class="sfida-done-icon"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#0D1117" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+      <div>
+        <strong>Sfida completata · +1 ⭐</strong>
+        <span>${MSG_FINE[tipo]||''}</span>
+      </div>
+    </div>`;
+  }
+
+  // ── ROMPI IL LOOP ────────────────────────────────
+  if(tipo==='rompi-loop'){
+    return `<p style="font-size:12px;color:var(--cream-dim);text-align:center;margin-bottom:4px">Trova la forma diversa dalle altre</p>
+    <div class="forme-grid">
+      ${forme.map(f=>`<button id="forma-${f.id}" class="forma" style="background:${f.colore};border-radius:${f.shape==='quadrato'?'8px':'50%'}" onclick="toccaForma(${f.id})"></button>`).join('')}
+    </div>`;
+  }
+
+  // ── MICRO CORAGGIO ───────────────────────────────
+  if(tipo==='micro-coraggio'){
+    if(azioneRivelata){
+      return `<div class="mistero-reveal">${azioneRivelata}</div>`;
+    }
+    return `<div style="text-align:center">
+      <p style="font-size:12px;color:var(--cream-dim);margin-bottom:12px">Non saprai cosa apparirà finché non premi</p>
+      <button class="mistero-btn" onclick="premiMistero()">?</button>
+    </div>`;
+  }
+
+  // ── DETTAGLIO NUOVO ──────────────────────────────
+  if(tipo==='dettaglio'){
+    const colBase  = COLORI_SCENA[0];
+    const colCamb  = COLORI_SCENA[2];
+    return `<div class="scena-wrap">
+      ${!scenaCambiata
+        ? `<p style="font-size:12px;color:var(--cream-dim);text-align:center">Osserva la scena…</p>`
+        : `<p style="font-size:12px;color:var(--cream-dim);text-align:center">Tocca l'elemento che è cambiato</p>`
+      }
+      <svg viewBox="0 0 300 160" style="width:100%;border-radius:10px;background:var(--navy-900);margin-top:8px">
+        ${OGGETTI_SCENA.map((o,i)=>{
+          const cambiato = scenaCambiata && i===idxCambiamento;
+          const colore   = cambiato ? colCamb : colBase;
+          const clickable= scenaCambiata ? `onclick="toccaOggetto(${i})" style="cursor:pointer"` : '';
+          if(o.tipo==='cerchio')
+            return `<circle id="ogg-${i}" cx="${o.x}" cy="${o.y}" r="${cambiato?o.r+6:o.r}" fill="${colore}" ${clickable}/>`;
+          else
+            return `<rect id="ogg-${i}" x="${o.x-o.w/2}" y="${o.y-o.h/2}" width="${cambiato?o.w+10:o.w}" height="${cambiato?o.h+10:o.h}" rx="4" fill="${colore}" ${clickable}/>`;
+        }).join('')}
+      </svg>
+    </div>`;
+  }
+
+  // ── FOCUS 30 ─────────────────────────────────────
+  if(tipo==='focus30'){
+    const sec=Math.max(0,Math.ceil(DURATA_FOCUS-progressoFocus/1000));
+    return `<div style="text-align:center">
+      <p style="font-size:12px;color:var(--cream-dim);margin-bottom:12px">Tieni il dito premuto per 30 secondi senza spostarlo</p>
+      <div class="focus-ring"
+           onpointerdown="startFocus()" onpointerup="stopFocus()" onpointerleave="stopFocus()"
+           onpointercancel="stopFocus()" style="touch-action:none">
+        <svg class="focus-svg" viewBox="0 0 120 120">
+          <circle class="focus-track" cx="60" cy="60" r="54"/>
+          <circle id="focus-prog" class="focus-prog" cx="60" cy="60" r="54"/>
+        </svg>
+        <div class="focus-label"><span id="focus-lbl">${sec}</span></div>
+      </div>
+    </div>`;
+  }
+
+  return '';
+}
+
+/* ── AVVIA SFIDA (chiamata dal pulsante) ────────── */
+window.avviaSfida = function(){
+  const data=oggi();
+  const tipo=scegliTipoSfida(data);
+  inizializzaSfida(tipo);
+  renderSfidaBox();
+};
+
+/* ── RENDER CARD SFIDA ──────────────────────────── */
+function renderCardSfida(statoOggi){
+  const data     = oggi();
+  const tipo     = scegliTipoSfida(data);
+  const gia      = statoOggi?.completata;
+  const pf       = getPF();
+
+  const TITOLI = {
+    'rompi-loop':    'Rompi il Loop',
+    'micro-coraggio':'Micro Coraggio',
+    'dettaglio':     'Trova il Dettaglio',
+    'focus30':       'Focus 30',
+  };
+  const SOTTOTITOLI = {
+    'rompi-loop':    'Individua la forma che si comporta diversamente dalle altre.',
+    'micro-coraggio':'Un pulsante. Non sai cosa apparirà. Premilo.',
+    'dettaglio':     'La scena cambierà leggermente. Trovalo.',
+    'focus30':       'Tieni il dito fermo per 30 secondi.',
+  };
+
+  // Se già completata, mostra stato finale
+  let contenuto;
+  if(gia){
+    contenuto=`<div class="sfida-done">
+      <div class="sfida-done-icon"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#0D1117" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+      <div><strong>Sfida completata · +1 ⭐</strong><span>${MSG_FINE[tipo]||''}</span></div>
+    </div>`;
+  } else {
+    contenuto=`<div class="sfida-box" id="sfida-content">
+      <button class="btn btn-star btn-full" onclick="avviaSfida()">Inizia la sfida →</button>
+    </div>`;
+  }
+
+  return `<div class="card card-star" style="animation:fadeUp .4s .3s both">
+    <div class="card-header">
+      <span class="tag-star">⭐ Sfida del Giorno</span>
+      <span style="font-size:11px;color:#F5C842;font-weight:600">${pf} pt</span>
+    </div>
+    <div style="font-family:'Playfair Display',serif;font-size:20px;margin:10px 0 6px;line-height:1.25">${TITOLI[tipo]||'Sfida'}</div>
+    <div style="font-size:13px;color:var(--cream-dim);line-height:1.6;margin-bottom:14px">${SOTTOTITOLI[tipo]||''}</div>
+    ${contenuto}
+  </div>`;
+}
+
+
+avvia();
+
+
+</script>
+</body>
+</html>
