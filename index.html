@@ -1194,7 +1194,10 @@ window.onRitTesto = function(el){ ritRuntime.testo = el.value; };
 
 /* ── Avvia il rituale ── */
 window.avviaRituale = function(){
-  if(!ritRuntime.testo.trim()) return;
+  const ta = document.getElementById('rit-ta');
+if (ta) ritRuntime.testo = ta.value;
+
+if (!ritRuntime.testo.trim()) return;
   ritRuntime.fase = 'animazione';
   renderRitualeBox();
 
