@@ -1,0 +1,2506 @@
+<!DOCTYPE html>
+<!-- Luck Loop v4.4 -->
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Luck Loop – Missioni quotidiane per aumentare le tue opportunità reali." />
+  <title>Luck Loop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════════════
+       LUCK LOOP — Design System v3.3
+       Tema: cielo notturno · costellazioni · premium
+    ═══════════════════════════════════════════════ */
+
+    /* ── RESET ────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── TOKEN ────────────────────────────────────── */
+    :root {
+      --navy-900: #080C12;
+      --navy-800: #0F1520;
+      --navy-700: #162030;
+      --navy-600: #1E2D42;
+      --navy-500: #27394F;
+
+      --gold:     #C9A84C;
+      --gold-lt:  #DFC57A;
+      --gold-dim: #8A6F2E;
+      --gold-glow:rgba(201,168,76,.18);
+
+      --cream:    #EDE4D0;
+      --cream-dim:#B5A485;
+      --cream-xs: rgba(237,228,208,.5);
+
+      --teal:     #4ECDC4;
+      --teal-dim: #2A8F88;
+      --teal-glow:rgba(78,205,196,.15);
+
+      --amber:    #E8934A;
+      --amber-glow:rgba(232,147,74,.15);
+
+      --violet:   #9C6FDE;
+      --star:     #F5C842;
+
+      --r-xs:  8px;
+      --r-sm:  12px;
+      --r-md:  16px;
+      --r-lg:  20px;
+      --r-xl:  24px;
+
+      --shadow-card: 0 4px 32px rgba(0,0,0,.35), 0 1px 4px rgba(0,0,0,.2);
+      --shadow-glow-gold: 0 0 24px rgba(201,168,76,.12);
+      --shadow-glow-teal: 0 0 24px rgba(78,205,196,.1);
+
+      --ease-spring: cubic-bezier(.22,1,.36,1);
+      --ease-out:    cubic-bezier(.16,1,.3,1);
+      --ease-in:     cubic-bezier(.4,0,1,1);
+    }
+
+    /* ── BASE ──────────────────────────────────────── */
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy-900);
+      color: var(--cream);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100dvh;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-thumb { background: var(--navy-500); border-radius: 99px; }
+
+    /* ── SFONDO STELLATO ───────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 15% 20%, rgba(78,205,196,.04) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 85% 75%, rgba(201,168,76,.05) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 50% 50%, rgba(156,111,222,.03) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Stelle fisse generate con box-shadow */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 8%,  rgba(255,255,255,.55) 0%, transparent 100%),
+        radial-gradient(1px 1px at 23% 15%, rgba(255,255,255,.4)  0%, transparent 100%),
+        radial-gradient(1px 1px at 38% 5%,  rgba(255,255,255,.5)  0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 12%, rgba(255,255,255,.35) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 3%,  rgba(255,255,255,.6)  0%, transparent 100%),
+        radial-gradient(1px 1px at 82% 18%, rgba(255,255,255,.45) 0%, transparent 100%),
+        radial-gradient(1px 1px at 92% 8%,  rgba(255,255,255,.3)  0%, transparent 100%),
+        radial-gradient(1px 1px at 5%  30%, rgba(255,255,255,.4)  0%, transparent 100%),
+        radial-gradient(1px 1px at 18% 45%, rgba(255,255,255,.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 45% 35%, rgba(255,255,255,.5)  0%, transparent 100%),
+        radial-gradient(1px 1px at 68% 28%, rgba(255,255,255,.35) 0%, transparent 100%),
+        radial-gradient(1px 1px at 88% 40%, rgba(255,255,255,.45) 0%, transparent 100%),
+        radial-gradient(1px 1px at 12% 60%, rgba(255,255,255,.3)  0%, transparent 100%),
+        radial-gradient(1px 1px at 30% 72%, rgba(255,255,255,.4)  0%, transparent 100%),
+        radial-gradient(1px 1px at 58% 65%, rgba(255,255,255,.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 78% 58%, rgba(255,255,255,.5)  0%, transparent 100%),
+        radial-gradient(1px 1px at 95% 62%, rgba(255,255,255,.35) 0%, transparent 100%),
+        radial-gradient(1px 1px at 8%  85%, rgba(255,255,255,.4)  0%, transparent 100%),
+        radial-gradient(1px 1px at 42% 90%, rgba(255,255,255,.3)  0%, transparent 100%),
+        radial-gradient(1px 1px at 72% 88%, rgba(255,255,255,.45) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 25% 25%, rgba(201,168,76,.6) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 62% 18%, rgba(78,205,196,.5) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 88% 70%, rgba(201,168,76,.5) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── LAYOUT ────────────────────────────────────── */
+    .app {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 0 18px 96px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Nebulosa ornamentale (rimpiazza glow-top/bottom) */
+    .glow-top {
+      position: fixed; top: -80px; right: -80px;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(201,168,76,.06) 0%, transparent 65%);
+      pointer-events: none; z-index: 0;
+    }
+    .glow-bottom {
+      position: fixed; bottom: -80px; left: -80px;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(78,205,196,.06) 0%, transparent 65%);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── HEADER ────────────────────────────────────── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 0 12px;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+      margin-bottom: 4px;
+    }
+
+    .logo { display: flex; align-items: center; gap: 12px; }
+
+    .logo-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: linear-gradient(135deg, rgba(201,168,76,.2) 0%, rgba(201,168,76,.08) 100%);
+      border: 1px solid rgba(201,168,76,.35);
+      box-shadow: 0 0 16px rgba(201,168,76,.1), inset 0 1px 0 rgba(255,255,255,.06);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: var(--gold);
+      transition: box-shadow .3s var(--ease-out);
+    }
+    .logo-icon:hover { box-shadow: 0 0 24px rgba(201,168,76,.22); }
+
+    .logo-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; color: var(--cream);
+      letter-spacing: .04em;
+    }
+
+    nav { display: flex; gap: 2px; }
+
+    nav button {
+      background: none; border: none; cursor: pointer;
+      color: var(--cream-dim); font-size: 13px; font-family: inherit;
+      padding: 7px 12px; border-radius: var(--r-sm);
+      letter-spacing: .01em;
+      transition: background .2s var(--ease-out), color .2s;
+    }
+    nav button:hover  { color: var(--cream); background: rgba(255,255,255,.06); }
+    nav button.active { background: rgba(255,255,255,.09); color: var(--cream); }
+
+    /* ── TIPOGRAFIA ────────────────────────────────── */
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px; line-height: 1.15;
+      letter-spacing: -.01em;
+      background: linear-gradient(135deg, var(--cream) 0%, var(--cream-dim) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .page-date { font-size: 12px; color: var(--cream-dim); margin-bottom: 6px; letter-spacing: .03em; }
+    h2.section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px; margin-bottom: 20px; letter-spacing: -.01em;
+    }
+    h3.card-sub {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; margin-bottom: 10px; letter-spacing: -.01em;
+    }
+    .section-label {
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .1em; color: var(--cream-dim); margin-bottom: 14px;
+    }
+
+    /* ── CARD BASE ─────────────────────────────────── */
+    .card {
+      border-radius: var(--r-lg);
+      padding: 22px;
+      margin-bottom: 14px;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow .3s var(--ease-out), transform .2s var(--ease-out);
+    }
+    .card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.025) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .card:hover { transform: translateY(-1px); }
+
+    .card-teal {
+      background: linear-gradient(160deg, rgba(30,45,66,.95) 0%, rgba(22,32,48,.95) 100%);
+      border: 1px solid rgba(78,205,196,.22);
+      box-shadow: var(--shadow-card), var(--shadow-glow-teal);
+    }
+    .card-gold {
+      background: linear-gradient(160deg, rgba(30,45,66,.95) 0%, rgba(22,32,48,.95) 100%);
+      border: 1px solid rgba(201,168,76,.22);
+      box-shadow: var(--shadow-card), var(--shadow-glow-gold);
+    }
+    .card-amber {
+      background: linear-gradient(160deg, rgba(30,45,66,.95) 0%, rgba(22,32,48,.95) 100%);
+      border: 1px solid rgba(232,147,74,.22);
+      box-shadow: var(--shadow-card), 0 0 24px var(--amber-glow);
+    }
+    .card-glass {
+      background: linear-gradient(160deg, rgba(22,32,48,.9) 0%, rgba(15,21,32,.9) 100%);
+      border: 1px solid rgba(255,255,255,.07);
+      box-shadow: var(--shadow-card);
+    }
+    .card-special {
+      background: linear-gradient(160deg, rgba(30,45,66,.95) 0%, rgba(22,32,48,.95) 100%);
+      border: 1px solid rgba(156,111,222,.28);
+      box-shadow: var(--shadow-card), 0 0 24px rgba(156,111,222,.08);
+    }
+    .card-rituale {
+      background: linear-gradient(160deg, rgba(30,45,66,.95) 0%, rgba(22,32,48,.95) 100%);
+      border: 1px solid rgba(201,168,76,.22);
+      box-shadow: var(--shadow-card), var(--shadow-glow-gold);
+    }
+    .card-star {
+      background: linear-gradient(160deg, rgba(30,45,66,.95) 0%, rgba(22,32,48,.95) 100%);
+      border: 1px solid rgba(245,200,66,.22);
+      box-shadow: var(--shadow-card), 0 0 24px rgba(245,200,66,.06);
+    }
+    .card-dark {
+      background: rgba(8,12,18,.6);
+      border-radius: var(--r-sm);
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,.05);
+    }
+
+    /* Identità visiva per categoria missione */
+    .card-teal  { --cat-accent: var(--teal); }
+    .card-amber { --cat-accent: var(--amber); }
+    .card-gold  { --cat-accent: var(--gold); }
+
+    /* ── TAG ───────────────────────────────────────── */
+    .tag {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 99px;
+    }
+    .tag-real    { color: var(--teal);   background: rgba(78,205,196,.1);   border: 1px solid rgba(78,205,196,.2);  }
+    .tag-micro   { color: var(--amber);  background: rgba(232,147,74,.1);   border: 1px solid rgba(232,147,74,.2);  }
+    .tag-special { color: var(--violet); background: rgba(156,111,222,.1);  border: 1px solid rgba(156,111,222,.22); }
+    .tag-rituale { color: var(--gold);   background: rgba(201,168,76,.1);   border: 1px solid rgba(201,168,76,.2);
+                   font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+                   padding: 4px 12px; border-radius: 99px; display: inline-flex; }
+    .tag-star    { color: var(--star);   background: rgba(245,200,66,.1);   border: 1px solid rgba(245,200,66,.2);
+                   font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+                   padding: 4px 12px; border-radius: 99px; display: inline-flex; }
+
+    /* ── IMPACT BADGE ──────────────────────────────── */
+    .impact { display: inline-flex; align-items: center; font-size: 11px; font-weight: 600; padding: 4px 11px; border-radius: var(--r-xs); letter-spacing: .02em; }
+    .impact-basso { color: var(--cream-dim); background: rgba(184,169,138,.08); border: 1px solid rgba(184,169,138,.12); }
+    .impact-medio { color: var(--gold);      background: rgba(201,168,76,.1);   border: 1px solid rgba(201,168,76,.18); }
+    .impact-alto  { color: var(--teal);      background: rgba(78,205,196,.1);   border: 1px solid rgba(78,205,196,.18); }
+
+    /* ── BOTTONI ───────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: inherit; font-weight: 600; cursor: pointer;
+      border-radius: var(--r-sm); border: none;
+      padding: 13px 22px; font-size: 14px; letter-spacing: .01em;
+      transition: transform .15s var(--ease-spring), background .18s, box-shadow .18s, opacity .15s;
+      position: relative; overflow: hidden;
+    }
+    .btn::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.08) 0%, transparent 60%);
+      opacity: 0; transition: opacity .2s;
+    }
+    .btn:hover::after  { opacity: 1; }
+    .btn:active { transform: scale(.96); }
+    .btn:disabled { opacity: .38; cursor: not-allowed; transform: none; }
+
+    .btn-primary { background: linear-gradient(135deg, var(--gold-lt) 0%, var(--gold) 100%); color: #0A0E16; box-shadow: 0 2px 16px rgba(201,168,76,.25); }
+    .btn-primary:hover { box-shadow: 0 4px 24px rgba(201,168,76,.35); }
+
+    .btn-teal    { background: rgba(78,205,196,.1);   color: var(--teal);   border: 1px solid rgba(78,205,196,.28); }
+    .btn-teal:hover    { background: rgba(78,205,196,.18);  box-shadow: 0 0 16px rgba(78,205,196,.15); }
+
+    .btn-amber   { background: rgba(232,147,74,.1);   color: var(--amber);  border: 1px solid rgba(232,147,74,.28); }
+    .btn-amber:hover   { background: rgba(232,147,74,.18);  box-shadow: 0 0 16px rgba(232,147,74,.15); }
+
+    .btn-special { background: rgba(156,111,222,.1);  color: var(--violet); border: 1px solid rgba(156,111,222,.28); }
+    .btn-special:hover { background: rgba(156,111,222,.18); box-shadow: 0 0 16px rgba(156,111,222,.15); }
+
+    .btn-star    { background: rgba(245,200,66,.1);   color: var(--star);   border: 1px solid rgba(245,200,66,.28); }
+    .btn-star:hover    { background: rgba(245,200,66,.18);  box-shadow: 0 0 16px rgba(245,200,66,.15); }
+
+    .btn-rituale { background: rgba(201,168,76,.1);   color: var(--gold);   border: 1px solid rgba(201,168,76,.28); }
+    .btn-rituale:hover { background: rgba(201,168,76,.18);  box-shadow: 0 0 16px rgba(201,168,76,.15); }
+
+    .btn-ghost   { background: transparent; color: var(--cream-dim); border: 1px solid rgba(255,255,255,.13); }
+    .btn-ghost:hover   { border-color: rgba(255,255,255,.28); color: var(--cream); }
+
+    .btn-danger  { background: transparent; color: rgba(239,68,68,.65); border: 1px solid rgba(239,68,68,.22); font-size: 13px; padding: 9px 14px; }
+    .btn-danger:hover  { border-color: rgba(239,68,68,.5); color: rgba(239,68,68,.95); }
+
+    .btn-full { width: 100%; }
+
+    /* ── STREAK BAR ────────────────────────────────── */
+    .streak-bar {
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      padding: 14px 18px;
+      background: linear-gradient(160deg, rgba(22,32,48,.9) 0%, rgba(15,21,32,.9) 100%);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--r-md);
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-card);
+    }
+    .streak-item  { display: flex; align-items: center; gap: 9px; }
+    .streak-num   { font-family: 'Playfair Display', serif; font-size: 24px; line-height: 1; }
+    .streak-label { font-size: 10px; color: var(--cream-dim); letter-spacing: .04em; text-transform: uppercase; }
+    .streak-divider { width: 1px; height: 30px; background: rgba(255,255,255,.07); flex-shrink: 0; }
+    .star-num     { font-family: 'Playfair Display', serif; font-size: 24px; line-height: 1; color: var(--star); }
+
+    /* ── CARD HEADER / BODY ─────────────────────────── */
+    .card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 6px; }
+    .card-title  { font-family: 'Playfair Display', serif; font-size: 21px; margin: 12px 0 10px; line-height: 1.2; letter-spacing: -.01em; }
+    .card-desc   { font-size: 14px; color: var(--cream-dim); line-height: 1.65; margin-bottom: 16px; }
+    .card-icon   { font-size: 20px; opacity: .85; }
+
+    /* ── PERCHÉ FUNZIONA (accordion) ──────────────── */
+    .card-why-toggle {
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; user-select: none;
+      padding: 10px 0;
+      border-top: 1px solid rgba(255,255,255,.06);
+      margin-bottom: 0;
+    }
+    .card-why-toggle span {
+      font-size: 10px; font-weight: 500; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--cream-dim); opacity: .6;
+      transition: color .2s, opacity .2s;
+    }
+    .card-why-toggle:hover span { opacity: 1; color: var(--teal); }
+    .card-why-toggle svg { transition: transform .25s var(--ease-out); flex-shrink: 0; opacity: .5; }
+    .card-why-toggle.open svg { transform: rotate(180deg); }
+    .card-why-toggle.no-border { border-top: none; padding-top: 0; }
+    .card-why-body {
+      font-size: 13px; color: var(--cream-dim); line-height: 1.65;
+      overflow: hidden; max-height: 0;
+      transition: max-height .35s var(--ease-out), padding .25s;
+      padding-top: 0;
+    }
+    .card-why-body.open { max-height: 600px; padding-top: 10px; }
+    .card-why p { font-size: 13px; color: var(--cream-dim); line-height: 1.65; }
+
+    /* ── ENERGY SELECTOR ────────────────────────────── */
+    .energy-option {
+      display: flex; align-items: center; gap: 16px;
+      width: 100%; text-align: left;
+      padding: 16px 18px; border-radius: var(--r-md);
+      border: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(160deg, rgba(22,32,48,.8) 0%, rgba(15,21,32,.8) 100%);
+      cursor: pointer; font-family: inherit;
+      transition: border-color .2s, background .2s, box-shadow .2s;
+      margin-bottom: 10px;
+    }
+    .energy-option:hover   { border-color: rgba(201,168,76,.25); box-shadow: 0 0 20px rgba(201,168,76,.06); }
+    .energy-option.selected { border-color: var(--gold); background: rgba(201,168,76,.07); box-shadow: 0 0 20px rgba(201,168,76,.1); }
+    .energy-name { font-size: 15px; font-weight: 600; color: var(--cream); }
+    .energy-desc { font-size: 12px; color: var(--cream-dim); margin-top: 1px; }
+    .energy-check { margin-left: auto; width: 22px; height: 22px; border-radius: 50%; background: var(--gold); display: none; align-items: center; justify-content: center; box-shadow: 0 0 8px rgba(201,168,76,.4); }
+    .energy-option.selected .energy-check { display: flex; }
+
+    /* ── COMPLETED STATE ────────────────────────────── */
+    .completed-state {
+      display: flex; align-items: center; gap: 14px;
+      background: rgba(78,205,196,.07);
+      border: 1px solid rgba(78,205,196,.18);
+      border-radius: var(--r-sm); padding: 14px;
+    }
+    .completed-check {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dim) 100%);
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 12px rgba(78,205,196,.3);
+    }
+    .completed-text strong { font-size: 14px; color: var(--teal); }
+    .completed-text span   { font-size: 12px; color: var(--cream-dim); display: block; }
+
+    .completed-state.special { background: rgba(156,111,222,.07); border-color: rgba(156,111,222,.18); }
+    .completed-state.special .completed-check { background: linear-gradient(135deg, var(--violet) 0%, #7A50B8 100%); box-shadow: 0 0 12px rgba(156,111,222,.3); }
+    .completed-state.special strong { color: var(--violet); }
+
+    /* is-nuovo glow animato al completamento */
+    .is-nuovo .completed-state { animation: completaGlow .55s var(--ease-spring) both; }
+    .is-nuovo .mp-completed     { animation: completaGlowAmber .55s var(--ease-spring) both; }
+
+    @keyframes completaGlow {
+      0%   { box-shadow: 0 0 0 0 rgba(78,205,196,.45); }
+      50%  { box-shadow: 0 0 0 10px rgba(78,205,196,.1); }
+      100% { box-shadow: 0 0 0 0 rgba(78,205,196,0); }
+    }
+    @keyframes completaGlowAmber {
+      0%   { box-shadow: 0 0 0 0 rgba(232,147,74,.45); }
+      50%  { box-shadow: 0 0 0 10px rgba(232,147,74,.1); }
+      100% { box-shadow: 0 0 0 0 rgba(232,147,74,0); }
+    }
+
+    .confirm-row   { display: flex; gap: 8px; }
+    .confirm-label { font-size: 12px; color: var(--cream-dim); text-align: center; margin-bottom: 10px; }
+
+    /* ── MICRO-PRINCIPIO ────────────────────────────── */
+    .mp-principio {
+      background: rgba(232,147,74,.06); border: 1px solid rgba(232,147,74,.13);
+      border-radius: var(--r-sm); padding: 14px; margin-bottom: 10px;
+    }
+    .mp-label  { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .09em; color: var(--amber); margin-bottom: 6px; }
+    .mp-testo  { font-size: 13px; color: var(--cream); line-height: 1.6; }
+    .mp-fonte  { font-size: 11px; color: var(--cream-dim); margin-top: 6px; font-style: italic; }
+    .mp-cultura {
+      background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--r-sm); padding: 14px; margin-bottom: 10px;
+    }
+    .mp-cultura .mp-label { color: var(--cream-dim); }
+    .mp-azione {
+      background: rgba(201,168,76,.07); border: 1px solid rgba(201,168,76,.18);
+      border-radius: var(--r-sm); padding: 14px; margin-bottom: 18px;
+    }
+    .mp-azione .mp-label  { color: var(--gold); }
+    .mp-azione .mp-testo  { font-weight: 500; }
+    .mp-completed {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(232,147,74,.07); border: 1px solid rgba(232,147,74,.18);
+      border-radius: var(--r-sm); padding: 13px;
+    }
+    .mp-completed-check {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--amber) 0%, #C0622A 100%);
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 10px rgba(232,147,74,.3);
+    }
+    .mp-completed strong { font-size: 13px; color: var(--amber); display: block; }
+    .mp-completed span   { font-size: 11px; color: var(--cream-dim); }
+
+    /* ── RITUALI ─────────────────────────────────────── */
+    .rituali-grid   { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 4px; }
+    .rituale-btn    { background: rgba(8,12,18,.6); border: 1px solid rgba(255,255,255,.07); border-radius: var(--r-sm); padding: 14px 10px; text-align: center; cursor: pointer; font-family: inherit; transition: border-color .2s, background .2s; }
+    .rituale-btn:hover   { border-color: rgba(201,168,76,.3); background: rgba(201,168,76,.05); }
+    .rituale-btn.selected { border-color: var(--gold); background: rgba(201,168,76,.08); }
+    .rituale-emoji  { font-size: 26px; display: block; margin-bottom: 5px; }
+    .rituale-nome   { font-size: 12px; font-weight: 600; color: var(--cream); }
+    .rituale-textarea {
+      width: 100%; background: rgba(8,12,18,.6); border: 1px solid rgba(255,255,255,.09);
+      border-radius: var(--r-sm); padding: 14px; color: var(--cream);
+      font-family: 'Playfair Display', serif; font-size: 16px; line-height: 1.6;
+      resize: none; outline: none; min-height: 90px; transition: border-color .2s;
+    }
+    .rituale-textarea:focus { border-color: rgba(201,168,76,.4); box-shadow: 0 0 16px rgba(201,168,76,.06); }
+    .rituale-textarea::placeholder { color: rgba(237,228,208,.25); font-style: italic; }
+    .rituale-stage { width: 100%; min-height: 130px; border-radius: var(--r-sm); background: rgba(8,12,18,.8); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,.05); }
+    .rituale-stage-text { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--cream); text-align: center; padding: 16px; line-height: 1.6; position: relative; z-index: 2; max-width: 90%; }
+    .rituale-done { display: flex; align-items: center; gap: 12px; background: rgba(201,168,76,.07); border: 1px solid rgba(201,168,76,.2); border-radius: var(--r-sm); padding: 13px; }
+    .rituale-done-icon { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%); flex-shrink: 0; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px rgba(201,168,76,.3); }
+    .rituale-done strong { font-size: 13px; color: var(--gold); display: block; }
+    .rituale-done span   { font-size: 11px; color: var(--cream-dim); }
+
+    /* ── COSTELLAZIONE ───────────────────────────────── */
+    .costellazione-wrap {
+      margin-bottom: 22px;
+      background: linear-gradient(160deg, rgba(15,21,32,.95) 0%, rgba(8,12,18,.95) 100%);
+      border: 1px solid rgba(201,168,76,.1);
+      border-radius: var(--r-xl);
+      padding: 22px 18px 16px;
+      box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255,255,255,.04);
+      position: relative; overflow: hidden;
+    }
+    .costellazione-wrap::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(201,168,76,.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .costellazione-svg { display: block; width: 100%; }
+    .stella-attiva  { fill: var(--gold); filter: drop-shadow(0 0 4px rgba(201,168,76,.7));
+                      opacity: 0; animation: stellaComparsa 1.3s ease-out forwards; }
+    .stella-recente { fill: var(--gold-lt); filter: drop-shadow(0 0 6px rgba(201,168,76,.9));
+                      opacity: 0; animation: stellaComparsa 1.3s ease-out forwards, stellaPulse 2.5s ease-in-out 1.8s infinite; }
+    @keyframes stellaComparsa {
+      0%   { opacity: 0;   filter: brightness(1)   drop-shadow(0 0 0px  rgba(201,168,76,0)); }
+      30%  { opacity: .25; filter: brightness(1.5) drop-shadow(0 0 8px  rgba(201,168,76,.5)); }
+      55%  { opacity: .55; filter: brightness(2)   drop-shadow(0 0 16px rgba(201,168,76,.8)); }
+      80%  { opacity: .9;  filter: brightness(1.4) drop-shadow(0 0 10px rgba(201,168,76,.6)); }
+      100% { opacity: 1;   filter: brightness(1)   drop-shadow(0 0 4px  rgba(201,168,76,.5)); }
+    }
+    @keyframes stellaPulse {
+      0%,100% { filter: drop-shadow(0 0 3px rgba(201,168,76,.5)); opacity: .9; }
+      50%      { filter: drop-shadow(0 0 9px rgba(201,168,76,.95)); opacity: 1; }
+    }
+    .linea-cost-attiva {
+      stroke: rgba(201,168,76,.28); stroke-linecap: round;
+      opacity: 0; animation: lineaComparsa .6s var(--ease-out) forwards;
+    }
+    @keyframes lineaComparsa {
+      from { opacity: 0; }
+      to   { opacity: var(--linea-op, 1); }
+    }
+    .costellazione-label { font-size: 12px; color: var(--cream-dim); text-align: center; margin-top: 12px; font-style: italic; letter-spacing: .03em; }
+    .costellazione-num   { font-size: 10px; color: rgba(255,255,255,.2); text-align: center; margin-top: 4px; letter-spacing: .07em; text-transform: uppercase; }
+
+    /* ── ARCHIVIO ────────────────────────────────────── */
+    .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+    .stat-box {
+      background: linear-gradient(160deg, rgba(22,32,48,.9) 0%, rgba(15,21,32,.9) 100%);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--r-md); padding: 14px 10px; text-align: center;
+      box-shadow: var(--shadow-card);
+    }
+    .stat-num   { font-family: 'Playfair Display', serif; font-size: 26px; line-height: 1; }
+    .stat-label { font-size: 10px; color: var(--cream-dim); letter-spacing: .04em; text-transform: uppercase; margin-top: 2px; }
+    .badge-row  { display: flex; align-items: center; gap: 12px; padding: 11px; border-radius: var(--r-sm); margin-bottom: 6px; transition: background .2s; }
+    .badge-row.earned { background: rgba(201,168,76,.07); border: 1px solid rgba(201,168,76,.16); }
+    .badge-row.locked { opacity: .32; }
+    .badge-emoji { font-size: 22px; }
+    .badge-name  { font-size: 13px; font-weight: 600; color: var(--gold); }
+    .badge-desc  { font-size: 11px; color: var(--cream-dim); }
+    .history-item {
+      background: rgba(8,12,18,.5); border: 1px solid rgba(255,255,255,.05);
+      border-radius: var(--r-sm); padding: 11px; margin-bottom: 7px;
+      transition: border-color .2s, background .25s var(--ease-out);
+      cursor: pointer;
+    }
+    .history-item:hover { border-color: rgba(255,255,255,.1); }
+    .history-item.expanded { background: rgba(78,205,196,.04); border-color: rgba(78,205,196,.16); }
+    .history-row { display: flex; align-items: center; gap: 11px; }
+    .history-icon  { font-size: 18px; opacity: .85; flex-shrink: 0; }
+    .history-title {
+      font-size: 13px; font-weight: 500;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      transition: white-space 0s;
+    }
+    .history-item.expanded .history-title {
+      white-space: normal; overflow: visible; text-overflow: clip;
+    }
+    .history-meta  { font-size: 11px; color: var(--cream-dim); margin-top: 1px; }
+    .history-check { width: 20px; height: 20px; border-radius: 50%; background: rgba(78,205,196,.15); flex-shrink: 0; margin-left: auto; display: flex; align-items: center; justify-content: center; }
+    .history-detail {
+      overflow: hidden; max-height: 0;
+      transition: max-height .35s var(--ease-out), padding .25s var(--ease-out), opacity .3s;
+      opacity: 0;
+    }
+    .history-item.expanded .history-detail {
+      max-height: 200px; padding-top: 9px; margin-top: 9px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      opacity: 1;
+    }
+    .history-detail-text { font-size: 12px; color: var(--cream-dim); line-height: 1.6; }
+
+    /* ── DONE BANNER ─────────────────────────────────── */
+    .done-banner { text-align: center; padding: 28px 0 10px; }
+    .done-emoji  { font-size: 38px; margin-bottom: 10px; display: block; }
+    .done-title  { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 5px; letter-spacing: -.01em; }
+    .done-sub    { font-size: 13px; color: var(--cream-dim); }
+    .streak-pill { display: inline-flex; align-items: center; gap: 7px; background: rgba(201,168,76,.1); border: 1px solid rgba(201,168,76,.22); border-radius: 99px; padding: 7px 18px; font-size: 13px; font-weight: 600; color: var(--gold); margin-top: 14px; }
+
+    /* ── SFIDA / FOCUS ────────────────────────────────── */
+    .focus-ring  { position: relative; width: 120px; height: 120px; touch-action: none; cursor: pointer; }
+    .focus-svg   { width: 120px; height: 120px; transform: rotate(-90deg); }
+    .focus-track { fill: none; stroke: rgba(255,255,255,.06); stroke-width: 9; }
+    .focus-prog  { fill: none; stroke: var(--star); stroke-width: 9; stroke-linecap: round; stroke-dasharray: 339.3; stroke-dashoffset: 339.3; transition: stroke-dashoffset .08s linear; }
+    .focus-label { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 26px; }
+    .mistero-btn { width: 72px; height: 72px; border-radius: 50%; background: rgba(245,200,66,.1); border: 2px solid rgba(245,200,66,.3); font-size: 30px; cursor: pointer; transition: transform .18s var(--ease-spring), background .2s; display: flex; align-items: center; justify-content: center; }
+    .mistero-btn:hover { background: rgba(245,200,66,.2); transform: scale(1.06); }
+    .mistero-reveal { font-size: 14px; color: var(--cream); line-height: 1.6; text-align: center; max-width: 240px; animation: fadeUp .35s var(--ease-spring); }
+    .sfida-done { display: flex; align-items: center; gap: 11px; background: rgba(245,200,66,.07); border: 1px solid rgba(245,200,66,.2); border-radius: var(--r-sm); padding: 13px; }
+    .sfida-done-icon { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--star) 0%, #C9A010 100%); flex-shrink: 0; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px rgba(245,200,66,.3); }
+    .sfida-done strong { font-size: 13px; color: var(--star); display: block; }
+    .sfida-done span   { font-size: 11px; color: var(--cream-dim); }
+    .forme-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .forma { width: 44px; height: 44px; border-radius: 50%; cursor: pointer; transition: transform .15s var(--ease-spring); display: flex; align-items: center; justify-content: center; border: none; }
+    .forma:active { transform: scale(.88); }
+
+    /* ── LOADER ENERGIA ──────────────────────────────── */
+    .loader-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 56px 0; gap: 20px; animation: fadeUp .35s var(--ease-spring) both; }
+    .loader-testo { font-size: 17px; color: var(--cream); letter-spacing: .01em; font-family: 'Playfair Display', serif; animation: loaderPulse 1.8s ease-in-out infinite; }
+    .loader-dots { display: flex; gap: 7px; }
+    .loader-dots span { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); display: block; }
+    .loader-dots span:nth-child(1) { animation: loaderDot 1.2s 0s   ease-in-out infinite; }
+    .loader-dots span:nth-child(2) { animation: loaderDot 1.2s .2s  ease-in-out infinite; }
+    .loader-dots span:nth-child(3) { animation: loaderDot 1.2s .4s  ease-in-out infinite; }
+
+    /* ── FEEDBACK / BACK / DEBUG ─────────────────────── */
+    .feedback-msg { text-align: center; font-size: 12px; color: var(--cream-dim); font-style: italic; padding: 9px 0 2px; animation: feedbackPop .45s var(--ease-spring) both; }
+    .completamento-label { font-size: 11px; color: var(--teal); font-weight: 500; opacity: 0; animation: fadeLabel .4s .1s var(--ease-spring) forwards; text-align: center; margin-top: 6px; }
+    .completamento-label.amber { color: var(--amber); }
+    .back-btn { display: inline-flex; align-items: center; gap: 7px; background: none; border: none; color: var(--cream-dim); font-family: inherit; font-size: 13px; cursor: pointer; margin-bottom: 22px; padding: 0; transition: color .2s; letter-spacing: .01em; }
+    .back-btn:hover { color: var(--cream); }
+    .debug-toggle { background: none; border: none; color: rgba(255,255,255,.18); font-size: 11px; font-family: inherit; cursor: pointer; margin-top: 24px; letter-spacing: .02em; }
+    .debug-toggle:hover { color: rgba(255,255,255,.35); }
+    .debug-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+
+    /* ── COME FUNZIONA ───────────────────────────────── */
+    .how-section { margin-bottom: 14px; }
+    .how-list li { display: flex; gap: 9px; font-size: 13px; color: var(--cream-dim); margin-bottom: 8px; line-height: 1.6; list-style: none; }
+    .how-list li::before { content: '→'; color: var(--teal); flex-shrink: 0; }
+    .no-list  li { display: flex; gap: 9px; font-size: 13px; color: var(--cream-dim); margin-bottom: 8px; list-style: none; }
+    .no-list  li::before { content: '✕'; color: #f87171; flex-shrink: 0; }
+
+    /* ── TOAST BADGE ─────────────────────────────────── */
+    #badge-toast { position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%) translateY(90px); background: linear-gradient(160deg, rgba(22,32,48,.98) 0%, rgba(15,21,32,.98) 100%); border: 1px solid rgba(201,168,76,.3); border-radius: 20px; padding: 18px 22px; display: flex; align-items: center; gap: 16px; min-width: 270px; z-index: 100; box-shadow: 0 16px 48px rgba(0,0,0,.6), 0 0 32px rgba(201,168,76,.1); transition: transform .45s var(--ease-spring), opacity .4s; opacity: 0; pointer-events: none; }
+    #badge-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    .toast-label { font-size: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: .09em; font-weight: 600; }
+    .toast-title { font-family: 'Playfair Display', serif; font-size: 18px; line-height: 1.1; }
+    .toast-desc  { font-size: 11px; color: var(--cream-dim); margin-top: 2px; }
+
+    /* ── STAR POP ────────────────────────────────────── */
+    .star-pop { animation: starPop .55s var(--ease-spring) both; }
+    .star-num  { font-family: 'Playfair Display', serif; font-size: 24px; line-height: 1; color: var(--star); }
+
+    /* ── SCENA RITUALE ───────────────────────────────── */
+    .scena-wrap { position: relative; width: 100%; max-width: 280px; }
+
+    /* ── KEYFRAMES ───────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(14px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .flip-in { animation: flipIn .5s var(--ease-spring) both; }
+    @keyframes flipIn {
+      from { opacity:0; transform:rotateY(-55deg) translateY(6px); }
+      to   { opacity:1; transform:rotateY(0) translateY(0); }
+    }
+    .page    { animation: fadeUp .4s var(--ease-spring) both; }
+
+    @keyframes loaderPulse  { 0%,100%{opacity:.35}50%{opacity:1} }
+    @keyframes loaderDot    { 0%,80%,100%{opacity:.2;transform:translateY(0)}40%{opacity:1;transform:translateY(-5px)} }
+    @keyframes feedbackPop  { 0%{opacity:0;transform:translateY(6px) scale(.97)}50%{opacity:1;transform:translateY(-1px) scale(1.01)}100%{opacity:1;transform:translateY(0) scale(1)} }
+    @keyframes fadeLabel    { from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)} }
+    @keyframes starPop      { 0%{transform:scale(0) rotate(-20deg);opacity:0}60%{transform:scale(1.25) rotate(5deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1} }
+
+    @keyframes fuoco        { 0%{color:var(--cream);text-shadow:none;opacity:1}25%{color:#E8934A;text-shadow:0 0 8px rgba(232,147,74,.6);opacity:1}60%{color:#C9A84C;text-shadow:0 0 16px rgba(201,168,76,.8);opacity:.7}100%{color:rgba(180,180,180,.2);text-shadow:none;opacity:0;transform:translateY(-12px)} }
+    @keyframes scorri       { 0%{transform:translateX(0);opacity:1}30%{transform:translateX(0);opacity:1}100%{transform:translateX(110%);opacity:0} }
+    @keyframes foglia-vola  { 0%{opacity:1;transform:translate(0,0) rotate(0deg) scale(1)}100%{opacity:0;transform:translate(var(--fx),var(--fy)) rotate(var(--fr)) scale(.4)} }
+    @keyframes paginaGira   { 0%{transform:perspective(600px) rotateY(0deg);opacity:1}50%{transform:perspective(600px) rotateY(-90deg);opacity:.3}100%{transform:perspective(600px) rotateY(-180deg);opacity:0} }
+    @keyframes ondaMove     { 0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)} }
+    @keyframes germoglia    { from{stroke-dashoffset:200;opacity:0}to{stroke-dashoffset:0;opacity:1} }
+    @keyframes respiroShrink { from{stroke-dashoffset:0}to{stroke-dashoffset:276.5} }
+    @keyframes correctFlash  { 0%{transform:scale(1)}40%{transform:scale(1.4)}100%{transform:scale(1)} }
+    @keyframes wrongShake    { 0%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}100%{transform:translateX(0)} }
+
+    /* ── REDUCED MOTION ──────────────────────────────── */
+    @media (prefers-reduced-motion:reduce) {
+      *, *::before, *::after { animation-duration:.01ms!important; transition-duration:.01ms!important; }
+    }
+
+    /* ══════════════════════════════════════════════
+       HOME PREMIUM — v3.4
+    ══════════════════════════════════════════════ */
+
+    /* Hero decorativa */
+    .home-hero {
+      position: relative;
+      padding: 28px 0 8px;
+      margin-bottom: 4px;
+    }
+    .hero-constellation {
+      position: absolute;
+      top: 0; left: -18px; right: -18px;
+      height: 160px;
+      pointer-events: none;
+      opacity: .22;
+    }
+    .hero-title-wrap {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Stelle scintillanti nella hero */
+    @keyframes twinkle {
+      0%,100% { opacity:.2; transform:scale(.8); }
+      50%      { opacity:1;  transform:scale(1.2); }
+    }
+    .star-twinkle {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--gold-lt);
+      pointer-events: none;
+    }
+
+    /* Missione protagonista */
+    .card-mission-main {
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 14px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, rgba(22,32,48,.98) 0%, rgba(12,18,30,.98) 100%);
+      border: 1px solid rgba(78,205,196,.32);
+      box-shadow:
+        0 0 0 1px rgba(78,205,196,.06),
+        0 8px 40px rgba(0,0,0,.45),
+        0 0 32px rgba(78,205,196,.1);
+      transition: box-shadow .3s var(--ease-out), transform .2s var(--ease-out);
+    }
+    .card-mission-main::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(78,205,196,.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .card-mission-main::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(78,205,196,.5) 50%, transparent 100%);
+    }
+    .card-mission-main:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 0 0 1px rgba(78,205,196,.1),
+        0 12px 48px rgba(0,0,0,.5),
+        0 0 48px rgba(78,205,196,.14);
+    }
+    /* Variante per missione speciale */
+    .card-mission-special {
+      border-color: rgba(156,111,222,.35);
+      box-shadow:
+        0 0 0 1px rgba(156,111,222,.07),
+        0 8px 40px rgba(0,0,0,.45),
+        0 0 32px rgba(156,111,222,.12);
+    }
+    .card-mission-special::before {
+      background: linear-gradient(135deg, rgba(156,111,222,.07) 0%, transparent 50%);
+    }
+    .card-mission-special::after {
+      background: linear-gradient(90deg, transparent 0%, rgba(156,111,222,.5) 50%, transparent 100%);
+    }
+
+    /* Glow pulsante sulla card principale */
+    @keyframes missionGlow {
+      0%,100% { box-shadow: 0 0 0 1px rgba(78,205,196,.06), 0 8px 40px rgba(0,0,0,.45), 0 0 32px rgba(78,205,196,.1); }
+      50%      { box-shadow: 0 0 0 1px rgba(78,205,196,.1),  0 8px 40px rgba(0,0,0,.45), 0 0 48px rgba(78,205,196,.18); }
+    }
+    .card-mission-main:not(.completed-card) {
+      animation: missionGlow 4s ease-in-out infinite;
+    }
+    .completed-card { animation: none !important; }
+
+    /* Micro-principio: meno card, più respiro */
+    .card-micro-light {
+      border-radius: 16px;
+      padding: 20px 22px;
+      margin-bottom: 14px;
+      position: relative;
+      background: rgba(15,21,32,.6);
+      border: 1px solid rgba(232,147,74,.15);
+      box-shadow: 0 4px 24px rgba(0,0,0,.25);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+    .card-micro-light::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(232,147,74,.35) 50%, transparent 100%);
+    }
+
+    /* Rituale: ancora più leggero */
+    .card-rituale-light {
+      border-radius: 16px;
+      padding: 20px 22px;
+      margin-bottom: 14px;
+      background: rgba(15,21,32,.5);
+      border: 1px solid rgba(201,168,76,.12);
+      box-shadow: 0 4px 20px rgba(0,0,0,.2);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    /* Streak bar: meno invasiva */
+    .streak-bar-home {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 16px;
+      background: rgba(15,21,32,.5);
+      border: 1px solid rgba(255,255,255,.05);
+      border-radius: 14px;
+      margin-bottom: 22px;
+      backdrop-filter: blur(8px);
+    }
+
+    /* Done banner più atmosferico */
+    .done-banner-home {
+      text-align: center;
+      padding: 32px 0 12px;
+      position: relative;
+    }
+    .done-banner-home::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(201,168,76,.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Separatori tra sezioni invece di card ovunque */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.06) 50%, transparent 100%);
+      margin: 6px 0 18px;
+    }
+
+    /* Animazione hero più morbida */
+    .home-hero-anim { animation: heroFadeIn .7s var(--ease-spring) both; }
+    @keyframes heroFadeIn {
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .card-mission-anim { animation: missionAppear .6s .15s var(--ease-spring) both; }
+    @keyframes missionAppear {
+      from { opacity:0; transform:translateY(16px) scale(.98); }
+      to   { opacity:1; transform:translateY(0) scale(1); }
+    }
+
+
+    /* ══════════════════════════════════════════════
+       IDENTITÀ VISIVA v3.5 — Luck Loop
+       Tema: cielo personale · costellazioni · depth
+    ══════════════════════════════════════════════ */
+
+    /* Stelle ambientali aggiuntive con timing asincrono */
+    @keyframes twinkleA { 0%,100%{opacity:.15;transform:scale(.7)} 50%{opacity:.7;transform:scale(1.1)} }
+    @keyframes twinkleB { 0%,100%{opacity:.25;transform:scale(.8)} 50%{opacity:.9;transform:scale(1.2)} }
+    @keyframes twinkleC { 0%,100%{opacity:.1; transform:scale(.6)} 50%{opacity:.5;transform:scale(1)} }
+
+    /* Glow respiro organico — tempi irregolari */
+    @keyframes breatheA { 0%,100%{opacity:.06} 60%{opacity:.14} }
+    @keyframes breatheB { 0%,100%{opacity:.04} 45%{opacity:.11} }
+    @keyframes breatheC { 0%,100%{opacity:.08} 70%{opacity:.18} }
+
+    /* Nebulosa decorativa sopra hero */
+    .hero-nebula {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(40px);
+    }
+    .hero-nebula-1 {
+      width: 200px; height: 120px;
+      top: -20px; left: -10%;
+      background: rgba(78,205,196,.07);
+      animation: breatheA 7s ease-in-out infinite;
+    }
+    .hero-nebula-2 {
+      width: 160px; height: 100px;
+      top: 0; right: -5%;
+      background: rgba(201,168,76,.06);
+      animation: breatheB 9s 2s ease-in-out infinite;
+    }
+    .hero-nebula-3 {
+      width: 100px; height: 80px;
+      top: 40px; left: 40%;
+      background: rgba(156,111,222,.04);
+      animation: breatheC 11s 1s ease-in-out infinite;
+    }
+
+    /* Stelline decorative nella hero (posizionate via JS) */
+    .star-ambient {
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.6);
+      pointer-events: none;
+    }
+    .star-ambient.gold { background: rgba(201,168,76,.8); width: 2.5px; height: 2.5px; }
+    .star-ambient.teal { background: rgba(78,205,196,.7); }
+
+    /* Connettori costellazione tra sezioni home */
+    .constellation-connector {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 2px 0 16px;
+      opacity: .35;
+      pointer-events: none;
+    }
+    .constellation-connector::before,
+    .constellation-connector::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,.5), transparent);
+    }
+    .connector-star {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--gold);
+      margin: 0 10px;
+      box-shadow: 0 0 6px rgba(201,168,76,.6);
+      animation: twinkleB 3.5s ease-in-out infinite;
+    }
+
+    /* Card missione principale — profondità aumentata */
+    .card-mission-main {
+      border-radius: 22px !important;
+      box-shadow:
+        0 0 0 1px rgba(78,205,196,.08),
+        0 2px 0 rgba(255,255,255,.04),
+        0 12px 48px rgba(0,0,0,.55),
+        0 4px 16px rgba(0,0,0,.3),
+        0 0 40px rgba(78,205,196,.1) !important;
+    }
+    /* Punto luce in alto a sinistra — effetto vetro */
+    .card-mission-main::before {
+      background: linear-gradient(135deg,
+        rgba(255,255,255,.06) 0%,
+        rgba(78,205,196,.04) 30%,
+        transparent 60%) !important;
+    }
+
+    /* Numero categoria missione — piccolo dettaglio stellare */
+    .mission-cat-dot {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .1em; color: var(--cream-dim); opacity: .6;
+      margin-bottom: 4px;
+    }
+    .mission-cat-dot::before {
+      content: '★';
+      font-size: 7px;
+      color: var(--teal);
+    }
+
+    /* Card secondarie più leggere — meno peso visivo */
+    .card-micro-light {
+      border-radius: 16px !important;
+      padding: 18px 20px !important;
+      background: rgba(12,18,28,.55) !important;
+      border: 1px solid rgba(232,147,74,.1) !important;
+      box-shadow: 0 4px 20px rgba(0,0,0,.2) !important;
+    }
+    .card-rituale-light {
+      border-radius: 16px !important;
+      padding: 18px 20px !important;
+      background: rgba(12,18,28,.45) !important;
+      border: 1px solid rgba(201,168,76,.08) !important;
+      box-shadow: 0 4px 16px rgba(0,0,0,.15) !important;
+    }
+
+    /* Separatore costellazione tra missione principale e secondari */
+    .section-divider {
+      display: flex; align-items: center;
+      margin: 8px 0 16px;
+      opacity: .28;
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
+    }
+    .section-divider-dot {
+      width: 3px; height: 3px; border-radius: 50%;
+      background: rgba(201,168,76,.8);
+      margin: 0 8px;
+    }
+
+    /* Streak bar home — vetro più raffinato */
+    .streak-bar-home {
+      background: rgba(10,15,24,.6) !important;
+      border: 1px solid rgba(255,255,255,.06) !important;
+      box-shadow: 0 4px 24px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.04) !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+    }
+
+    /* Hero title — gradient più ricco */
+    .page-title {
+      font-size: 27px !important;
+      background: linear-gradient(135deg,
+        rgba(237,228,208,1) 0%,
+        rgba(201,168,76,.9) 50%,
+        rgba(237,228,208,.85) 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
+    }
+
+    /* Linea di connessione decorativa sotto header */
+    header::after {
+      content: '';
+      display: block;
+      height: 1px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(201,168,76,.15) 30%,
+        rgba(78,205,196,.15) 70%,
+        transparent 100%);
+      margin-top: 12px;
+    }
+
+    /* Micro: stelle decorative fisse nel body::after — più stelle */
+    /* (Già presenti, solo raffiniamo density e timing) */
+
+    /* Logo pulse molto sottile */
+    @keyframes logoPulse {
+      0%,100% { box-shadow: 0 0 16px rgba(201,168,76,.1), inset 0 1px 0 rgba(255,255,255,.06); }
+      50%      { box-shadow: 0 0 28px rgba(201,168,76,.2), inset 0 1px 0 rgba(255,255,255,.08); }
+    }
+    .logo-icon { animation: logoPulse 5s ease-in-out infinite; }
+
+    /* Comparsa elementi: più fluida e sequenziale */
+    .card-mission-anim {
+      animation: missionAppear .65s .1s var(--ease-spring) both !important;
+    }
+    @keyframes missionAppear {
+      from { opacity:0; transform:translateY(18px) scale(.97); }
+      to   { opacity:1; transform:translateY(0) scale(1); }
+    }
+
+
+    /* ── Stelle di sfondo che si illuminano randomicamente ── */
+    .bg-stars {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      overflow: hidden;
+    }
+    .bg-star {
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.8);
+      opacity: 0;
+      animation: bgTwinkle 4s ease-in-out infinite;
+    }
+    .bg-star.gold { background: rgba(201,168,76,.9); width: 2.5px; height: 2.5px; }
+    @keyframes bgTwinkle {
+      0%, 100% { opacity: 0; }
+      50%       { opacity: 1; filter: drop-shadow(0 0 3px currentColor); }
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="glow-top"></div>
+<div class="glow-bottom"></div>
+
+<div class="bg-stars">
+  <div class="bg-star" style="top:61.8%;left:4.4%;animation-delay:1.65s;animation-duration:3.78s"></div>
+  <div class="bg-star gold" style="top:65.3%;left:85.9%;animation-delay:0.52s;animation-duration:4.48s"></div>
+  <div class="bg-star" style="top:23.1%;left:49.5%;animation-delay:0.16s;animation-duration:3.70s"></div>
+  <div class="bg-star gold" style="top:53.1%;left:22.7%;animation-delay:3.54s;animation-duration:5.83s"></div>
+  <div class="bg-star" style="top:77.1%;left:67.6%;animation-delay:2.04s;animation-duration:3.54s"></div>
+  <div class="bg-star" style="top:34.0%;left:10.7%;animation-delay:0.58s;animation-duration:5.97s"></div>
+  <div class="bg-star" style="top:77.3%;left:70.6%;animation-delay:3.22s;animation-duration:6.41s"></div>
+  <div class="bg-star" style="top:53.8%;left:80.0%;animation-delay:3.71s;animation-duration:6.02s"></div>
+  <div class="bg-star gold" style="top:67.8%;left:6.3%;animation-delay:1.37s;animation-duration:4.01s"></div>
+  <div class="bg-star" style="top:24.4%;left:11.5%;animation-delay:1.67s;animation-duration:5.22s"></div>
+  <div class="bg-star" style="top:37.1%;left:21.7%;animation-delay:1.60s;animation-duration:6.28s"></div>
+  <div class="bg-star" style="top:59.0%;left:18.1%;animation-delay:4.37s;animation-duration:3.57s"></div>
+</div>
+
+<div class="app">
+  <header>
+    <div class="logo">
+      <div class="logo-icon">∞</div>
+      <span class="logo-name">Luck Loop</span>
+    </div>
+    <nav>
+      <button id="nav-history" onclick="showPage('history')">Archivio</button>
+      <button id="nav-how" onclick="showPage('how')">Come funziona</button>
+    </nav>
+  </header>
+  <main id="main"></main>
+</div>
+
+<div id="badge-toast">
+  <span id="toast-emoji" style="font-size:32px"></span>
+  <div>
+    <div class="toast-label">Nuovo badge!</div>
+    <div class="toast-title" id="toast-title"></div>
+    <div class="toast-desc" id="toast-desc"></div>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════
+   DATI — MISSIONI REALI (v1.8 — 42 missioni)
+══════════════════════════════════════════════════ */
+const MISSIONI_REALI = [
+  // ── SOCIALE ──────────────────────────────────────────────────────────────
+  {id:'r01',categoria:'sociale',energia:['media','alta'],titolo:"Scrivi a qualcuno che non senti da un po'",descrizione:"Manda un messaggio breve e sincero a una persona che stimi. Non chiedere nulla, solo un contatto genuino.",impatto:'medio',perche:"Le reti sociali dormienti sono una delle fonti più sottovalutate di opportunità inaspettate."},
+  {id:'r02',categoria:'sociale',energia:['alta'],titolo:"Parla con uno sconosciuto",descrizione:"Fai una domanda o un complimento sincero a qualcuno che non conosci. Bar, negozio, coda: qualunque contesto.",impatto:'alto',perche:"Le connessioni deboli (weak ties) aprono porte che le amicizie strette raramente raggiungono."},
+  {id:'r03',categoria:'sociale',energia:['bassa'],titolo:"Rispondi al messaggio rimasto in sospeso",descrizione:"C'è qualcuno che aspetta una tua risposta. Fallo ora, anche con due righe.",impatto:'basso',perche:"L'affidabilità nelle piccole cose costruisce reputazione nel tempo."},
+  {id:'r04',categoria:'sociale',energia:['alta'],titolo:"Partecipa a un evento",descrizione:"Trova un evento, meetup o incontro nel tuo settore o area di interesse. Basta essere presenti.",impatto:'alto',perche:"La presenza fisica o attiva aumenta la probabilità di essere ricordati e coinvolti."},
+  {id:'r05',categoria:'sociale',energia:['alta'],titolo:"Fai una micro-presentazione",descrizione:"Pensa a due persone che potrebbero trarre vantaggio dal conoscersi. Presentale via messaggio.",impatto:'alto',perche:"Chi connette gli altri viene percepito come risorsa preziosa e ricordato con gratitudine."},
+  {id:'r16',categoria:'sociale',energia:['media','alta'],titolo:"Fai una domanda a qualcuno più esperto",descrizione:"Una sola domanda, genuina e specifica su un problema reale. Non chiedere consigli generici.",impatto:'alto',perche:"Fare buone domande è una delle competenze più rare e valorizzate in qualsiasi contesto."},
+  {id:'r17',categoria:'sociale',energia:['bassa'],titolo:"Pensa a qualcuno e scrivi cosa apprezzi di lui",descrizione:"Non devi mandare nulla. Scrivi su carta o in un notes privato una cosa concreta che apprezzi di una persona della tua vita.",impatto:'basso',perche:"L'attenzione deliberata verso le qualità altrui allena la capacità di riconoscere risorse e alleati nel proprio ambiente."},
+  {id:'r18',categoria:'sociale',energia:['bassa'],titolo:"Lascia un commento sincero",descrizione:"Trova qualcosa pubblicato da una persona che stimi e lascia un commento reale — non generico. Due righe vere valgono più di mille reazioni.",impatto:'basso',perche:"Le micro-interazioni positive costruiscono presenza sociale senza richiedere investimento emotivo elevato."},
+  {id:'r23',categoria:'sociale',energia:['media'],titolo:"Chiedi un feedback su qualcosa che hai fatto",descrizione:"Scegli una persona di fiducia e chiedi un'opinione onesta su qualcosa che hai prodotto, scritto o fatto di recente. Specifica cosa vuoi sapere.",impatto:'medio',perche:"Il feedback attivo accelera la crescita e segnala apertura, una delle qualità più valorizzate nei contesti professionali e sociali."},
+  {id:'r24',categoria:'sociale',energia:['media'],titolo:"Condividi qualcosa che hai imparato di recente",descrizione:"Scrivi un messaggio, un post o una nota per un gruppo in cui partecipi. Non una lezione: solo una cosa interessante che hai scoperto.",impatto:'medio',perche:"Condividere conoscenza costruisce una reputazione di persona curiosa e generosa — due tratti correlati alle opportunità."},
+  {id:'r25',categoria:'sociale',energia:['media'],titolo:"Proponi un incontro a qualcuno che stimi",descrizione:"Scrivi a una persona con cui vuoi passare del tempo e proponi qualcosa di specifico: un caffè, una chiamata, una passeggiata. Data e luogo precisi.",impatto:'alto',perche:"Le relazioni che producono opportunità si mantengono con iniziativa concreta, non con intenzioni vaghe. Chi propone controlla la propria rete."},
+  {id:'r26',categoria:'sociale',energia:['bassa','media'],titolo:"Manda un messaggio di ringraziamento specifico",descrizione:"Pensa a qualcuno che ha fatto qualcosa per te — anche tempo fa. Mandagli un messaggio che descrive esattamente cosa ha fatto e cosa ha significato.",impatto:'medio',perche:"La gratitudine specifica rafforza i legami più della gratitudine generica e viene ricordata a lungo da chi la riceve."},
+  {id:'r27',categoria:'sociale',energia:['media'],titolo:"Prendi posizione in una conversazione",descrizione:"In una discussione — online o dal vivo — esprimi un'opinione chiara su qualcosa che ti interessa. Non per convincere: per essere presente.",impatto:'medio',perche:"Le persone che esprimono punti di vista chiari vengono ricordate e cercate. La visibilità intellettuale è una forma di capitale sociale."},
+  {id:'r28',categoria:'sociale',energia:['bassa'],titolo:"Scrivi i nomi di tre persone con cui vorresti restare in contatto",descrizione:"Non devi contattarle ora. Scrivi solo i nomi e una riga su perché quella persona ti interessa. È una mappa, non un impegno.",impatto:'basso',perche:"Rendere esplicita la propria rete desiderata aumenta la probabilità di agire su di essa. Ciò che scriviamo diventa più reale di ciò che pensiamo."},
+  {id:'r29',categoria:'sociale',energia:['bassa'],titolo:"In una conversazione oggi, fai solo domande",descrizione:"Scegli una conversazione e per almeno 5 minuti fai solo domande. Nessuna opinione, nessuna storia tua. Solo curiosità genuina verso l'altro.",impatto:'medio',perche:"L'ascolto attivo è una delle competenze più rare e apprezzate nelle relazioni. Chi sa ascoltare viene cercato."},
+  // ── ESPLORAZIONE ─────────────────────────────────────────────────────────
+  {id:'r06',categoria:'esplorazione',energia:['bassa'],titolo:"Cambia percorso",descrizione:"Oggi prendi una strada diversa dal solito. Anche solo 10 minuti a piedi in una direzione nuova.",impatto:'basso',perche:"Piccoli cambiamenti di routine espongono il cervello a stimoli nuovi e aumentano la prontezza cognitiva."},
+  {id:'r07',categoria:'esplorazione',energia:['media','alta'],titolo:"Entra in un posto che non hai mai frequentato",descrizione:"Un bar, una libreria, un negozio, un parco. Entra senza obiettivo e osserva.",impatto:'medio',perche:"L'esposizione a nuovi ambienti allarga il campo delle possibilità percepite."},
+  {id:'r08',categoria:'esplorazione',energia:['bassa'],titolo:"Leggi un articolo fuori dalla tua nicchia",descrizione:"Cerca un argomento completamente fuori dalla tua comfort zone. Dedica 10 minuti senza giudicare.",impatto:'basso',perche:"Le idee contaminate da settori diversi producono soluzioni creative uniche."},
+  {id:'r09',categoria:'esplorazione',energia:['media','alta'],titolo:"Prova qualcosa che rimandi da mesi",descrizione:"Quella cosa nella lista 'prima o poi'. Fallo per 20 minuti, solo per capire come ci si sente.",impatto:'alto',perche:"L'action bias — agire nonostante l'incertezza — è correlato alle opportunità percepite come 'fortuna'."},
+  {id:'r10',categoria:'esplorazione',energia:['alta'],titolo:"Fai una cosa che ti spaventa un po'",descrizione:"Non qualcosa di pericoloso: qualcosa che ti mette a disagio in modo sano. Una presentazione, una chiamata, un tentativo.",impatto:'alto',perche:"La zona di disagio evolutivo è dove avvengono la maggior parte delle trasformazioni significative."},
+  {id:'r19',categoria:'esplorazione',energia:['bassa'],titolo:"Guarda un video su un luogo che non conosci",descrizione:"Scegli un paese, una città o un paesaggio che non hai mai visto. Guardane un video per 5 minuti. Nessun obiettivo pratico.",impatto:'basso',perche:"L'esposizione vicaria a nuovi ambienti stimola la curiosità e riduce il bias di familiarità nelle scelte future."},
+  {id:'r20',categoria:'esplorazione',energia:['media'],titolo:"Esplora una zona della tua città che ignori",descrizione:"Scegli una zona che non frequenti. Cammina senza meta per 15-20 minuti. Nessun obiettivo da raggiungere.",impatto:'medio',perche:"La familiarità con il proprio territorio allarga il perimetro delle possibilità percepite."},
+  {id:'r30',categoria:'esplorazione',energia:['alta'],titolo:"Vai in un posto che hai sempre rimandato",descrizione:"Non un posto nuovo generico: uno che sai che esiste ma non hai mai visitato. Museo, quartiere, mercato, studio. Vai e stai almeno 30 minuti.",impatto:'alto',perche:"L'esplorazione fisica del proprio territorio allarga il campo delle possibilità percepite e crea connessioni cognitive tra contesti diversi."},
+  {id:'r31',categoria:'esplorazione',energia:['alta'],titolo:"Parla con qualcuno che la pensa diversamente da te",descrizione:"Trova una persona con opinioni diverse dalle tue su un tema che ti interessa. Ascolta senza interrompere. Non devi cambiare idea: devi capire la sua.",impatto:'alto',perche:"L'esposizione a prospettive diverse riduce i bias cognitivi e aumenta la capacità di trovare soluzioni in contesti ambigui."},
+  {id:'r32',categoria:'esplorazione',energia:['alta'],titolo:"Partecipa a qualcosa che non avresti mai scelto da solo",descrizione:"Un evento, una lezione, un gruppo, un'attività fuori dal tuo solito perimetro. Lasciati portare dalla scelta di qualcun altro o dal caso.",impatto:'alto',perche:"Le scoperte più significative avvengono ai margini del proprio territorio cognitivo e sociale. L'apertura all'inaspettato è una competenza allenabile."},
+  {id:'r33',categoria:'esplorazione',energia:['media'],titolo:"Segui un tutorial su qualcosa che non sai fare",descrizione:"Scegli qualcosa di pratico che non hai mai imparato. Cucina, codice, disegno, strumento, tecnica. Fallo per 20 minuti senza aspettarti di diventare bravo.",impatto:'medio',perche:"L'apprendimento di nuove skill amplia la mappa mentale delle possibilità e riduce la paura dell'incapacità."},
+  {id:'r34',categoria:'esplorazione',energia:['media'],titolo:"Osserva il tuo ambiente con occhi da straniero",descrizione:"Scegli un posto che frequenti ogni giorno. Cammina o siediti lì per 15 minuti come se fosse la prima volta. Nota tre cose che non avevi mai visto.",impatto:'basso',perche:"La familiarità riduce la percezione. Rompere il filtro dell'abitudine allena il cervello a notare dettagli e opportunità che l'automazione nasconde."},
+  // ── ABITUDINI ─────────────────────────────────────────────────────────────
+  {id:'r11',categoria:'abitudini',energia:['bassa'],titolo:"Riordina un singolo spazio",descrizione:"Scrivania, borsa, inbox email, una cartella sul computer. Un posto solo. Ordinato e finito.",impatto:'basso',perche:"Gli ambienti ordinati riducono il carico cognitivo e migliorano la capacità decisionale."},
+  {id:'r12',categoria:'abitudini',energia:['bassa','media'],titolo:"Cammina 20 minuti senza schermo",descrizione:"Solo tu e il mondo. Nessun podcast, nessun audio. Lascia che la mente vada dove vuole.",impatto:'medio',perche:"Il default mode network, attivo nel riposo, è associato alla creatività e alla risoluzione di problemi complessi."},
+  {id:'r13',categoria:'abitudini',energia:['bassa'],titolo:"Chiudi un micro-task aperto",descrizione:"Quella piccola cosa che hai in testa da giorni. Meno di 10 minuti. Chiudila.",impatto:'basso',perche:"I task aperti consumano banda cognitiva inconsapevolmente. Chiuderli libera risorse mentali reali."},
+  {id:'r14',categoria:'abitudini',energia:['media','alta'],titolo:"30 minuti su qualcosa che stai imparando",descrizione:"Una skill, una lingua, uno strumento. Anche solo 30 minuti di pratica deliberata contano.",impatto:'alto',perche:"Il compounding dell'apprendimento: piccole sessioni regolari producono risultati sproporzionati nel tempo."},
+  {id:'r15',categoria:'abitudini',energia:['bassa','media'],titolo:"Scrivi 3 cose che vuoi che accadano",descrizione:"Non una lista dei desideri: scrivi come se fossero già in corso. Presente, concreto, specifico.",impatto:'medio',perche:"La scrittura di intenzioni attiva il filtro attentivo del cervello e aumenta il riconoscimento di opportunità."},
+  {id:'r21',categoria:'abitudini',energia:['bassa'],titolo:"Scrivi una cosa che hai fatto bene oggi",descrizione:"Non importa quanto piccola. Una sola cosa concreta che hai fatto e che vale la pena riconoscere. Scrivila.",impatto:'basso',perche:"Il riconoscimento deliberato dei propri progressi quotidiani è uno dei fattori più correlati alla motivazione sostenuta nel tempo."},
+  {id:'r22',categoria:'abitudini',energia:['media'],titolo:"Pianifica i prossimi 3 giorni in 10 minuti",descrizione:"Non un piano perfetto. Scrivi le tre cose principali che vuoi fare nei prossimi tre giorni. Una per giorno.",impatto:'medio',perche:"La pianificazione a breve termine riduce il carico cognitivo quotidiano e aumenta la probabilità di eseguire ciò che conta."},
+  {id:'r35',categoria:'abitudini',energia:['alta'],titolo:"Dedica 90 minuti a un progetto personale che hai abbandonato",descrizione:"Quel progetto fermo da settimane o mesi. Non devi finirlo: riaprilo, capisci dove eri rimasto e fai almeno un passo avanti concreto.",impatto:'alto',perche:"I progetti abbandonati consumano energia cognitiva inconsapevolmente. Riprenderli libera quella tensione e riattiva la motivazione."},
+  {id:'r36',categoria:'abitudini',energia:['alta'],titolo:"Scrivi una review onesta della tua settimana",descrizione:"In 15-20 minuti: cosa hai fatto bene, cosa hai evitato, cosa ti ha sorpreso. Non una lista di risultati: un'analisi onesta dei tuoi pattern.",impatto:'alto',perche:"La revisione periodica del comportamento è uno degli strumenti più potenti per accelerare la crescita. Ciò che non si misura non migliora."},
+  {id:'r37',categoria:'abitudini',energia:['alta'],titolo:"Fai un allenamento fisico che ti mette alla prova",descrizione:"Non importa il tipo. Corsa, pesi, yoga intenso, nuoto. Qualcosa che richieda sforzo reale per almeno 30 minuti. Non comfort: intensità.",impatto:'medio',perche:"L'esercizio fisico intenso migliora le funzioni esecutive e potenzia la capacità di tollerare l'incertezza e il disagio."},
+  {id:'r38',categoria:'abitudini',energia:['alta'],titolo:"Definisci un obiettivo per il prossimo mese",descrizione:"Un solo obiettivo. Scrivi cosa vuoi ottenere, come misurerai il successo, e quale sarà la prima azione concreta entro 24 ore.",impatto:'alto',perche:"Gli obiettivi scritti con criteri di misurazione chiari hanno probabilità significativamente più alta di essere raggiunti rispetto alle intenzioni vaghe."},
+  {id:'r39',categoria:'abitudini',energia:['media'],titolo:"Elimina una cosa dalla lista che non farai mai",descrizione:"Guarda la tua lista di cose da fare. Trovane una che rimandi da mesi e che in realtà non vuoi davvero fare. Cancellala consapevolmente.",impatto:'medio',perche:"Le liste gonfiate di task irrealistici aumentano l'ansia e riducono la capacità di agire su ciò che conta. Eliminare è una forma di decisione."},
+  {id:'r40',categoria:'abitudini',energia:['media'],titolo:"Leggi per 30 minuti qualcosa di lungo e impegnativo",descrizione:"Non un articolo breve. Un saggio, un capitolo di un libro, un report. Qualcosa che richiede attenzione sostenuta. Niente highlights: solo lettura.",impatto:'medio',perche:"La lettura profonda allena la capacità di attenzione sostenuta — una delle risorse cognitive più preziose nell'era della distrazione."},
+  {id:'r41',categoria:'abitudini',energia:['media'],titolo:"Audita come hai usato il tuo tempo ieri",descrizione:"Ricostruisci a memoria le attività di ieri ora per ora. Quanto era pianificato? Quanto reattivo? Quale parte ha prodotto valore reale?",impatto:'medio',perche:"La consapevolezza dell'uso del tempo è il primo passo per redistribuirlo verso ciò che conta."},
+  {id:'r42',categoria:'abitudini',energia:['bassa','media'],titolo:"Scrivi tre cose che vuoi smettere di fare",descrizione:"Non abitudini da aggiungere: comportamenti da ridurre o eliminare. Scrivi una riga su perché ognuna ti costa più di quanto ti dà.",impatto:'medio',perche:"Identificare cosa sottrarre è spesso più efficace che aggiungere nuovi comportamenti. La sottrazione libera risorse per ciò che conta."},
+];
+
+/* ══════════════════════════════════════════════════
+   DATI — MISSIONI SPECIALI (eventi rari ~3%)
+══════════════════════════════════════════════════ */
+const MISSIONI_SPECIALI = [
+  {id:'sp01',categoria:'speciale',energia:['bassa','media','alta'],titolo:"Missione Jolly — oggi scegli tu",descrizione:"Nessuna istruzione. Fai qualcosa di insolito che non faresti in un giorno normale. Qualunque cosa, purché deliberata.",impatto:'alto',perche:"L'autonomia nella scelta aumenta la motivazione e la probabilità di ricordare l'azione nel tempo.",speciale:true,tipoSpeciale:"Jolly"},
+  {id:'sp02',categoria:'speciale',energia:['media','alta'],titolo:"Sfida Coraggio — una cosa scomoda",descrizione:"Fai oggi qualcosa che ti mette a disagio in modo costruttivo. Non pericoloso: scomodo. Un confine che sposti di un millimetro.",impatto:'alto',perche:"L'esposizione graduale al disagio riduce l'evitamento e amplia la finestra di tolleranza emotiva.",speciale:true,tipoSpeciale:"Coraggio"},
+  {id:'sp03',categoria:'speciale',energia:['bassa','media','alta'],titolo:"Connessione Umana — presenza totale",descrizione:"In una conversazione oggi, sii completamente presente. Niente telefono, niente pensieri paralleli. Solo quella persona, per tutto il tempo che durerà.",impatto:'alto',perche:"La qualità dell'attenzione, non la quantità del tempo, è ciò che le persone ricordano delle relazioni.",speciale:true,tipoSpeciale:"Connessione"},
+  {id:'sp04',categoria:'speciale',energia:['bassa','media','alta'],titolo:"Esplorazione Casuale — segui un'intuizione",descrizione:"Oggi, senza pianificare, segui la prima cosa che ti incuriosisce. Un vicolo, un libro, un nome. Dài 15 minuti a qualcosa di completamente non pianificato.",impatto:'medio',perche:"Le scoperte più importanti nella storia umana sono spesso avvenute seguendo intuizioni non razionalizzate in anticipo.",speciale:true,tipoSpeciale:"Esplorazione"},
+];
+
+/* ══════════════════════════════════════════════════
+   DATI — MICRO-PRINCIPI (30 — un mese senza ripetizioni)
+══════════════════════════════════════════════════ */
+const MICRO_PRINCIPI = [
+  {principio:"Le persone ricordano meglio le informazioni elaborate attivamente rispetto a quelle ricevute passivamente.",fonte:"Psicologia cognitiva — effetto di generazione (Slamecka & Graf, 1978)",cultura:"Nel Giappone feudale i carpentieri tramandavano le tecniche solo attraverso la pratica diretta. Il verbo 'capire' in giapponese antico includeva la radice del 'fare'.",azione:"Spiega ad alta voce, anche a te stesso, qualcosa che stai cercando di imparare. Bastano 2 minuti."},
+  {principio:"Dopo aver aiutato qualcuno, tendiamo a valutarlo più positivamente. Fare un favore genera simpatia verso chi lo riceve.",fonte:"Effetto Benjamin Franklin — psicologia sociale (Jecker & Landy, 1969)",cultura:"Gli indigeni Kula delle Trobriand costruivano alleanze attraverso scambi rituali di doni: chi dava per primo stabiliva la relazione.",azione:"Chiedi un piccolo favore a qualcuno oggi. Un consiglio, un'opinione, un aiuto minimo. Rafforza il legame."},
+  {principio:"La presenza di un osservatore — anche immaginario — migliora le performance e aumenta la motivazione.",fonte:"Facilitazione sociale (Zajonc, 1965) — effetto audience",cultura:"I monaci zen praticavano la calligrafia in pubblico non per esibirsi, ma perché lo sguardo altrui portava la mente a uno stato di piena presenza.",azione:"Fai una cosa che rimandi come se qualcuno di importante ti stesse guardando. Scegli tu chi."},
+  {principio:"Nominiamo, e quindi notiamo, solo ciò per cui abbiamo una parola. Espandere il vocabolario espande la percezione della realtà.",fonte:"Ipotesi Sapir-Whorf — linguistica cognitiva",cultura:"Gli Inuit hanno decine di parole per tipi diversi di neve, consentendo distinzioni percettive impossibili senza quel lessico.",azione:"Impara una parola nuova che descriva qualcosa che già esiste nella tua vita ma non avevi nominato."},
+  {principio:"Le decisioni prese dopo una breve pausa sono mediamente migliori di quelle prese immediatamente sotto pressione.",fonte:"Teoria del pensiero inconscio (Dijksterhuis, 2004) — effetto sleeping on it",cultura:"I Quaccheri praticavano il silenzio deliberato prima di qualsiasi decisione collettiva. La pausa era parte formale del processo.",azione:"Prima della prossima decisione non urgente, aspetta deliberatamente 10 minuti. Poi decidi."},
+  {principio:"Le persone completano meglio i compiti interrotti — il cervello mantiene attiva la tensione verso l'incompiuto.",fonte:"Effetto Zeigarnik (1927) — psicologia della Gestalt",cultura:"I narratori orali dell'Africa subsahariana interrompevano le storie nei punti di massima tensione, garantendo che il pubblico tornasse.",azione:"Inizia qualcosa che vuoi fare ma non hai il tempo di finire oggi. L'inizio riduce la resistenza futura."},
+  {principio:"Esprimere gratitudine concreta aumenta il benessere di chi la riceve e, in misura uguale o maggiore, di chi la esprime.",fonte:"Psicologia positiva (Emmons & McCullough, 2003)",cultura:"In molte culture andine esiste il concetto di 'ayni' — reciprocità cosmica — che lega ogni azione di cura a un ritorno naturale.",azione:"Di' o scrivi a una persona una cosa specifica e concreta per cui sei grato. Non generica: specifica."},
+  {principio:"Il cervello non distingue chiaramente tra immaginazione vivida e memoria reale. Visualizzare un'azione la rende più eseguibile.",fonte:"Mental simulation — neuroscienze cognitive (Kosslyn, 1994)",cultura:"I Maestri del Rinascimento insegnavano ai propri allievi a 'vedere' il dipinto finito prima di toccare il pennello.",azione:"Prima di qualcosa di impegnativo oggi, chiudi gli occhi per 60 secondi e immaginala già fatta con successo."},
+  {principio:"Il contesto fisico in cui siamo influenza il nostro stato mentale. Cambiare ambiente cambia il tipo di pensiero.",fonte:"Cognizione incarnata (embodied cognition) — Lakoff & Johnson",cultura:"I Peripatetici di Aristotele insegnavano camminando. Il movimento fisico era considerato parte integrante del ragionamento.",azione:"Porta fuori un problema che stai cercando di risolvere. Cammina mentre ci pensi, non seduto."},
+  {principio:"La specificità degli obiettivi aumenta drasticamente la probabilità di raggiungerli rispetto a intenzioni vaghe.",fonte:"Goal-setting theory (Locke & Latham, 1990)",cultura:"I costruttori delle cattedrali medievali fissavano pietre miliari precise anche sapendo che non avrebbero visto il completamento.",azione:"Prendi un obiettivo vago e trasformalo in una frase con data, luogo e azione concreta."},
+  {principio:"Ridere insieme è uno dei meccanismi più rapidi di costruzione di fiducia tra persone.",fonte:"Psicologia sociale della risata condivisa (Dunbar, 2012)",cultura:"Nelle cerimonie Maori (pōwhiri), l'umorismo rituale serve a disattivare la tensione tra stranieri prima di qualsiasi accordo.",azione:"Trova oggi un momento per ridere davvero con qualcuno, non per educazione. Cercalo, non aspettarlo."},
+  {principio:"Le persone si conformano alle norme sociali percepite anche in assenza di pressione esplicita, se la norma è resa visibile.",fonte:"Teoria delle norme sociali (Cialdini, 1990)",cultura:"Le città medievali usavano campane pubbliche per scandire momenti collettivi. Il ritmo condiviso costruiva identità comunitaria.",azione:"Osserva un comportamento positivo che vedi fare agli altri e imitalo consapevolmente. Non seguire: scegli."},
+  {principio:"Piccole vittorie quotidiane attivano il sistema dopaminergico e aumentano la motivazione per compiti successivi più difficili.",fonte:"Progress principle (Amabile & Kramer, 2011)",cultura:"I costruttori di giardini zen completavano ogni giorno un micro-segmento, rendendo il progresso visibile anche in percorsi decennali.",azione:"Identifica la cosa più piccola e completabile che hai in lista. Falla per prima. Il momentum è reale."},
+  {principio:"Le emozioni degli altri sono contagiose a livello neurale — i neuroni specchio ci sincronizzano con chi abbiamo di fronte.",fonte:"Mirror neurons — Rizzolatti et al. (1996)",cultura:"Nel teatro Noh giapponese, l'attore non recita l'emozione: la 'abita' internamente, fidandosi che il pubblico la riceva.",azione:"In una conversazione oggi, ascolta senza pianificare la risposta. Lascia che l'altro ti arrivi prima di reagire."},
+  {principio:"Il senso di autonomia — scegliere come fare una cosa, non solo cosa fare — aumenta motivazione e qualità indipendentemente dal compito.",fonte:"Self-determination theory (Deci & Ryan, 1985)",cultura:"Le gilde medievali permettevano ai maestri grande libertà metodologica, a patto che il risultato rispettasse gli standard.",azione:"Prendi un compito che senti imposto e ridefinisci almeno un aspetto del come lo eseguirai. Riappropriatene."},
+  {principio:"La scrittura a mano attiva aree cognitive diverse rispetto alla digitazione, producendo comprensione più profonda e duratura.",fonte:"Mueller & Oppenheimer (2014) — The Pen Is Mightier Than the Keyboard",cultura:"I monaci copisti consideravano la copia manuale un atto contemplativo: la lentezza era funzionale all'assimilazione.",azione:"Scrivi a mano — su carta — una cosa importante che hai in mente oggi. Solo una. Non digitarla."},
+  {principio:"La scarsità di tempo aumenta la creatività quando il compito è ben definito. I vincoli stimolano soluzioni che l'abbondanza non produce.",fonte:"Constraint-induced creativity (Catrinel Haught-Tromp, 2017)",cultura:"La poesia haiku nacque come forma estrema di vincolo — 17 sillabe — che trasformò il limite in intensità espressiva.",azione:"Dati 10 minuti esatti, risolvi o avanza su un problema che rimandi. Il timer è lo strumento, non la trappola."},
+  {principio:"Le persone valutano le esperienze in base al picco emotivo e alla fine — non alla durata totale.",fonte:"Peak-end rule (Kahneman & Fredrickson, 1993)",cultura:"I banchetti romani si chiudevano sempre con il piatto più raffinato: avevano capito intuitivamente che il finale definisce il ricordo.",azione:"Cura consapevolmente come finisce qualcosa oggi: una conversazione, un lavoro, un pasto. Il finale rimane."},
+  {principio:"Attribuire un nome o un'identità a un ruolo cambia il comportamento delle persone in quel ruolo, indipendentemente dal compenso.",fonte:"Effetto etichetta — identità e comportamento (Bem, 1972)",cultura:"I guerrieri Masai ricevono un nome nuovo dopo ogni rito di passaggio. Il nome non descrive chi sono: indica chi devono diventare.",azione:"Dai un nome al ruolo che stai cercando di costruire — professionalmente o personalmente. Dillo ad alta voce."},
+  {principio:"Le persone che dormono su una decisione difficile la vivono con meno rimpianto anche quando il risultato è lo stesso.",fonte:"Regret theory — Loomes & Sugden (1982)",cultura:"Nella diplomazia ottomana, le risposte alle missive importanti venivano deliberatamente ritardate di un giorno — non per lentezza: per strategia emotiva.",azione:"Se hai una risposta da dare che potrebbe essere reattiva, posticipala di qualche ora. Poi rispondi."},
+  {principio:"Il senso di appartenenza a un gruppo aumenta la resilienza individuale più di qualsiasi tecnica di gestione dello stress individuale.",fonte:"Social baseline theory (Coan & Sbarra, 2015)",cultura:"Le comunità benedettine strutturavano la giornata intorno a momenti collettivi obbligatori come infrastruttura di supporto reciproco.",azione:"Cerca oggi un momento di presenza condivisa con qualcuno — non necessariamente parlando. Stare insieme conta."},
+  {principio:"Le metafore che usiamo per descrivere un problema determinano inconsciamente le soluzioni che consideriamo.",fonte:"Metaphors We Live By — Lakoff & Johnson (1980)",cultura:"I diplomatici navajo usavano narrazioni indirette per trattare conflitti complessi: raccontavano una storia che conteneva il problema.",azione:"Descrivi una situazione difficile con una metafora diversa da quella solita. Cambia l'immagine, vedrai nuove uscite."},
+  {principio:"Fissare un punto fisso per 30-60 secondi riduce l'attivazione dell'amigdala e migliora la capacità di decidere sotto pressione.",fonte:"Neuroscienze dello stress — Huberman Lab (Stanford, 2021)",cultura:"I maestri di Kenjutsu insegnavano il 'metsuke' — fissare un punto lontano — per mantenere visione periferica e mente calma simultaneamente.",azione:"Prima di una situazione stressante oggi, fissa un punto lontano per 30 secondi. Respira normalmente."},
+  {principio:"Raccontare un'esperienza difficile in terza persona riduce la reattività emotiva e favorisce l'elaborazione razionale.",fonte:"Self-distancing — Ethan Kross, Università del Michigan (2014)",cultura:"Gli Stoici romani praticavano il distacco narrativo come esercizio quotidiano: Epitteto consigliava di osservare sé stessi come se si guardasse un altro.",azione:"Descrivi a te stesso in terza persona un problema che ti pesa. Guarda se cambia la prospettiva."},
+  {principio:"La curiosità — non la certezza — è il motore principale dell'apprendimento efficace e della resilienza cognitiva.",fonte:"Information gap theory of curiosity (Loewenstein, 1994)",cultura:"I polimati del Rinascimento non specializzavano le proprie letture: il salto tra discipline era considerato metodo, non distrazione.",azione:"Segui oggi una curiosità senza utilità immediata. Cerca per il gusto di cercare, non per arrivare a qualcosa."},
+  {principio:"La vicinanza fisica ripetuta — anche non intenzionale — aumenta la probabilità di sviluppare simpatia e fiducia reciproca.",fonte:"Effetto di mera esposizione (Zajonc, 1968) — prossimità e attrazione",cultura:"Le piazze medievali erano progettate per massimizzare gli incontri ricorrenti tra le stesse persone, costruendo fiducia commerciale.",azione:"Oggi scegli intenzionalmente di passare vicino a qualcuno con cui vuoi costruire un rapporto migliore."},
+  {principio:"Il modo in cui incorniciamo un'informazione — guadagno o perdita — cambia radicalmente la decisione anche con dati identici.",fonte:"Prospect theory — Kahneman & Tversky (1979)",cultura:"I mercanti veneziani del '400 usavano il linguaggio del 'non perdere' invece di 'guadagnare': avevano capito intuitivamente l'asimmetria emotiva.",azione:"Rileggi qualcosa che vuoi proporre e riformulalo in termini di cosa si perde non facendolo."},
+  {principio:"Le abitudini si consolidano più rapidamente quando vengono agganciate a comportamenti già automatici.",fonte:"Habit stacking — James Clear (2018), basato su ricerca comportamentale",cultura:"I samurai agganciavano la meditazione mattutina alla pulizia della spada — un'azione già automatica. Il rituale seguiva il binario.",azione:"Scegli un'abitudine che vuoi creare. Agganciala subito dopo qualcosa che fai già ogni giorno senza pensarci."},
+  {principio:"Esprimere incertezza in modo esplicito aumenta la credibilità di chi parla, non la riduce.",fonte:"Calibrated uncertainty — psicologia della comunicazione (Tetlock, 2005)",cultura:"Nella tradizione talmudica, dire 'non lo so' era una risposta completa e rispettabile. L'ammissione dell'ignoranza era segno di serietà.",azione:"Oggi, in almeno una conversazione, di' 'non sono sicuro' invece di fingere certezza. Osserva la reazione."},
+  {principio:"L'atto fisico di sorridere — anche deliberato — attiva in parte le stesse risposte neurali del sorriso spontaneo.",fonte:"Facial feedback hypothesis (Strack, 1988) — confermata parzialmente (2022)",cultura:"Alcune scuole buddiste tibetane iniziano la meditazione con un sorriso deliberato — non come espressione di gioia, ma come porta di accesso ad essa.",azione:"Sorridi consapevolmente per 30 secondi, anche da solo. Non deve essere spontaneo: è un esperimento."},
+];
+
+/* ══════════════════════════════════════════════════
+   DATI ACCESSORI
+══════════════════════════════════════════════════ */
+const BADGE = [
+  {id:'primo_passo',   label:'Primo Passo',      desc:'Prima missione completata',  emoji:'🌱'},
+  {id:'tre_giorni',    label:'Tripletta',         desc:'3 giorni di fila',           emoji:'🎯'},
+  {id:'sette_giorni',  label:'Settimana Intera',  desc:'7 giorni consecutivi',       emoji:'🔥'},
+  {id:'venti_missioni',label:'Abitudine Solida',  desc:'20 missioni completate',     emoji:'⚡'},
+  {id:'cinquanta',     label:'Loop Master',       desc:'50 missioni completate',     emoji:'🌀'},
+];
+const LIVELLI = [
+  {id:'bassa',label:'Bassa energia',emoji:'🌙',desc:'Giornata tranquilla, missioni leggere'},
+  {id:'media',label:'Media energia',emoji:'⚡',desc:'In forma, pronto a qualcosa di concreto'},
+  {id:'alta', label:'Alta energia', emoji:'🔥',desc:'Al massimo, sfida più intensa'},
+];
+const CAT_ICON = {sociale:'🤝',esplorazione:'🧭',abitudini:'⚙️',speciale:'✦'};
+const EN_EMOJI  = {bassa:'🌙',media:'⚡',alta:'🔥'};
+
+// Tag per micro-principi — categoria tematica
+// Permette di orientare il principio verso il comportamento prevalente dell'utente
+const MP_TAG = {
+  relazioni:  ['r01','r02','r03','r04','r05'],   // indici MICRO_PRINCIPI orientati al sociale
+  individuale:['r06','r07','r08','r09','r10'],   // orientati all'autonomia/esplorazione
+  abitudini:  ['r11','r12','r13','r14','r15'],   // orientati all'abitudine/routine
+  neutro:     ['r16','r17','r18','r19','r20','r21','r22','r23','r24','r25','r26','r27','r28','r29'],
+};
+// Mappa indice MICRO_PRINCIPI → tag tematico
+function tagDiMicro(idx){
+  if([0,1,2,10,11,20,25].includes(idx)) return 'relazioni';
+  if([5,6,7,8,16,21,24].includes(idx)) return 'individuale';
+  if([3,12,13,14,15,27,28,29].includes(idx)) return 'abitudini';
+  return 'neutro';
+}
+
+/* ══════════════════════════════════════════════════
+   SEED — generazione deterministica
+══════════════════════════════════════════════════ */
+function hash(s){let h=0;for(let i=0;i<s.length;i++)h=Math.imul(31,h)+s.charCodeAt(i)|0;return Math.abs(h);}
+function mkRng(seed){let s=seed;return()=>{s=(s*1664525+1013904223)&0xffffffff;return(s>>>0)/0xffffffff;};}
+function rngVal(data,sale){const r=mkRng(hash(data+sale));r();return r();}
+
+/* ══════════════════════════════════════════════════
+   MEMORIA UTENTE — ll_m (cuore del sistema reattivo)
+   Struttura:
+   {
+     completate: [{id, categoria, energia, data, speciale}],  // max 100
+     ignorate:   [{id, categoria, energia, data}],            // max 100
+     categorie:  {sociale:1, esplorazione:1, abitudini:1},    // pesi dinamici
+     energiaIgnorata: {bassa:0, media:0, alta:0},             // conta energia ignorata
+     socialeSenza: 0,   // giorni senza missione sociale completata
+     altaIgnorataDa: 0, // giorni consecutivi con "alta" ignorata
+   }
+══════════════════════════════════════════════════ */
+const KK = {
+  G:'ll_g', H:'ll_h', S:'ll_s', B:'ll_b', T:'ll_t',
+  M:'ll_m',            // [v1.3] memoria utente unificata
+  MR:'ll_mr_hist',     // storico missioni mostrate (anti-ripetizione)
+  MP:'ll_mp_hist',     // storico micro-principi mostrati
+};
+
+const KS = {
+  PF:  'll_pf',     // totale punti fortuna
+  SD:  'll_sd',     // stato sfida giornaliera {data, tipo, completata}
+  PFB: 'll_pfb',    // badge punti fortuna già assegnati
+};
+
+function getPF()   { return parseInt(localStorage.getItem(KS.PF)||'0',10); }
+function addPF()   { const n=getPF()+1; localStorage.setItem(KS.PF,n); return n; }
+function getSfidaStato() { try{return JSON.parse(localStorage.getItem(KS.SD));}catch{return null;} }
+function saveSfidaStato(v){ try{localStorage.setItem(KS.SD,JSON.stringify(v));}catch{} }
+function getPFBadge() { try{return JSON.parse(localStorage.getItem(KS.PFB))||[];}catch{return[];} }
+function addPFBadge(id){ const b=getPFBadge(); if(b.includes(id))return false; b.push(id); try{localStorage.setItem(KS.PFB,JSON.stringify(b));}catch{} return true; }
+
+const BADGE_PF = [
+  {id:'pf_10',  label:'Esploratore',          desc:'10 Punti Fortuna',           emoji:'🔍', soglia:10},
+  {id:'pf_30',  label:'Cercatore',             desc:'30 Punti Fortuna',           emoji:'🧭', soglia:30},
+  {id:'pf_100', label:'Costruttore di Occasioni',desc:'100 Punti Fortuna',       emoji:'⭐', soglia:100},
+];
+
+const sg = k=>{try{return JSON.parse(localStorage.getItem(k));}catch{return null;}};
+const ss = (k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch{}};
+
+function oggi(){const d=new Date();return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function ieriDi(s){const d=new Date(s+'T12:00:00');d.setDate(d.getDate()-1);return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+
+// Memoria utente — default
+function memDefault(){
+  return{
+    completate:[],ignorate:[],
+    categorie:{sociale:1,esplorazione:1,abitudini:1},
+    energiaIgnorata:{bassa:0,media:0,alta:0},
+    socialeSenza:0,
+    altaIgnorataDa:0,
+  };
+}
+function getMem(){return {...memDefault(),...(sg(KK.M)||{})};}
+function saveMem(m){ss(KK.M,m);}
+
+// Streak e totale (invariati)
+const storia         =()=>sg(KK.H)||[];
+const streak         =()=>sg(KK.S)||{corrente:0,record:0,ultimaData:null};
+const totale         =()=>parseInt(localStorage.getItem(KK.T)||'0',10);
+const badgeGuadagnati=()=>sg(KK.B)||[];
+
+function aggiungiStoria(e){const h=storia();h.unshift({...e,completatoIl:new Date().toISOString()});ss(KK.H,h.slice(0,100));}
+function aggiornaStreak(data){const s=streak();if(s.ultimaData===data)return s;s.corrente=s.ultimaData===ieriDi(data)?s.corrente+1:1;s.record=Math.max(s.record,s.corrente);s.ultimaData=data;ss(KK.S,s);return s;}
+function incTotale(){const n=totale()+1;localStorage.setItem(KK.T,n);return n;}
+function daBadge(id){const b=badgeGuadagnati();if(b.includes(id))return false;b.push(id);ss(KK.B,b);return true;}
+function resetTutto(){Object.values(KK).forEach(k=>localStorage.removeItem(k));}
+
+/* ══════════════════════════════════════════════════
+   REGISTRAZIONE EVENTI — aggiorna la memoria utente
+══════════════════════════════════════════════════ */
+function registraCompletamento(missione){
+  const m=getMem();
+  // Aggiungi a completate
+  m.completate.unshift({id:missione.id,categoria:missione.categoria,data:oggi(),speciale:!!missione.speciale});
+  m.completate=m.completate.slice(0,100);
+
+  // Peso categoria: +0.2, clamp 0.5–2.0
+  if(m.categorie[missione.categoria]!==undefined){
+    m.categorie[missione.categoria]=Math.min(2.0, m.categorie[missione.categoria]+0.2);
+  }
+
+  // Reset contatori sociali se missione sociale completata
+  if(missione.categoria==='sociale') m.socialeSenza=0;
+
+  // Reset altaIgnorataDa se energia alta completata
+  saveMem(m);
+}
+
+function registraIgnorata(missione, energia){
+  if(!missione) return;
+  const m=getMem();
+  // Aggiungi a ignorate
+  m.ignorate.unshift({id:missione.id,categoria:missione.categoria,energia,data:oggi()});
+  m.ignorate=m.ignorate.slice(0,100);
+
+  // Peso categoria: -0.3, clamp 0.5–2.0
+  if(!missione.speciale && m.categorie[missione.categoria]!==undefined){
+    m.categorie[missione.categoria]=Math.max(0.5, m.categorie[missione.categoria]-0.3);
+  }
+
+  // Conta energia ignorata
+  if(m.energiaIgnorata[energia]!==undefined) m.energiaIgnorata[energia]++;
+
+  // Conta giorni senza sociale
+  if(missione.categoria!=='sociale') m.socialeSenza=(m.socialeSenza||0)+1;
+
+  // Conta giorni con alta ignorata
+  if(energia==='alta') m.altaIgnorataDa=(m.altaIgnorataDa||0)+1;
+  else m.altaIgnorataDa=0;
+
+  saveMem(m);
+}
+
+/* ══════════════════════════════════════════════════
+   ANTI-RIPETIZIONE — basata su esperienza, non su data
+   Esclude missioni completate negli ultimi 30 giorni.
+   Se pool < 3, include le meno recenti (fallback).
+══════════════════════════════════════════════════ */
+const FINESTRA = 30;
+
+function dataRecentiSet(n){
+  const s=new Set();
+  for(let i=0;i<n;i++){const d=new Date();d.setDate(d.getDate()-i);s.add(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`);}
+  return s;
+}
+
+function idCompletateRecenti(){
+  const rec=dataRecentiSet(FINESTRA);
+  const mem=getMem();
+  return new Set(mem.completate.filter(e=>rec.has(e.data)).map(e=>e.id));
+}
+
+function idxMicroRecenti(){
+  const rec=dataRecentiSet(FINESTRA);
+  return new Set((sg(KK.MP)||[]).filter(e=>rec.has(e.data)).map(e=>e.idx));
+}
+
+function addMissioneHist(id,data){const h=sg(KK.MR)||[];h.push({id,data});ss(KK.MR,h.slice(-60));}
+function addMicroHist(idx,data){const h=sg(KK.MP)||[];h.push({idx,data});ss(KK.MP,h.slice(-60));}
+
+/* ══════════════════════════════════════════════════
+   PESO DINAMICO — cuore del sistema reattivo
+   peso = base(categoria) + bonus streak + malus inattività
+══════════════════════════════════════════════════ */
+function calcolaPesi(pool, mem, streakCorrente){
+  // Bonus streak alta: favorisce sociale/esplorazione
+  const bonusStreak = streakCorrente >= 5 ? 0.3 : 0;
+
+  return pool.map(m=>{
+    let peso = mem.categorie[m.categoria] || 1.0;
+
+    // Bonus streak per categorie che ampliano le opportunità
+    if(streakCorrente>=5 && (m.categoria==='sociale'||m.categoria==='esplorazione')){
+      peso += bonusStreak;
+    }
+
+    // Malus se energia alta è stata ignorata spesso
+    // (non eliminare, solo ridurre la probabilità di missioni impegnative)
+    const altaIgn = mem.altaIgnorataDa||0;
+    if(altaIgn>=3 && m.impatto==='alto'){
+      peso = Math.max(0.3, peso-0.4);
+    }
+
+    // Bonus abitudini se utente inattivo (socialeSenza alto)
+    if((mem.socialeSenza||0)>=5 && m.categoria==='abitudini'){
+      peso += 0.3;
+    }
+
+    return {missione:m, peso:Math.max(0.3, Math.min(2.0, peso))};
+  });
+}
+
+/* ══════════════════════════════════════════════════
+   SELEZIONE MISSIONE REALE (reattiva)
+══════════════════════════════════════════════════ */
+function scegliMissioneReale(data, energia, mem, streakCorrente){
+  // 1. Pool base filtrato per energia
+  let pool = MISSIONI_REALI.filter(m=>m.energia.includes(energia));
+  if(!pool.length) pool=[...MISSIONI_REALI];
+
+  // 2. Anti-ripetizione: rimuovi completate negli ultimi 30gg
+  const viste = idCompletateRecenti();
+  let disp = pool.filter(m=>!viste.has(m.id));
+
+  // 3. Fallback se pool troppo piccolo
+  if(disp.length<3){
+    const hist=sg(KK.MR)||[];
+    const ultime={};hist.forEach(e=>{ultime[e.id]=e.data;});
+    const fallback=pool.filter(m=>viste.has(m.id))
+      .sort((a,b)=>(ultime[a.id]||'0')<(ultime[b.id]||'0')?-1:1)
+      .slice(0,3-disp.length);
+    disp=[...disp,...fallback];
+  }
+
+  // 4. Calcola pesi dinamici
+  const pesati = calcolaPesi(disp, mem, streakCorrente);
+
+  // 5. Costruisci lottery pesata
+  const lottery=[];
+  pesati.forEach(({missione,peso})=>{
+    const slots=Math.max(1,Math.round(peso*10));
+    for(let i=0;i<slots;i++) lottery.push(missione);
+  });
+
+  // 6. Selezione deterministica per data+energia (riproducibile)
+  const r=mkRng(hash(data+'miss2'+energia));r();
+  return lottery[Math.min(Math.floor(r()*lottery.length),lottery.length-1)]||disp[0]||pool[0];
+}
+
+/* ══════════════════════════════════════════════════
+   SELEZIONE MICRO-PRINCIPIO (reattiva)
+   Orienta il principio verso il comportamento prevalente:
+   - Completa spesso sociale → principi su relazioni
+   - Evita sociale → principi su psicologia individuale
+   - Completa abitudini → principi su routine
+══════════════════════════════════════════════════ */
+function scegliMicro(data, mem){
+  const visti=idxMicroRecenti();
+  let cand=MICRO_PRINCIPI.map((_,i)=>i).filter(i=>!visti.has(i));
+  if(cand.length<3){
+    const hist=sg(KK.MP)||[];
+    const ultime={};hist.forEach(e=>{ultime[e.idx]=e.data;});
+    const fallback=MICRO_PRINCIPI.map((_,i)=>i).filter(i=>visti.has(i))
+      .sort((a,b)=>(ultime[a]||'0')<(ultime[b]||'0')?-1:1).slice(0,3-cand.length);
+    cand=[...cand,...fallback];
+  }
+
+  // Determina orientamento prevalente dall'utente
+  const catPrev = Object.entries(mem.categorie)
+    .sort((a,b)=>b[1]-a[1])[0][0]; // categoria con peso maggiore
+
+  // Mappa categoria → tema micro-principio
+  const temaFav = catPrev==='sociale' ? 'relazioni'
+                : catPrev==='abitudini' ? 'abitudini'
+                : 'individuale';
+
+  // Costruisci lista pesata: principi del tema favorito hanno peso 2x
+  const pesati=[];
+  cand.forEach(idx=>{
+    const tag=tagDiMicro(idx);
+    const slots=tag===temaFav?2:1;
+    for(let i=0;i<slots;i++) pesati.push(idx);
+  });
+
+  const r=mkRng(hash(data+'mp3'));r();
+  const pick=pesati[Math.min(Math.floor(r()*pesati.length),pesati.length-1)];
+  return{idx:pick, dato:MICRO_PRINCIPI[pick]||MICRO_PRINCIPI[0]};
+}
+
+/* ══════════════════════════════════════════════════
+   EVENTI ADATTIVI — non random puro, ma condizionati
+   al comportamento recente dell'utente
+══════════════════════════════════════════════════ */
+function controllaEventoSpeciale(data, mem, streakCorrente){
+  const altaIgn  = mem.altaIgnorataDa||0;
+  const senzaSoc = mem.socialeSenza||0;
+  const baseProb = rngVal(data,'special3');
+
+  // Trigger 1: "Sfida Coraggio" — solo se alta energia ignorata da 3+ giorni
+  if(altaIgn>=3 && baseProb<0.12){
+    return MISSIONI_SPECIALI[1]; // Sfida Coraggio
+  }
+
+  // Trigger 2: "Connessione Umana" — se nessun sociale completato da 5+ giorni
+  if(senzaSoc>=5 && baseProb<0.15){
+    return MISSIONI_SPECIALI[2]; // Connessione Umana
+  }
+
+  // Trigger 3: "Reset Loop" — streak lunga (10+) con bassa varietà categorie
+  if(streakCorrente>=10){
+    const pesi=Object.values(mem.categorie);
+    const maxPeso=Math.max(...pesi);
+    const minPeso=Math.min(...pesi);
+    // Bassa varietà = una categoria domina molto
+    if(maxPeso-minPeso>1.0 && baseProb<0.08){
+      return {...MISSIONI_SPECIALI[0], titolo:"Reset Loop — esci dal pattern", tipoSpeciale:"Reset"};
+    }
+  }
+
+  // Evento raro generico (~3%)
+  if(baseProb<0.03){
+    const r=mkRng(hash(data+'sp4'));r();
+    return MISSIONI_SPECIALI[Math.min(Math.floor(r()*MISSIONI_SPECIALI.length),MISSIONI_SPECIALI.length-1)];
+  }
+
+  return null;
+}
+
+/* ══════════════════════════════════════════════════
+   COSTRUZIONE GIORNATA (reattiva)
+══════════════════════════════════════════════════ */
+function costruisciGiornata(data, energia){
+  const mem = getMem();
+  const str = streak();
+
+  const mSpec  = controllaEventoSpeciale(data, mem, str.corrente);
+  const mReale = mSpec || scegliMissioneReale(data, energia, mem, str.corrente);
+  const {idx:mpIdx, dato:mpDato} = scegliMicro(data, mem);
+
+  return{
+    data, energia,
+    missioneReale:   mReale,
+    missioneSpeciale:!!mSpec,
+    microPrincipio:  mpDato,
+    microIdx:        mpIdx,
+    realeCompletata: false,
+    microCompletato: false,
+    _mId:  mReale.id,
+    _mpIdx:mpIdx,
+  };
+}
+
+/* ══════════════════════════════════════════════════
+   MIGRAZIONE AUTOMATICA da v1.0 / v1.1 / v1.2
+══════════════════════════════════════════════════ */
+function migra(s){
+  if(!s) return s;
+  if(!s.microPrincipio){const{idx,dato}=scegliMicro(s.data||oggi(),getMem());s.microPrincipio=dato;s.microIdx=idx;s.microCompletato=false;}
+  if(s.missioneSpeciale===undefined) s.missioneSpeciale=false;
+  if(!s._mId)  s._mId=s.missioneReale?.id||'';
+  if(s._mpIdx===undefined) s._mpIdx=s.microIdx||0;
+  return s;
+}
+
+/* ══════════════════════════════════════════════════
+   STATO APP
+══════════════════════════════════════════════════ */
+let app={
+  pagina:'home', giornata:null,
+  streak:streak(), badge:badgeGuadagnati(), totale:totale(),
+  debugAperto:false, confermaReale:false,
+};
+
+function avvia(){
+  const salvato=migra(sg(KK.G));
+  const td=oggi();
+
+  if(salvato && salvato.data===td){
+    app.giornata=salvato;
+  } else if(salvato && salvato.data!==td && !salvato.realeCompletata){
+    // Giornata scaduta non completata → registra come ignorata
+    registraIgnorata(salvato.missioneReale, salvato.energia);
+  }
+  render();
+}
+
+/* ══════════════════════════════════════════════════
+   AZIONI
+══════════════════════════════════════════════════ */
+window.showPage=(p)=>{app.pagina=p;app.confermaReale=false;render();};
+
+window.scegliEnergia=(liv)=>{
+  const g=costruisciGiornata(oggi(),liv);
+  ss(KK.G,g);
+  addMissioneHist(g._mId,g.data);
+  addMicroHist(g._mpIdx,g.data);
+  app.giornata=g;render();
+};
+
+window.toggleConferma=()=>{app.confermaReale=!app.confermaReale;render();};
+
+
+/* ── Frasi micro-feedback completamento ── */
+const FRASI_FEEDBACK = [
+  "Un piccolo passo conta.",
+  "Il loop si rafforza.",
+  "Hai trasformato un’intenzione in un’azione.",
+  "Anche oggi hai mosso qualcosa.",
+  "Fatto. È più di quanto sembra.",
+  "La costanza costruisce in silenzio.",
+  "Ogni azione lascia una traccia.",
+  "Più facile di ieri. Più difficile di domani.",
+  "L’abitudine si forma un giorno alla volta.",
+  "Notato, registrato, fatto.",
+  "Il momento giusto era adesso.",
+  "Piccolo fuori, grande dentro.",
+  "Ci sei stato. Conta.",
+];
+function fraseFeedback(){
+  return FRASI_FEEDBACK[Math.floor(Math.random()*FRASI_FEEDBACK.length)];
+}
+
+window.completaReale=()=>{
+  if(!app.giornata||app.giornata.realeCompletata)return;
+  app.giornata.realeCompletata=true;
+  ss(KK.G,app.giornata);
+  const m=app.giornata.missioneReale;
+  aggiungiStoria({data:oggi(),missioneId:m.id,titolo:m.titolo,categoria:m.categoria,energia:app.giornata.energia,speciale:app.giornata.missioneSpeciale});
+  registraCompletamento({...m,speciale:app.giornata.missioneSpeciale});
+  app.streak=aggiornaStreak(oggi());
+  app.totale=incTotale();
+  controllaBadge();
+  app.confermaReale=false;
+  render();
+};
+
+window.completaMicro=()=>{
+  if(!app.giornata||app.giornata.microCompletato)return;
+  app.giornata.microCompletato=true;ss(KK.G,app.giornata);render();
+};
+
+window.rigenera=()=>{
+  if(!app.giornata)return;
+  const g=costruisciGiornata(oggi(),app.giornata.energia);
+  ss(KK.G,g);addMissioneHist(g._mId,g.data);addMicroHist(g._mpIdx,g.data);
+  app.giornata=g;render();
+};
+
+window.resetCompleto=()=>{
+  if(!confirm('Vuoi davvero resettare tutti i dati?'))return;
+  resetTutto();
+  app={pagina:'home',giornata:null,streak:streak(),badge:badgeGuadagnati(),totale:0,debugAperto:false,confermaReale:false};
+  render();
+};
+
+window.toggleDebug=()=>{app.debugAperto=!app.debugAperto;render();};
+
+let _en=null;
+window.cliccaEnergia=(id)=>{
+  _en=id;
+  document.querySelectorAll('.energy-option').forEach(el=>el.classList.remove('selected'));
+  document.getElementById('eo-'+id)?.classList.add('selected');
+  document.getElementById('conferma-energia').disabled=false;
+};
+window.confermaEnergia=()=>{
+  if(!_en) return;
+  // Mostra loader elegante prima di rivelare la missione
+  const main = document.getElementById('main');
+  const messaggi = [
+    'Analizzo il tuo livello di energia…',
+    'Scelgo una missione per oggi…',
+    'Sto preparando la tua giornata…',
+    'Seleziono qualcosa adatto a te…',
+  ];
+  const msg = messaggi[Math.floor(Math.random()*messaggi.length)];
+  main.innerHTML = `<div class="loader-wrap">
+    <div class="loader-dots"><span></span><span></span><span></span></div>
+    <div class="loader-testo">${msg}</div>
+  </div>`;
+  setTimeout(()=>scegliEnergia(_en), 2000);
+};
+
+function controllaBadge(){
+  const checks=[
+    {id:'primo_passo',   ok:app.totale>=1},
+    {id:'tre_giorni',    ok:app.streak.corrente>=3},
+    {id:'sette_giorni',  ok:app.streak.corrente>=7},
+    {id:'venti_missioni',ok:app.totale>=20},
+    {id:'cinquanta',     ok:app.totale>=50},
+  ];
+  for(const c of checks){
+    if(c.ok&&!app.badge.includes(c.id)){
+      if(daBadge(c.id)){app.badge=badgeGuadagnati();mostraToast(BADGE.find(b=>b.id===c.id));break;}
+    }
+  }
+}
+
+function mostraToast(b){
+  const t=document.getElementById('badge-toast');
+  document.getElementById('toast-emoji').textContent=b.emoji;
+  document.getElementById('toast-title').textContent=b.label;
+  document.getElementById('toast-desc').textContent=b.desc;
+  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000);
+}
+
+
+function render(){
+  document.getElementById('nav-history').classList.toggle('active',app.pagina==='history');
+  document.getElementById('nav-how').classList.toggle('active',app.pagina==='how');
+  const main=document.getElementById('main');
+  if(app.pagina==='how')     {main.innerHTML=renderCome();   return;}
+  if(app.pagina==='history') {main.innerHTML=renderStoria(); return;}
+  renderHome(main);
+}
+
+
+function renderHome(main){
+  const dataLabel=new Date().toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'});
+  const emojiEn  = app.giornata ? EN_EMOJI[app.giornata.energia] : '';
+  const g        = app.giornata;
+
+  // ── Hero SVG costellazione decorativa ──
+  const heroSvg = `<svg class="hero-constellation" viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    <!-- linee delicate -->
+    <line x1="40"  y1="120" x2="90"  y2="80"  stroke="rgba(201,168,76,.6)" stroke-width=".7"/>
+    <line x1="90"  y1="80"  x2="150" y2="50"  stroke="rgba(201,168,76,.6)" stroke-width=".7"/>
+    <line x1="150" y1="50"  x2="220" y2="70"  stroke="rgba(201,168,76,.5)" stroke-width=".7"/>
+    <line x1="220" y1="70"  x2="280" y2="40"  stroke="rgba(201,168,76,.5)" stroke-width=".7"/>
+    <line x1="280" y1="40"  x2="330" y2="90"  stroke="rgba(201,168,76,.4)" stroke-width=".7"/>
+    <line x1="150" y1="50"  x2="180" y2="100" stroke="rgba(201,168,76,.35)" stroke-width=".5"/>
+    <line x1="90"  y1="80"  x2="120" y2="130" stroke="rgba(201,168,76,.3)" stroke-width=".5"/>
+    <!-- stelle -->
+    <circle cx="40"  cy="120" r="2.5" fill="rgba(201,168,76,.9)"/>
+    <circle cx="90"  cy="80"  r="3"   fill="rgba(201,168,76,1)">
+      <animate attributeName="opacity" values=".6;1;.6" dur="3.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="150" cy="50"  r="3.5" fill="rgba(201,168,76,1)">
+      <animate attributeName="opacity" values=".7;1;.7" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="220" cy="70"  r="2.5" fill="rgba(201,168,76,.85)">
+      <animate attributeName="opacity" values=".5;.9;.5" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="280" cy="40"  r="3"   fill="rgba(201,168,76,.95)">
+      <animate attributeName="opacity" values=".6;1;.6" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="330" cy="90"  r="2"   fill="rgba(201,168,76,.7)"/>
+    <circle cx="180" cy="100" r="2"   fill="rgba(78,205,196,.7)">
+      <animate attributeName="opacity" values=".4;.8;.4" dur="5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="120" cy="130" r="1.5" fill="rgba(201,168,76,.5)"/>
+    <!-- stelle piccole sparse -->
+    <circle cx="60"  cy="40"  r="1"   fill="rgba(255,255,255,.4)"/>
+    <circle cx="200" cy="130" r="1"   fill="rgba(255,255,255,.3)"/>
+    <circle cx="310" cy="130" r="1"   fill="rgba(255,255,255,.35)"/>
+    <circle cx="20"  cy="70"  r="1"   fill="rgba(255,255,255,.3)"/>
+    <circle cx="250" cy="110" r="1"   fill="rgba(255,255,255,.4)"/>
+  </svg>`;
+
+  let html = `<div class="page">
+    <div class="home-hero home-hero-anim" style="position:relative">
+      <div class="hero-nebula hero-nebula-1"></div>
+      <div class="hero-nebula hero-nebula-2"></div>
+      <div class="hero-nebula hero-nebula-3"></div>
+      ${heroSvg}
+      <div class="hero-title-wrap">
+        <div class="page-date">${dataLabel}</div>
+        <h1 class="page-title">La tua giornata ${emojiEn}</h1>
+      </div>
+    </div>`;
+
+  // Streak bar (alleggerita se visibile)
+  if(app.totale>0||app.streak.corrente>0){
+    const bE=BADGE.filter(b=>app.badge.includes(b.id)).slice(-3);
+    html+=`<div class="streak-bar-home">
+      <div class="streak-item"><span>🔥</span><div>
+        <div class="streak-num" style="color:var(--gold)">${app.streak.corrente}</div>
+        <div class="streak-label">giorni di fila</div>
+      </div></div>
+      <div class="streak-divider"></div>
+      <div class="streak-item"><span>🎯</span><div>
+        <div class="streak-num">${app.totale}</div>
+        <div class="streak-label">missioni</div>
+      </div></div>
+      <div class="streak-divider"></div>
+      <div class="streak-item"><span>⭐</span><div>
+        <div class="star-num" id="pf-count">${getPF()}</div>
+        <div class="streak-label">punti fortuna</div>
+      </div></div>
+    </div>`;
+  }
+
+  if(!g){
+    html += renderSelezioneEnergia();
+  } else {
+    // Missione principale — card protagonista
+    html += renderCardReale(g.missioneReale, g.realeCompletata, g.missioneSpeciale);
+
+    // Separatore costellazione
+    html += '<div class="section-divider"><div class="section-divider-dot"></div></div>';
+
+    // Micro-principio e rituale con stile più leggero
+    html += renderCardMicro(g.microPrincipio, g.microCompletato);
+    html += '<div class="constellation-connector"><div class="connector-star"></div></div>';
+
+    const _ritStato=getRitStato();
+    const _ritOggi=_ritStato&&_ritStato.data===oggi()?_ritStato:null;
+    html += renderCardRituale(_ritOggi);
+
+    // Done banner
+    const _ritOggiDone=_ritOggi&&_ritOggi.completato;
+    if(g.realeCompletata&&g.microCompletato&&_ritOggiDone){
+      html+=`<div class="done-banner-home">
+        <span class="done-emoji">✨</span>
+        <div class="done-title">Giornata completata</div>
+        <div class="done-sub">Torna domani per una nuova missione</div>
+        ${app.streak.corrente>1?`<div class="streak-pill">🔥 ${app.streak.corrente} giorni di fila</div>`:''}
+      </div>`;
+    }
+
+    html+=`<div style="padding-top:8px;border-top:1px solid rgba(255,255,255,.04);margin-top:8px">
+      <button class="debug-toggle" onclick="toggleDebug()">··· opzioni sviluppatore</button>
+      ${app.debugAperto?`<div class="debug-row">
+        <button class="btn btn-ghost" onclick="rigenera()" style="font-size:12px;padding:7px 12px">🔄 Rigenera giornata</button>
+        <button class="btn btn-danger" onclick="resetCompleto()">🗑️ Reset completo</button>
+      </div>`:''}
+    </div>`;
+  }
+
+  html += '</div>';
+  main.innerHTML = html;
+
+  if(!g) {
+    document.querySelectorAll('[data-energia]').forEach(function(btn){
+      btn.addEventListener('click', function(){ cliccaEnergia(this.dataset.energia); });
+    });
+  }
+}
+
+function renderSelezioneEnergia(){
+  // Concatenazione semplice — nessun template literal annidato
+  var btns = LIVELLI.map(function(l){
+    return '<button class="energy-option" id="eo-'+l.id+'" data-energia="'+l.id+'">'
+      +'<span style="font-size:22px">'+l.emoji+'</span>'
+      +'<div><div class="energy-name">'+l.label+'</div>'
+      +'<div class="energy-desc">'+l.desc+'</div></div>'
+      +'<div class="energy-check">'
+      +'<svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="#0D1117" stroke-width="3">'
+      +'<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>'
+      +'</svg></div>'
+      +'</button>';
+  }).join('');
+  return '<div>'
+    +'<div class="section-label" style="text-align:center;margin-bottom:4px">Come ti senti oggi?</div>'
+    +'<h2 class="section-title" style="text-align:center;font-size:20px;margin-bottom:4px">Scegli il tuo livello di energia</h2>'
+    +'<p style="font-size:12px;color:var(--cream-dim);text-align:center;margin-bottom:20px">Calibra la difficoltà della missione reale</p>'
+    +btns
+    +'<button class="btn btn-primary btn-full" id="conferma-energia" disabled onclick="confermaEnergia()">Genera la mia giornata →</button>'
+    +'</div>';
+}
+
+
+function renderCardReale(m,completata,speciale){
+  const iC={basso:'impact-basso',medio:'impact-medio',alto:'impact-alto'}[m.impatto];
+  const iL={basso:'Impatto lieve',medio:'Impatto medio',alto:'Impatto alto'}[m.impatto];
+  const cCard=speciale?'card-special':'card-teal';
+  const cBtn =speciale?'btn-special':'btn-teal';
+  const tag  =speciale?`<span class="tag tag-special">✦ ${m.tipoSpeciale}</span>`:`<span class="tag tag-real">Missione Reale</span>`;
+  const cComp=speciale?'completed-state special':'completed-state';
+  const cConf=speciale?'var(--violet)':'var(--teal)';
+  const cWhy =speciale?'card-why' :'card-why';
+  const mainCls=speciale?"card-mission-main card-mission-special":"card-mission-main";
+  return`<div class="${mainCls} card-mission-anim${app.totale<=2?' is-nuovo':''} ${completata?'completed-card':''}">
+    <div class="card-header">${tag}<span>${CAT_ICON[m.categoria]||'🎯'}</span></div>
+    <div class="card-title">${m.titolo}</div>
+    <div class="card-desc">${m.descrizione}</div>
+    <div style="margin-bottom:14px"><span class="impact ${iC}">${iL}</span></div>
+    <div class="card-why-toggle" onclick="togglePerche(this)"><span>Perché funziona</span><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div><div class="card-why-body" style="margin-bottom:16px"><p style="font-size:12px;color:var(--cream-dim);line-height:1.6">${m.perche}</p></div>
+    ${completata
+      ?`<div class="${cComp}"><div class="completed-check"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div class="completed-text"><strong>Missione completata</strong><span>Ottimo lavoro, la streak continua</span></div></div><div class="feedback-msg">${fraseFeedback()}</div>`
+      :app.confermaReale
+        ?`<div><div class="confirm-label">Hai davvero completato questa missione?</div><div class="confirm-row"><button class="btn btn-ghost" style="flex:1;font-size:13px" onclick="toggleConferma()">No, aspetta</button><button class="btn" style="flex:1;font-size:13px;background:${cConf};color:var(--navy-900)" onclick="completaReale()">Sì, completata ✓</button></div></div>`
+        :`<button class="btn ${cBtn} btn-full" onclick="toggleConferma()">Segna come completata</button>`
+    }</div>`;
+}
+
+function renderCardMicro(mp,completato){
+  if(!mp)return'';
+  return`<div class="card-micro-light${app.totale<=2?' is-nuovo':''}" style="animation:fadeUp .45s .25s var(--ease-spring) both">
+    <div class="card-header"><span class="tag tag-micro">Micro-principio del giorno</span><span>🧠</span></div>
+    <div class="card-title" style="margin-top:12px">Cosa sa il comportamento umano</div>
+
+    <div class="card-why-toggle" onclick="togglePerche(this)" style="margin-bottom:0;border-top:none;padding-top:0;margin-top:0">
+      <span style="color:var(--amber)">Il principio</span>
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+      </svg>
+    </div>
+    <div class="card-why-body" style="margin-bottom:14px">
+      <div class="mp-principio" style="margin-bottom:8px">
+        <div class="mp-label">Il principio</div>
+        <div class="mp-testo">${mp.principio}</div>
+        <div class="mp-fonte">${mp.fonte}</div>
+      </div>
+      <div class="mp-cultura">
+        <div class="mp-label">Nel mondo</div>
+        <div class="mp-testo">${mp.cultura}</div>
+      </div>
+    </div>
+
+    <div class="mp-azione"><div class="mp-label">La tua micro-azione di oggi</div><div class="mp-testo">${mp.azione}</div></div>
+    ${completato
+      ?`<div class="mp-completed"><div class="mp-completed-check"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div><strong>Principio applicato</strong><span>Hai messo in pratica la scienza oggi</span></div></div><div class="feedback-msg">${fraseFeedback()}</div>`
+      :`<button class="btn btn-amber btn-full" onclick="completaMicro()">Ho applicato questa micro-azione</button>`
+    }
+  </div>`;
+}
+
+
+/* ══════════════════════════════════════════════════
+   COSTELLAZIONE DEL PERCORSO
+   Ogni 16 missioni completate → nuova costellazione.
+   Visualizzazione solo in archivio. Solo lettura.
+══════════════════════════════════════════════════ */
+const COSTELLAZIONI = [
+  { nome:"Bussola", frasi_idx:0,
+    stelle:[
+      [100,10],[115,30],[100,60],[85,30],  // N,E,S,O (croce)
+      [100,35],[122,22],[100,85],[78,22],  // centro e punte diagonali
+      [140,60],[60,60],[100,10],[100,85],  // cerchio esterno
+      [120,45],[80,45],[120,75],[80,75],
+    ],
+    linee:[[0,1],[1,2],[2,3],[3,0],[4,5],[4,6],[4,7],[0,4],[2,4],[1,4],[3,4],[8,9],[10,11],[12,13],[14,15]]
+  },
+  { nome:"Spirale", frasi_idx:1,
+    stelle:[
+      [100,60],[115,55],[125,65],[120,80],[105,90],[88,85],
+      [78,72],[80,58],[92,48],[108,46],[122,52],[130,68],
+      [128,85],[112,96],[92,98],[74,88],
+    ],
+    linee:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11],[11,12],[12,13],[13,14],[14,15]]
+  },
+  { nome:"Albero", frasi_idx:2,
+    stelle:[
+      [100,100],[100,80],[100,60],          // tronco
+      [100,40],[80,55],[120,55],            // rami bassi
+      [100,20],[70,35],[130,35],            // rami medi
+      [60,20],[90,10],[110,10],[140,20],    // chioma
+      [75,42],[125,42],[100,50],
+    ],
+    linee:[[0,1],[1,2],[2,3],[2,4],[2,5],[3,6],[3,7],[3,8],[6,9],[6,10],[6,11],[6,12],[4,13],[5,14],[3,15]]
+  },
+  { nome:"Onda", frasi_idx:3,
+    stelle:[
+      [20,60],[35,40],[50,60],[65,40],[80,60],[95,40],[110,60],[125,40],
+      [140,60],[155,40],[170,60],[185,40],[30,80],[55,80],[80,80],[105,80],
+    ],
+    linee:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11],[12,13],[13,14],[14,15],[0,12],[4,13],[8,14]]
+  },
+  { nome:"Montagna", frasi_idx:0,
+    stelle:[
+      [20,95],[50,70],[80,40],[100,10],[120,40],[150,70],[180,95],
+      [35,95],[65,55],[100,10],[135,55],[165,95],
+      [60,95],[80,65],[120,65],[140,95],
+    ],
+    linee:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[7,8],[8,9],[9,10],[10,11],[12,13],[13,14],[14,15],[0,7],[6,11]]
+  },
+  { nome:"Foglia", frasi_idx:1,
+    stelle:[
+      [100,100],[100,80],[85,65],[70,50],[60,35],[65,20],[80,10],
+      [100,5],[120,10],[135,20],[140,35],[130,50],[115,65],[100,80],
+      [100,60],[100,40],
+    ],
+    linee:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11],[11,12],[12,13],[1,14],[14,15],[15,7]]
+  },
+  { nome:"Nodo", frasi_idx:2,
+    stelle:[
+      [100,20],[130,40],[140,70],[120,90],[100,85],[80,90],
+      [60,70],[70,40],[100,20],[100,50],[120,60],[110,80],
+      [90,80],[80,60],[100,50],[100,70],
+    ],
+    linee:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,0],[9,10],[10,11],[11,12],[12,13],[13,9],[4,15],[15,9]]
+  },
+  { nome:"Fenice", frasi_idx:3,
+    stelle:[
+      [100,90],[100,70],[85,55],[65,45],[45,50],[30,40],[50,30],
+      [80,35],[100,20],[120,35],[150,30],[170,40],[155,50],
+      [135,45],[115,55],[100,70],
+    ],
+    linee:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11],[11,12],[12,13],[13,14],[14,15],[1,15]]
+  },
+];
+
+const FRASI_COST = [
+  "Il tuo percorso prende forma.",
+  "Non vedi tutto, ma il disegno esiste.",
+  "Ogni scelta lascia una traccia.",
+  "Le storie non si vedono mentre si vivono.",
+];
+
+// Modificatori visivi per energia prevalente del ciclo
+const ENERGIA_VISUAL = {
+  // densita: <1 allarga la costellazione (punti più distanti, bassa energia)
+  //          >1 la comprime (punti più vicini, alta energia)
+  // spessore: larghezza delle linee di connessione
+  bassa: { scala: .85, glow: .5,  raggio: 2.6, densita: .82, spessore: .6 },
+  media: { scala: 1,   glow: 1,   raggio: 3.5, densita: 1,   spessore: 1  },
+  alta:  { scala: 1.12,glow: 1.6, raggio: 4.2, densita: 1.18,spessore: 1.6},
+};
+
+function renderCostellazione(totale){
+  if(totale === 0) return '';
+
+  const ciclo     = Math.floor(totale / 16);
+  const progresso = totale % 16;
+  const idxCost   = ciclo % COSTELLAZIONI.length;
+  const cost      = COSTELLAZIONI[idxCost];
+  const isCompleta= progresso === 0 && ciclo > 0;
+  const attive    = isCompleta ? 16 : progresso;
+
+  // Firma persistente: seed stabile + energia prevalente del ciclo
+  const firma   = getFirmaCiclo(ciclo);
+  const seed    = firma.seed;
+  const visual  = ENERGIA_VISUAL[firma.energia] || ENERGIA_VISUAL.media;
+
+  // Il seed genera deformazioni deterministiche e stabili nel tempo:
+  // shift dei nodi, leggera rotazione, variazione di densità.
+  const rngFirma   = mkRng(Math.floor(seed * 1e9));
+  const rotazione  = (rngFirma() - .5) * 14;              // -7°..+7°
+  const shiftScale = .04 + rngFirma() * .05;               // intensità shift nodi
+  const denseFactor= .92 + rngFirma() * .16;                // .92..1.08 densità
+
+  const W = 200, H = 120;
+  const cxView = W/2, cyView = H/2;
+  const rad = rotazione * Math.PI / 180;
+
+  // Deforma un nodo: shift deterministico (seedato sull'indice) + rotazione + densità
+  // La densità combina due fattori indipendenti:
+  // - denseFactor (dal seed, varia la forma in modo univoco e stabile)
+  // - visual.densita (dall'energia: low=più distanti, high=più compatte)
+  const densitaFinale = denseFactor * visual.densita;
+  function deformaNodo(x, y, i){
+    const r2 = mkRng(Math.floor((seed + i*0.137) * 1e9));
+    const dx = (r2() - .5) * shiftScale * 40;
+    const dy = (r2() - .5) * shiftScale * 40;
+    // Applica densità (avvicina/allontana dal centro forma)
+    const fx = cxView + (x - cxView) * densitaFinale + dx;
+    const fy = cyView + (y - cyView) * densitaFinale + dy;
+    // Applica rotazione attorno al centro
+    const rx = cxView + (fx - cxView) * Math.cos(rad) - (fy - cyView) * Math.sin(rad);
+    const ry = cyView + (fx - cxView) * Math.sin(rad) + (fy - cyView) * Math.cos(rad);
+    return [rx, ry];
+  }
+
+  const sx = x => (x / 200) * W;
+  const sy = y => (y / 100) * H;
+
+  const nodiTrasformati = cost.stelle.map(([x,y], i) => deformaNodo(sx(x), sy(y), i));
+
+  // Solo linee tra stelle già attive — non rivela la forma futura
+  const linee = cost.linee
+    .filter(([a,b]) => a < attive && b < attive)
+    .map(([a,b]) => {
+      const [xa,ya] = nodiTrasformati[a];
+      const [xb,yb] = nodiTrasformati[b];
+      // La linea compare dopo che entrambe le stelle che connette sono apparse
+      const delayLinea = (Math.max(a,b) * 0.09 + 0.25).toFixed(2);
+      const opTarget    = (.28*visual.glow).toFixed(2);
+      return `<line x1="${xa.toFixed(1)}" y1="${ya.toFixed(1)}" x2="${xb.toFixed(1)}" y2="${yb.toFixed(1)}" class="linea-cost-attiva" style="--linea-op:${opTarget};animation-delay:${delayLinea}s;stroke-width:${visual.spessore}"/>`;
+    }).join('');
+
+  // Solo stelle attive — quelle future non esistono visivamente
+  const stelleSVG = nodiTrasformati
+    .map(([cx,cy], i) => {
+      if(i >= attive) return ''; // non mostrare stelle future
+      const isUltima = i === attive - 1 && !isCompleta;
+      const cls = isUltima ? 'stella-recente' : 'stella-attiva';
+      const r = (visual.raggio * (isUltima?1.05:1)).toFixed(2);
+      const glowPx = (4 * visual.glow).toFixed(1);
+      // Comparsa sequenziale: ogni stella appare con un piccolo ritardo dalla precedente
+      const delay = (i * 0.14).toFixed(2);
+      return `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${r}" class="${cls}" style="animation-delay:${delay}s;filter:drop-shadow(0 0 ${glowPx}px rgba(201,168,76,${(.5*visual.glow).toFixed(2)}))"/>`;
+    }).join('');
+
+  const frase = FRASI_COST[cost.frasi_idx];
+
+  return `<div class="costellazione-wrap">
+    <svg class="costellazione-svg" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="transform:scale(${visual.scala});transform-origin:center">
+      ${linee}${stelleSVG}
+    </svg>
+    <div class="costellazione-label">${frase}</div>
+  </div>`;
+}
+
+
+function renderCome(){
+  return`<div class="page">
+    <button class="back-btn" onclick="showPage('home')">← Torna alla home</button>
+    <h2 class="section-title">Come funziona Luck Loop</h2>
+    <div class="card card-teal how-section"><span class="tag tag-real" style="margin-bottom:12px;display:inline-block">Missione Reale</span><h3 class="card-sub">La fortuna si costruisce con il comportamento</h3><p style="font-size:13px;color:var(--cream-dim);line-height:1.65;margin-bottom:10px">La ricerca in psicologia e scienze comportamentali mostra che le persone percepite come "fortunate" condividono comportamenti specifici: mantengono reti sociali attive, si espongono a nuove esperienze, completano micro-azioni che aumentano visibilità e occasioni di incontro.</p><p style="font-size:13px;color:var(--cream-dim);line-height:1.65">Il sistema anti-ripetizione garantisce che la stessa missione non compaia per almeno 30 giorni. Il sistema adattivo aumenta leggermente la probabilità delle categorie che completi spesso — senza mai eliminarne nessuna.</p></div>
+    <div class="card card-amber how-section"><span class="tag tag-micro" style="margin-bottom:12px;display:inline-block">Micro-principio del giorno</span><h3 class="card-sub">Un fatto, una radice, un'azione</h3><p style="font-size:13px;color:var(--cream-dim);line-height:1.65">Ogni giorno un principio comportamentale reale, un riferimento culturale umano, una micro-azione concreta. Cambia ogni giorno, non si ripete per almeno 30 giorni.</p></div>
+    <div class="card card-glass how-section" style="border-color:rgba(156,111,222,.2)"><span class="tag tag-special" style="margin-bottom:12px;display:inline-block">✦ Evento Raro</span><h3 class="card-sub">Le giornate speciali</h3><p style="font-size:13px;color:var(--cream-dim);line-height:1.65">Raramente — circa 3 giorni su 100 — compare una missione speciale: Jolly, Coraggio, Connessione Umana, Esplorazione Casuale. Stessi effetti sulla streak delle missioni normali.</p></div>
+    <div class="card card-rituale how-section">
+      <span class="tag-rituale" style="margin-bottom:12px;display:inline-block">✦ Rituale del giorno</span>
+      <h3 class="card-sub" style="font-family:'Playfair Display',serif;font-size:17px;margin-bottom:8px">Un gesto simbolico, un momento tuo</h3>
+      <p style="font-size:13px;color:var(--cream-dim);line-height:1.65;margin-bottom:14px">Ogni giorno un breve rituale opzionale, scelto a caso tra cinque. Nessuna magia, nessuna promessa — solo uno spazio simbolico per dare forma a un pensiero. Simile allo scrivere una lettera che non verrà mai spedita.</p>
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="color:var(--gold);font-size:11px;margin-top:2px;flex-shrink:0">★</span>
+          <p style="font-size:12px;color:var(--cream-dim);line-height:1.5"><strong style="color:var(--cream)">Lascia andare</strong> — scrivi un pensiero e guardalo bruciare lentamente</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="color:var(--gold);font-size:11px;margin-top:2px;flex-shrink:0">★</span>
+          <p style="font-size:12px;color:var(--cream-dim);line-height:1.5"><strong style="color:var(--cream)">Pianta un'intenzione</strong> — scrivi un obiettivo, vedilo germogliare</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="color:var(--gold);font-size:11px;margin-top:2px;flex-shrink:0">★</span>
+          <p style="font-size:12px;color:var(--cream-dim);line-height:1.5"><strong style="color:var(--cream)">Lascia scorrere</strong> — le parole vengono portate via dall'acqua</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="color:var(--gold);font-size:11px;margin-top:2px;flex-shrink:0">★</span>
+          <p style="font-size:12px;color:var(--cream-dim);line-height:1.5"><strong style="color:var(--cream)">Affida al vento</strong> — il messaggio si disperde in foglie</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="color:var(--gold);font-size:11px;margin-top:2px;flex-shrink:0">★</span>
+          <p style="font-size:12px;color:var(--cream-dim);line-height:1.5"><strong style="color:var(--cream)">Chiudi il capitolo</strong> — la pagina si gira e porta via il testo</p>
+        </div>
+      </div>
+    </div>
+    <div class="card card-glass how-section"><div class="section-label">La scienza dietro</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <span style="color:var(--teal);font-size:11px;margin-top:2px;flex-shrink:0">★</span>
+          <p style="font-size:13px;color:var(--cream-dim);line-height:1.6">Le <strong style="color:var(--cream)">reti sociali dormienti</strong> producono più opportunità delle connessioni attive (Levin et al., 2022)</p>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <span style="color:var(--teal);font-size:11px;margin-top:2px;flex-shrink:0">★</span>
+          <p style="font-size:13px;color:var(--cream-dim);line-height:1.6">L'<strong style="color:var(--cream)">esposizione a stimoli nuovi</strong> attiva percorsi cognitivi associati alla creatività</p>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <span style="color:var(--teal);font-size:11px;margin-top:2px;flex-shrink:0">★</span>
+          <p style="font-size:13px;color:var(--cream-dim);line-height:1.6">I <strong style="color:var(--cream)">micro-task completati</strong> riducono il cognitive load e migliorano le decisioni</p>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <span style="color:var(--teal);font-size:11px;margin-top:2px;flex-shrink:0">★</span>
+          <p style="font-size:13px;color:var(--cream-dim);line-height:1.6">Le <strong style="color:var(--cream)">abitudini agganciate</strong> a comportamenti esistenti si consolidano più velocemente</p>
+        </div>
+      </div></div>
+    <div class="card card-glass how-section"><div class="section-label">Cosa Luck Loop NON dice mai</div><ul class="no-list"><li>Che la fortuna esista come forza causale</li><li>Che i principi garantiscano risultati immediati</li><li>Che completare le missioni cambi la vita in un giorno</li><li>Che ci sia un unico modo corretto di applicare ogni principio</li></ul></div>
+    <button class="btn btn-primary btn-full" onclick="showPage('home')">Torna alla mia giornata</button>
+  </div>`;
+}
+
+function renderStoria(){
+  const h=storia();
+  return`<div class="page">
+    <button class="back-btn" onclick="showPage('home')">← Torna alla home</button>
+    <h2 class="section-title">Il tuo archivio</h2>
+    ${renderCostellazione(app.totale)}
+    <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:10px">
+      <div class="stat-box"><div class="stat-num" style="color:var(--gold)">${app.totale}</div><div class="stat-label">missioni</div></div>
+      <div class="stat-box"><div class="stat-num" style="color:var(--teal)">${app.streak.corrente}</div><div class="stat-label">streak</div></div>
+      <div class="stat-box"><div class="stat-num">${app.streak.record}</div><div class="stat-label">record</div></div>
+    </div>
+    <div class="stats-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stat-box"><div class="stat-num" style="color:#F5C842">${getPF()}</div><div class="stat-label">punti fortuna</div></div>
+      <div class="stat-box"><div class="stat-num" style="color:var(--gold)">${getTotRituali()}</div><div class="stat-label">rituali</div></div>
+      <div class="stat-box"><div class="stat-num" style="color:var(--cream-dim)">${Math.floor(app.totale/16)}</div><div class="stat-label">costellazioni</div></div>
+    </div>
+    <div class="card card-glass" style="margin-bottom:14px"><div class="section-label" style="margin-bottom:6px">Badge</div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:12px;padding:10px;background:rgba(245,200,66,.06);border:1px solid rgba(245,200,66,.18);border-radius:10px">
+        <span style="font-size:20px">⭐</span>
+        <div><div style="font-family:'Playfair Display',serif;font-size:20px;color:#F5C842">${getPF()}</div><div style="font-size:11px;color:var(--cream-dim)">Punti Fortuna totali</div></div>
+      </div>
+      ${[...BADGE,...BADGE_PF].map(b=>{const earned=[...app.badge,...getPFBadge()];const e=earned.includes(b.id);return`<div class="badge-row ${e?'earned':'locked'}"><span class="badge-emoji">${b.emoji}</span><div><div class="badge-name" style="${e?'':'color:var(--cream-dim)'}">${b.label}</div><div class="badge-desc">${b.desc}</div></div>${e?`<div style="margin-left:auto;color:var(--gold)">✓</div>`:''}</div>`;
+      }).join('')}</div>
+    <div class="card card-glass"><div class="section-label">Missioni completate</div>${h.length===0?`<p style="font-size:13px;color:var(--cream-dim);text-align:center;padding:16px 0">Nessuna missione ancora.<br>Inizia oggi!</p>`:h.map(e=>`<div class="history-item" onclick="toggleStoriaItem(this)"><div class="history-row"><span class="history-icon">${e.speciale?'✦':CAT_ICON[e.categoria]||'🎯'}</span><div style="flex:1;min-width:0"><div class="history-title">${e.titolo}</div><div class="history-meta">${new Date(e.completatoIl).toLocaleDateString('it-IT',{day:'numeric',month:'short'})} · ${EN_EMOJI[e.energia]||''} ${e.energia}${e.speciale?' · <span style="color:var(--violet)">speciale</span>':''}</div></div><div class="history-check"><svg fill="none" viewBox="0 0 24 24" stroke="var(--teal)" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div></div><div class="history-detail"><div class="history-detail-text">${e.titolo}</div></div></div>`).join('')}</div>
+  </div>`;
+}
+
+
+/* ══════════════════════════════════════════════════
+   RITUALI — sezione simbolica e contemplativa
+   Nessuna magia, nessuna promessa. Gesti simbolici
+   simili allo scrivere una lettera mai spedita.
+══════════════════════════════════════════════════ */
+
+const RITUALI = [
+  { id:"fuoco",  emoji:"🕯️", nome:"Lascia andare",
+    placeholder:"Scrivi un pensiero che vuoi lasciarti alle spalle…",
+    hint:"Il testo brucerà lentamente e svanirà.",
+    durata:7000 },
+  { id:"seme",   emoji:"🌱", nome:"Pianta un’intenzione",
+    placeholder:"Scrivi un obiettivo o un desiderio…",
+    hint:"Un seme germoglierà sotto le tue parole.",
+    durata:8000 },
+  { id:"acqua",  emoji:"〰️", nome:"Lascia scorrere",
+    placeholder:"Scrivi qualcosa che vuoi che scorra via…",
+    hint:"L’acqua porterà via le tue parole.",
+    durata:6000 },
+  { id:"vento",  emoji:"🍃", nome:"Affida al vento",
+    placeholder:"Scrivi un messaggio da affidare al vento…",
+    hint:"Le tue parole diventeranno foglie nel vento.",
+    durata:7000 },
+  { id:"pagina", emoji:"📄", nome:"Chiudi il capitolo",
+    placeholder:"Scrivi quello che vuoi chiudere…",
+    hint:"La pagina si girerà e porterà via le tue parole.",
+    durata:5000 },
+];
+
+/* ── Storage rituali (riusa KS per coerenza) ── */
+const KR = {
+  RIT:  'll_rit',   // stato rituale giornaliero {data, completato}
+  RTOT: 'll_rtot',  // totale rituali completati
+};
+function getRitStato(){ try{return JSON.parse(localStorage.getItem(KR.RIT));}catch{return null;} }
+function saveRitStato(v){ try{localStorage.setItem(KR.RIT,JSON.stringify(v));}catch{} }
+function getTotRituali(){ return parseInt(localStorage.getItem(KR.RTOT)||'0',10); }
+function incRituali(){ const n=getTotRituali()+1; localStorage.setItem(KR.RTOT,n); return n; }
+
+/* ── Firma persistente costellazioni ──────────────────────────────────────
+   Ogni ciclo di 16 missioni ottiene un seed stabile, salvato una sola volta.
+   Il seed deforma in modo deterministico la geometria base della forma,
+   così ogni costellazione è unica ma identica ad ogni reload.
+   Struttura: { "<idxCiclo>": { seed: 0.482, energia: "media" } }
+────────────────────────────────────────────────────────────────────────── */
+const KC = { FIRME: 'll_cost_firme' };
+
+function getFirmeCostellazioni(){ try{return JSON.parse(localStorage.getItem(KC.FIRME))||{};}catch{return{};} }
+function saveFirmeCostellazioni(v){ try{localStorage.setItem(KC.FIRME,JSON.stringify(v));}catch{} }
+
+// Energia prevalente nelle ultime N missioni completate (storico già esistente)
+function energiaPrevalente(n){
+  const h = storia().slice(0, n);
+  if(!h.length) return 'media';
+  const conta = {bassa:0, media:0, alta:0};
+  h.forEach(e => { if(conta[e.energia]!==undefined) conta[e.energia]++; });
+  return Object.entries(conta).sort((a,b)=>b[1]-a[1])[0][0];
+}
+
+// Ottiene (o crea) la firma persistente per un dato ciclo di costellazione
+function getFirmaCiclo(idxCiclo){
+  const firme = getFirmeCostellazioni();
+  if(firme[idxCiclo]) return firme[idxCiclo];
+
+  // Prima volta che vediamo questo ciclo: genera seed deterministico
+  // basato su data di creazione + indice ciclo, poi lo persiste.
+  const seedBase = rngVal(oggi(), 'costellazione' + idxCiclo);
+  const firma = {
+    seed: seedBase,
+    energia: energiaPrevalente(16),
+  };
+  firme[idxCiclo] = firma;
+  saveFirmeCostellazioni(firme);
+  return firma;
+}
+
+/* ── Selezione rituale del giorno (deterministica) ── */
+function scegliRituale(data){
+  const r = mkRng(hash(data+'rit2'));r();
+  return RITUALI[Math.min(Math.floor(r()*RITUALI.length),RITUALI.length-1)];
+}
+
+/* ── Stato runtime rituale ── */
+let ritRuntime = { fase:'selezione', rituale:null, testo:'', animTimer:null };
+
+function resetRitRuntime(data){
+  if(ritRuntime.animTimer) clearTimeout(ritRuntime.animTimer);
+  ritRuntime = { fase:'selezione', rituale:scegliRituale(data), testo:'', animTimer:null };
+}
+
+/* ── Avvia il rituale ── */
+window.avviaRituale = function(){
+  const ta = document.getElementById('rit-ta');
+  if(ta) ritRuntime.testo = ta.value;
+
+  if(!ritRuntime.testo.trim()) return;
+
+  const testo = ritRuntime.testo.trim();
+  ritRuntime.testo = testo;
+  ritRuntime.fase = 'animazione';
+
+  const el = document.getElementById('rituale-content');
+  if(!el) return;
+
+  // Inietta il contenuto animato
+  el.innerHTML = buildAnimazione(ritRuntime.rituale, testo);
+
+  // Forza reflow per assicurare che le animazioni CSS partano
+  el.offsetHeight;
+
+  // Timer completamento
+  if(ritRuntime.animTimer) clearTimeout(ritRuntime.animTimer);
+  ritRuntime.animTimer = setTimeout(()=>{
+    ritRuntime.fase = 'completato';
+    saveRitStato({ data:oggi(), completato:true });
+    incRituali();
+    addPF();
+    const pfEl = document.getElementById('pf-count');
+    if(pfEl) pfEl.textContent = getPF();
+    if(el) el.innerHTML = `<div class="rituale-done">
+      <div class="rituale-done-icon">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#0D1117" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+        </svg>
+      </div>
+      <div>
+        <strong>Rituale completato</strong>
+        <span>Un gesto simbolico, un momento tuo.</span>
+      </div>
+    </div>`;
+  }, ritRuntime.rituale.durata);
+};
+
+/* ── onRitTesto: aggiorna testo runtime dalla textarea ── */
+window.onRitTesto = function(el){ ritRuntime.testo = el.value; };
+
+/* ── renderRitualeBox: usato solo per reset/init ── */
+function renderRitualeBox(){
+  const el = document.getElementById('rituale-content');
+  if(!el) return;
+  el.innerHTML = buildRitualeContent();
+  const ta = document.getElementById('rit-ta');
+  if(ta){
+    ta.value = ritRuntime.testo || '';
+    ta.addEventListener('input', function(){ ritRuntime.testo = this.value; });
+  }
+}
+
+
+function buildRitualeContent(){
+  const {fase, rituale, testo} = ritRuntime;
+  if(!rituale) return '';
+
+  if(fase === 'completato'){
+    return `<div class="rituale-done">
+      <div class="rituale-done-icon"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#0D1117" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+      <div><strong>Rituale completato</strong><span>Un gesto simbolico, un momento tuo.</span></div>
+    </div>`;
+  }
+
+  if(fase === 'animazione'){
+    return buildAnimazione(rituale, testo);
+  }
+
+  // fase === 'scrittura' (default)
+  return `<div>
+    <p style="font-size:12px;color:var(--cream-dim);margin-bottom:10px;font-style:italic">${rituale.hint}</p>
+    <textarea id="rit-ta" class="rituale-textarea"
+              placeholder="${rituale.placeholder}"
+              oninput="onRitTesto(this)"
+              maxlength="200" rows="3"></textarea>
+    <button class="btn btn-rituale btn-full" onclick="avviaRituale()" style="margin-top:10px">
+      Esegui il rituale →
+    </button>
+  </div>`;
+}
+
+
+function buildAnimazione(rit, testo){
+  const escaped = testo.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const d = rit.durata;
+
+  if(rit.id === 'fuoco'){
+    return `<div class="rituale-stage">
+      <div class="rituale-stage-text" style="animation:fuoco ${d}ms ease-in forwards">${escaped}</div>
+    </div>`;
+  }
+
+  if(rit.id === 'acqua'){
+    return `<div class="rituale-stage" style="background:linear-gradient(180deg,#0D1117 0%,#0D2030 100%)">
+      <div style="position:absolute;bottom:0;left:0;right:0;height:40%;
+                  background:rgba(78,205,196,.06);animation:ondaMove 3s ease-in-out infinite;
+                  border-radius:50% 50% 0 0"></div>
+      <div class="rituale-stage-text" style="animation:scorri ${d}ms ease-in forwards">${escaped}</div>
+    </div>`;
+  }
+
+  if(rit.id === 'vento'){
+    // CSS custom properties su elemento wrapping — compatibile con tutti i browser
+    const foglie = [
+      {tx:'-80px',ty:'-60px',rot:'120deg', delay:'0ms'},
+      {tx:'90px', ty:'-70px',rot:'-90deg', delay:'200ms'},
+      {tx:'-60px',ty:'80px', rot:'200deg', delay:'100ms'},
+      {tx:'70px', ty:'75px', rot:'-150deg',delay:'300ms'},
+      {tx:'-30px',ty:'-90px',rot:'60deg',  delay:'150ms'},
+    ];
+    const foglieSVG = foglie.map(f=>`
+      <svg style="position:absolute;width:20px;height:24px;
+                  animation:foglia-vola ${d}ms ${f.delay} ease-out forwards;
+                  transform-origin:center;
+                  --fx:${f.tx};--fy:${f.ty};--fr:${f.rot}"
+           viewBox="0 0 18 22">
+        <path d="M9 20 C9 20 2 14 2 8 C2 4 5 1 9 1 C13 1 16 4 16 8 C16 14 9 20 9 20Z"
+              fill="rgba(78,205,196,.5)" stroke="rgba(78,205,196,.8)" stroke-width="1"/>
+      </svg>`).join('');
+    return `<div class="rituale-stage" style="position:relative">
+      <div class="rituale-stage-text" style="animation:fuoco ${d}ms ease-in forwards">${escaped}</div>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+        ${foglieSVG}
+      </div>
+    </div>`;
+  }
+
+  if(rit.id === 'pagina'){
+    return `<div class="rituale-stage" style="perspective:600px">
+      <div class="rituale-stage-text"
+           style="animation:paginaGira ${d}ms ease-in-out forwards;
+                  background:rgba(255,255,255,.03);border-radius:8px;
+                  padding:16px;border:1px solid rgba(255,255,255,.08)">
+        ${escaped}
+      </div>
+    </div>`;
+  }
+
+  if(rit.id === 'seme'){
+    const d2 = Math.round(d*0.7);
+    const d3 = Math.round(d*0.2);
+    const d4 = Math.round(d*0.35);
+    return `<div class="rituale-stage" style="flex-direction:column;gap:12px">
+      <div class="rituale-stage-text" style="font-size:13px;opacity:.75">${escaped}</div>
+      <svg viewBox="0 0 80 65" style="width:90px;height:65px;overflow:visible">
+        <line x1="40" y1="63" x2="40" y2="30"
+              stroke="var(--teal)" stroke-width="2" stroke-linecap="round"
+              stroke-dasharray="35" stroke-dashoffset="35"
+              style="animation:germoglia ${d}ms ease-out forwards"/>
+        <path d="M40 35 C40 35 27 28 25 15 C30 10 39 18 40 35Z"
+              fill="rgba(78,205,196,.4)" stroke="var(--teal)" stroke-width="1"
+              stroke-dasharray="70" stroke-dashoffset="70"
+              style="animation:germoglia ${d2}ms ${d3}ms ease-out forwards"/>
+        <path d="M40 28 C40 28 53 21 55 8 C50 3 41 11 40 28Z"
+              fill="rgba(78,205,196,.3)" stroke="var(--teal)" stroke-width="1"
+              stroke-dasharray="70" stroke-dashoffset="70"
+              style="animation:germoglia ${d2}ms ${d4}ms ease-out forwards"/>
+      </svg>
+    </div>`;
+  }
+
+  return `<div class="rituale-stage"><div class="rituale-stage-text">${escaped}</div></div>`;
+}
+
+
+/* ── Render card rituale (chiamata da renderHome) ── */
+function renderCardRituale(statoOggi){
+  const data  = oggi();
+  const rit   = scegliRituale(data);
+  const fatto = statoOggi?.completato;
+
+  // Init runtime se non ancora fatto per oggi
+  if(ritRuntime.rituale?.id !== rit.id) resetRitRuntime(data);
+
+  const contenuto = fatto
+    ? `<div class="rituale-done">
+        <div class="rituale-done-icon"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#0D1117" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+        <div><strong>Rituale completato</strong><span>Un gesto simbolico, un momento tuo.</span></div>
+      </div>`
+    : `<div id="rituale-content">${buildRitualeContent()}</div>`;
+
+  return `<div class="card-rituale-light" style="animation:fadeUp .45s .35s var(--ease-spring) both">
+    <div class="card-header">
+      <span class="tag-rituale">✦ Rituale del giorno</span>
+      <span style="font-size:18px">${rit.emoji}</span>
+    </div>
+    <div style="font-family:'Playfair Display',serif;font-size:20px;margin:10px 0 6px;line-height:1.25">${rit.nome}</div>
+    <div style="font-size:13px;color:var(--cream-dim);line-height:1.6;margin-bottom:14px">Un gesto simbolico. Nessuna promessa, solo un momento tuo.</div>
+    ${contenuto}
+  </div>`;
+}
+
+
+
+
+/* ── UX v1.9 — toggle "Perché funziona" ── */
+window.togglePerche = function(el){
+  el.classList.toggle('open');
+  const body = el.nextElementSibling;
+  if(body) body.classList.toggle('open');
+};
+
+
+/* ── Archivio: espandi/comprimi missione completata ── */
+window.toggleStoriaItem = function(el){
+  el.classList.toggle('expanded');
+};
+
+avvia();
+
+
+
+</script>
+</body>
+</html>
