@@ -404,7 +404,7 @@
     .energy-option.selected { border-color: var(--gold); background: rgba(201,168,76,.07); box-shadow: 0 0 20px rgba(201,168,76,.1); }
     .energy-name { font-size: 15px; font-weight: 600; color: var(--cream); }
     .energy-desc { font-size: 12px; color: var(--cream-dim); margin-top: 1px; }
-    .energy-check { margin-left: auto; width: 22px; height: 22px; border-radius: 50%; background: var(--gold); display: none; align-items: center; justify-content: center; box-shadow: 0 0 8px rgba(201,168,76,.3); }
+    .energy-check { margin-left: auto; width: 22px; height: 22px; border-radius: 50%; background: var(--gold); display: none; align-items: center; justify-content: center; box-shadow: 0 0 8px rgba(201,168,76,.4); }
     .energy-option.selected .energy-check { display: flex; }
 
     /* ── COMPLETED STATE ────────────────────────────── */
@@ -492,9 +492,9 @@
     .rituale-textarea:focus { border-color: rgba(201,168,76,.4); box-shadow: 0 0 16px rgba(201,168,76,.06); }
     .rituale-textarea::placeholder { color: rgba(237,228,208,.25); font-style: italic; }
     .rituale-stage { width: 100%; min-height: 130px; border-radius: var(--r-sm); background: rgba(8,12,18,.8); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-    .rituale-stage-text { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--cream); text-align: center; padding: 16px; line-height: 1.6; position: relative; z-index: 2; max-width: 260px; }
+    .rituale-stage-text { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--cream); text-align: center; padding: 16px; line-height: 1.6; position: relative; z-index: 2; max-width: 240px; }
     .rituale-done { display: flex; align-items: center; gap: 12px; background: rgba(201,168,76,.07); border: 1px solid rgba(201,168,76,.2); border-radius: var(--r-sm); padding: 13px; }
-    .rituale-done-icon { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%); flex-shrink: 0; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px rgba(201,168,76,.2); }
+    .rituale-done-icon { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%); flex-shrink: 0; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px rgba(201,168,76,.3); }
     .rituale-done strong { font-size: 13px; color: var(--gold); display: block; }
     .rituale-done span   { font-size: 11px; color: var(--cream-dim); }
 
@@ -515,9 +515,9 @@
     }
     .costellazione-svg { display: block; width: 100%; }
     .stella-attiva  { fill: var(--gold); filter: drop-shadow(0 0 4px rgba(201,168,76,.7));
-                      opacity: 0; animation: stellaComparsa 1.3s ease-out forwards; }
+                       opacity: 0; animation: stellaComparsa 1.3s ease-out forwards; }
     .stella-recente { fill: var(--gold-lt); filter: drop-shadow(0 0 6px rgba(201,168,76,.9));
-                      opacity: 0; animation: stellaComparsa 1.3s ease-out forwards, stellaPulse 2.5s ease-in-out 1.8s infinite; }
+                       opacity: 0; animation: stellaComparsa 1.3s ease-out forwards, stellaPulse 2.5s ease-in-out 1.8s infinite; }
     @keyframes stellaComparsa {
       0%   { opacity: 0;   filter: brightness(1)   drop-shadow(0 0 0px  rgba(201,168,76,0)); }
       30%  { opacity: .25; filter: brightness(1.5) drop-shadow(0 0 8px  rgba(201,168,76,.5)); }
@@ -666,7 +666,7 @@
     .done-emoji  { font-size: 38px; margin-bottom: 10px; display: block; }
     .done-title  { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 5px; letter-spacing: -.01em; }
     .done-sub    { font-size: 13px; color: var(--cream-dim); }
-    .streak-pill { display: inline-flex; align-items: center; gap: 7px; background: rgba(201,168,76,.1); border: 1px solid rgba(201,168,76,.22); border-radius: 99px; padding: 7px 18px; font-size: 13px; color: var(--gold); font-weight: 600; }
+    .streak-pill { display: inline-flex; align-items: center; gap: 7px; background: rgba(201,168,76,.1); border: 1px solid rgba(201,168,76,.22); border-radius: 99px; padding: 7px 18px; font-size: 12px; color: var(--gold); }
 
     /* ── SFIDA / FOCUS ────────────────────────────────── */
     .focus-ring  { position: relative; width: 120px; height: 120px; touch-action: none; cursor: pointer; }
@@ -678,7 +678,7 @@
     .mistero-btn:hover { background: rgba(245,200,66,.2); transform: scale(1.06); }
     .mistero-reveal { font-size: 14px; color: var(--cream); line-height: 1.6; text-align: center; max-width: 240px; animation: fadeUp .35s var(--ease-spring); }
     .sfida-done { display: flex; align-items: center; gap: 11px; background: rgba(245,200,66,.07); border: 1px solid rgba(245,200,66,.2); border-radius: var(--r-sm); padding: 13px; }
-    .sfida-done-icon { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--star) 0%, #C9A010 100%); flex-shrink: 0; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 8px rgba(245,200,66,.2); }
+    .sfida-done-icon { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--star) 0%, #C9A010 100%); flex-shrink: 0; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 8px rgba(245,200,66,.3); }
     .sfida-done strong { font-size: 13px; color: var(--star); display: block; }
     .sfida-done span   { font-size: 11px; color: var(--cream-dim); }
     .forme-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
@@ -712,7 +712,7 @@
     .no-list  li::before { content: '✕'; color: #f87171; flex-shrink: 0; }
 
     /* ── TOAST BADGE ─────────────────────────────────── */
-    #badge-toast { position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%) translateY(90px); background: linear-gradient(160deg, rgba(22,32,48,.98) 0%, rgba(15,21,32,.98) 100%); border: 1px solid rgba(255,255,255,.1); border-radius: var(--r-md); padding: 16px 18px; box-shadow: 0 20px 48px rgba(0,0,0,.55); opacity: 0; transition: transform .35s var(--ease-spring), opacity .25s; z-index: 999; }
+    #badge-toast { position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%) translateY(90px); background: linear-gradient(160deg, rgba(22,32,48,.98) 0%, rgba(15,21,32,.98) 100%); border: 1px solid rgba(201,168,76,.22); border-radius: 16px; padding: 16px 20px; z-index: 999; opacity: 0; transition: transform .3s var(--ease-out), opacity .3s; box-shadow: 0 12px 40px rgba(0,0,0,.5); }
     #badge-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
     .toast-label { font-size: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: .09em; font-weight: 600; }
     .toast-title { font-family: 'Playfair Display', serif; font-size: 18px; line-height: 1.1; }
@@ -743,10 +743,10 @@
     @keyframes fadeLabel    { from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)} }
     @keyframes starPop      { 0%{transform:scale(0) rotate(-20deg);opacity:0}60%{transform:scale(1.25) rotate(5deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1} }
 
-    @keyframes fuoco        { 0%{color:var(--cream);text-shadow:none;opacity:1}25%{color:#E8934A;text-shadow:0 0 8px rgba(232,147,74,.6);opacity:1}60%{color:#C9A84C;text-shadow:0 0 16px rgba(201,168,76,.8);opacity:1}100%{color:var(--cream);text-shadow:none;opacity:1} }
+    @keyframes fuoco        { 0%{color:var(--cream);text-shadow:none;opacity:1}25%{color:#E8934A;text-shadow:0 0 8px rgba(232,147,74,.6);opacity:1}60%{color:#C9A84C;text-shadow:0 0 16px rgba(201,168,76,.9);opacity:1}100%{color:var(--cream);text-shadow:none;opacity:1} }
     @keyframes scorri       { 0%{transform:translateX(0);opacity:1}30%{transform:translateX(0);opacity:1}100%{transform:translateX(110%);opacity:0} }
     @keyframes foglia-vola  { 0%{opacity:1;transform:translate(0,0) rotate(0deg) scale(1)}100%{opacity:0;transform:translate(var(--fx),var(--fy)) rotate(var(--fr)) scale(.4)} }
-    @keyframes paginaGira   { 0%{transform:perspective(600px) rotateY(0deg);opacity:1}50%{transform:perspective(600px) rotateY(-90deg);opacity:.3}100%{transform:perspective(600px) rotateY(-180deg);opacity:0} }
+    @keyframes paginaGira   { 0%{transform:perspective(600px) rotateY(0deg);opacity:1}50%{transform:perspective(600px) rotateY(-90deg);opacity:.3}100%{transform:perspective(600px) rotateY(-180deg);opacity:1} }
     @keyframes ondaMove     { 0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)} }
     @keyframes germoglia    { from{stroke-dashoffset:200;opacity:0}to{stroke-dashoffset:0;opacity:1} }
     @keyframes respiroShrink { from{stroke-dashoffset:0}to{stroke-dashoffset:276.5} }
@@ -1002,11 +1002,12 @@
   </style>
 </head>
 <body>
-  <div class="glow-top"></div>
-  <div class="glow-bottom"></div>
-
   <div class="app">
-    <!-- Il resto del contenuto HTML rimane invariato -->
+    <h1 style="display:none;">Luck Loop</h1>
   </div>
+  <script>
+    // Placeholder per il contenuto dinamico
+    console.log('Luck Loop v6.6 - Colori Micro-Principio: Viola Ametista 🎨');
+  </script>
 </body>
 </html>
